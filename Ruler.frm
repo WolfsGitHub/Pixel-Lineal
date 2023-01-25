@@ -69,7 +69,7 @@ Private Declare Function DeleteObject Lib "gdi32" (ByVal _
         hObject As Long) As Long
  
 Private Declare Function TextOut Lib "gdi32" Alias "TextOutA" _
-        (ByVal hDC As Long, ByVal x As Long, ByVal y As Long, _
+        (ByVal hDC As Long, ByVal X As Long, ByVal Y As Long, _
         ByVal lpString As String, ByVal nCount As Long) As Long
         
 Private Const VK_LBUTTON = &H1
@@ -170,32 +170,32 @@ End Property
 Public Property Let Orientation(ByVal vNewValue As PL_Orientation)
   Dim tCursorPos As POINTAPI
   Dim tDeltaPos As POINTAPI
-  Dim x As Long, y As Long
+  Dim X As Long, Y As Long
   
     mRulerOrientation = vNewValue
     GetCursorPos tCursorPos
-    tDeltaPos.x = tCursorPos.x * LTwipsPerPixelX - Me.Left
-    tDeltaPos.y = tCursorPos.y * LTwipsPerPixelY - Me.Top
+    tDeltaPos.X = tCursorPos.X * LTwipsPerPixelX - Me.Left
+    tDeltaPos.Y = tCursorPos.Y * LTwipsPerPixelY - Me.Top
   
     If mRulerOrientation = PL_HORIZONTAL Then
         frmMenu.mnuOrientation.Caption = "&Vertikal"
-        x = (tCursorPos.x * LTwipsPerPixelX) - tDeltaPos.y
-        y = (tCursorPos.y * LTwipsPerPixelY) - tDeltaPos.x
+        X = (tCursorPos.X * LTwipsPerPixelX) - tDeltaPos.Y
+        Y = (tCursorPos.Y * LTwipsPerPixelY) - tDeltaPos.X
     Else
         frmMenu.mnuOrientation.Caption = "&Horizontal"
-        x = (tCursorPos.x * LTwipsPerPixelX) - tDeltaPos.y
-        y = (tCursorPos.y * LTwipsPerPixelY) - tDeltaPos.x
+        X = (tCursorPos.X * LTwipsPerPixelX) - tDeltaPos.Y
+        Y = (tCursorPos.Y * LTwipsPerPixelY) - tDeltaPos.X
     End If
-    If x < 0 Then x = 0
-    If y < 0 Then y = 0
-    Call ProcRefreshRuler(x, y)
-    x = GetMenu(frmMenu.hwnd)
-    y = GetSubMenu(x, 0&)
-    SetMenuItemBitmaps y, 0, MF_BYPOSITION, frmMenu.picMenuRuler(Abs(mRulerOrientation - 1)).Picture, frmMenu.picMenuRuler(Abs(mRulerOrientation - 1)).Picture
+    If X < 0 Then X = 0
+    If Y < 0 Then Y = 0
+    Call ProcRefreshRuler(X, Y)
+    X = GetMenu(frmMenu.hwnd)
+    Y = GetSubMenu(X, 0&)
+    SetMenuItemBitmaps Y, 0, MF_BYPOSITION, frmMenu.picMenuRuler(Abs(mRulerOrientation - 1)).Picture, frmMenu.picMenuRuler(Abs(mRulerOrientation - 1)).Picture
 End Property
 
 
-Public Sub ProcRefreshRuler(x As Long, y As Long)
+Public Sub ProcRefreshRuler(X As Long, Y As Long)
 Dim i As Long
 Dim iZehner As Long
 Dim ubMarker As Long
@@ -203,13 +203,13 @@ Dim sBeschriftung As String
 
     picRuler.Cls
     If mRulerOrientation = PL_HORIZONTAL Then
-      Me.Move x, y, mRulerWidth * LTwipsPerPixelX, plBREADTH * LTwipsPerPixelY    'Breite des Lineals berechnen
+      Me.Move X, Y, mRulerWidth * LTwipsPerPixelX, plBREADTH * LTwipsPerPixelY    'Breite des Lineals berechnen
       picRuler.Move 0, 0, mRulerWidth, plBREADTH
       For i = 2 To mRulerWidth Step 2    'kleine Gradierungen setzen, werden bei allen Einstellungen benötigt
           picRuler.Line (i - plZeroLine, 0)-(i - plZeroLine, 2)
       Next i
     Else
-      Me.Move x, y, plBREADTH * LTwipsPerPixelY, mRulerHeight * LTwipsPerPixelY  'Höhe des Lineals berechnen
+      Me.Move X, Y, plBREADTH * LTwipsPerPixelY, mRulerHeight * LTwipsPerPixelY  'Höhe des Lineals berechnen
       picRuler.Move 0, 0, plBREADTH, mRulerHeight
       For i = 2 To mRulerHeight Step 2   'kleine Gradierungen setzen, werden bei allen Einstellungen benötigt
           picRuler.Line (plBREADTH - 2, i - plZeroLine)-(plBREADTH, i - plZeroLine)
@@ -483,7 +483,12 @@ Dim f As Form
     Set MagGlass = Nothing
     Set Capture = Nothing
     For Each f In Forms
-        If f Is frmImage Then Unload f
+        If f Is frmImage Then
+            Unload f
+        ElseIf f Is frmMagGlass Then
+            Unload f
+            Set MagGlass = Nothing
+        End If
     Next
     Set f = Nothing
     gdiplus.TerminateGDI
@@ -493,7 +498,7 @@ Dim f As Form
 End Sub
 
 
-Private Sub SetScaleUser(x As Single, y As Single)
+Private Sub SetScaleUser(X As Single, Y As Single)
 Dim benutzerwert As Double
 Dim benutzerwertStr As String
 Dim eingabeok As Boolean
@@ -510,9 +515,9 @@ Dim prompt As String
         Else
             eingabeok = True
             If mRulerOrientation = PL_HORIZONTAL Then
-                RulerScaleMulti = benutzerwert / (x + 1)
+                RulerScaleMulti = benutzerwert / (X + 1)
             Else
-                RulerScaleMulti = benutzerwert / (y + 1)
+                RulerScaleMulti = benutzerwert / (Y + 1)
             End If
             XYFieldWidth = XYFieldMinWidth + Len(CStr(Fix(RulerScaleMulti * 1000))) * 8
             ProcRefreshRuler frmRuler.Left, frmRuler.Top
@@ -532,7 +537,7 @@ Static tCursorPos0 As POINTAPI
     GetCursorPos tCursorPos
     'Strg+C untersuchen
     If GetAsyncKeyState(vbKeyControl) And GetAsyncKeyState(VK_MBUTTON) Then
-        frmRuler.Move tCursorPos.x * LTwipsPerPixelX, tCursorPos.y * LTwipsPerPixelY
+        frmRuler.Move tCursorPos.X * LTwipsPerPixelX, tCursorPos.Y * LTwipsPerPixelY
         Call GetAsyncKeyState(VK_LBUTTON)
     ElseIf GetAsyncKeyState(vbKeyControl) And GetAsyncKeyState(vbKeyMenu) And GetAsyncKeyState(vbKeyC) Then
         Dim lPxColor As Long
@@ -541,7 +546,7 @@ Static tCursorPos0 As POINTAPI
         Exit Sub
     End If
     If Not MagGlass Is Nothing Then
-        If (tCursorPos0.x = tCursorPos.x And tCursorPos0.y = tCursorPos.y) Then 'keine Änderung der Mauszeigerposition
+        If (tCursorPos0.X = tCursorPos.X And tCursorPos0.Y = tCursorPos.Y) Then 'keine Änderung der Mauszeigerposition
             ForceRefresh = ForceRefresh - 1
         Else
             ForceRefresh = FORCE_REFRESH_RES
@@ -575,7 +580,7 @@ picRuler_DblClick_Error:
    vbCritical
 End Sub
 
-Private Sub picRuler_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picRuler_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 Dim i As Long
 Dim isKeyCtrl As Boolean
 Dim ubMarker As Long
@@ -583,9 +588,9 @@ Dim MousePosition As MousePos
     If Button = vbLeftButton Then
         isKeyCtrl = CBool(GetAsyncKeyState(vbKeyControl))
         If isKeyCtrl <> 0 And RulerScaleMode = PL_USER Then
-          Call SetScaleUser(x, y)
+          Call SetScaleUser(X, Y)
         Else
-          MousePosition = GetMousePos(Me, x, y, 5)
+          MousePosition = GetMousePos(Me, X, Y, 5)
           ReleaseCapture
           If mRulerOrientation = PL_HORIZONTAL And (MousePosition = mpRight) Then
             PostMessage hwnd, WM_SYSCOMMAND, SC_SIZE_Right, 0&
@@ -607,7 +612,7 @@ Dim MousePosition As MousePos
       If mRulerOrientation = PL_HORIZONTAL Then
           ubMarker = UBound(HMarker)
           For i = 1 To ubMarker
-              If x = HMarker(i) Or x = HMarker(i) - 1 Or x = HMarker(i) + 1 Then
+              If X = HMarker(i) Or X = HMarker(i) - 1 Or X = HMarker(i) + 1 Then
                   frmMenu.mnuMarker.Caption = "Markierer entfernen"
                   frmMenu.mnuMarker.Tag = i
                   i = 0
@@ -618,11 +623,11 @@ Dim MousePosition As MousePos
               frmMenu.mnuMarker.Caption = "Markierer setzen          M"
               frmMenu.mnuMarker.Tag = "+"
           End If
-          TMarker = x 'X-Pos zwischenspeichern, damit er in frmMenu abrufbar wird
+          TMarker = X 'X-Pos zwischenspeichern, damit er in frmMenu abrufbar wird
       Else
           ubMarker = UBound(VMarker)
           For i = 1 To ubMarker
-              If y = VMarker(i) Or y = VMarker(i) - 1 Or y = VMarker(i) + 1 Then
+              If Y = VMarker(i) Or Y = VMarker(i) - 1 Or Y = VMarker(i) + 1 Then
                   frmMenu.mnuMarker.Caption = "Markierer entfernen"
                   frmMenu.mnuMarker.Tag = i
                   i = 0
@@ -633,21 +638,21 @@ Dim MousePosition As MousePos
               frmMenu.mnuMarker.Caption = "Markierer setzen          M"
               frmMenu.mnuMarker.Tag = "+"
           End If
-          TMarker = y 'Y-Pos zwischenspeichern, damit er in frmMenu abrufbar wird
+          TMarker = Y 'Y-Pos zwischenspeichern, damit er in frmMenu abrufbar wird
       End If
       PopupMenu frmMenu.MRuler
         
     ElseIf Button = vbMiddleButton Then
       Dim tCursorPos As POINTAPI
       GetCursorPos tCursorPos
-      Me.Move tCursorPos.x * LTwipsPerPixelX, tCursorPos.y * LTwipsPerPixelY
+      Me.Move tCursorPos.X * LTwipsPerPixelX, tCursorPos.Y * LTwipsPerPixelY
     End If
 End Sub
 
-Private Sub picRuler_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub picRuler_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 Dim MousePosition As MousePos
 
-    MousePosition = GetMousePos(Me, x, y, 5)
+    MousePosition = GetMousePos(Me, X, Y, 5)
     If mRulerOrientation = PL_HORIZONTAL And (MousePosition = mpRight) Then
       picRuler.MousePointer = vbSizeWE
     ElseIf mRulerOrientation = PL_VERTICAL And (MousePosition = mpBottom) Then
@@ -656,19 +661,19 @@ Dim MousePosition As MousePos
         picRuler.MousePointer = vbCustom
         If RulerScaleMode = PL_USER Then
             If mRulerOrientation = PL_HORIZONTAL Then
-                picRuler.ToolTipText = Round(((x + plZeroLine) * Abs(RulerScaleMulti)) * 1000) / 1000
-                TMarker = x 'X-Pos zwischenspeichern, damit er mit der M-Taste abrufbar wird
+                picRuler.ToolTipText = Round(((X + plZeroLine) * Abs(RulerScaleMulti)) * 1000) / 1000
+                TMarker = X 'X-Pos zwischenspeichern, damit er mit der M-Taste abrufbar wird
             Else
-                picRuler.ToolTipText = Round(((y + plZeroLine) * Abs(RulerScaleMulti)) * 1000) / 1000
-                TMarker = y 'Y-Pos zwischenspeichern, damit er mit der M-Taste abrufbar wird
+                picRuler.ToolTipText = Round(((Y + plZeroLine) * Abs(RulerScaleMulti)) * 1000) / 1000
+                TMarker = Y 'Y-Pos zwischenspeichern, damit er mit der M-Taste abrufbar wird
             End If
         Else
             If mRulerOrientation = PL_HORIZONTAL Then
-                picRuler.ToolTipText = (x + plZeroLine) * Abs(RulerScaleMulti)
-                TMarker = x 'X-Pos zwischenspeichern, damit er mit der M-Taste abrufbar wird
+                picRuler.ToolTipText = (X + plZeroLine) * Abs(RulerScaleMulti)
+                TMarker = X 'X-Pos zwischenspeichern, damit er mit der M-Taste abrufbar wird
             Else
-                picRuler.ToolTipText = (y + plZeroLine) * Abs(RulerScaleMulti)
-                TMarker = y 'Y-Pos zwischenspeichern, damit er mit der M-Taste abrufbar wird
+                picRuler.ToolTipText = (Y + plZeroLine) * Abs(RulerScaleMulti)
+                TMarker = Y 'Y-Pos zwischenspeichern, damit er mit der M-Taste abrufbar wird
             End If
         End If
     End If

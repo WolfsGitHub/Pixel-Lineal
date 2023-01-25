@@ -51,16 +51,16 @@ Begin VB.Form frmMagGlass
    End
    Begin VB.Menu mnuView 
       Caption         =   "Ansicht"
-      Begin VB.Menu mnuColorHEX 
+      Begin VB.Menu mnuColorCode 
          Caption         =   "HTML Farbanzeige"
          Checked         =   -1  'True
          Index           =   0
       End
-      Begin VB.Menu mnuColorHEX 
+      Begin VB.Menu mnuColorCode 
          Caption         =   "VB Farbanzeige"
          Index           =   1
       End
-      Begin VB.Menu mnuColorHEX 
+      Begin VB.Menu mnuColorCode 
          Caption         =   "OLEColor"
          Index           =   2
       End
@@ -80,6 +80,10 @@ Begin VB.Form frmMagGlass
          Begin VB.Menu mnuFaktorX 
             Caption         =   "6"
             Index           =   2
+         End
+         Begin VB.Menu mnuFaktorX 
+            Caption         =   "8"
+            Index           =   3
          End
       End
       Begin VB.Menu mnuStatus 
@@ -199,9 +203,9 @@ Dim X As Long, Y As Long, a As Single, s As String
     If isCopy Then
       picStatusbar.Print "Farbe kopiert!"
     Else
-      If HexColor = PL_HEXHTML Then
+      If ColorCode = PL_HEXHTML Then
         picStatusbar.Print "Farbe: " & RGBtoHTML(lPxColor, True)
-      ElseIf HexColor = PL_HEXVB Then
+      ElseIf ColorCode = PL_HEXVB Then
         picStatusbar.Print "Farbe: " & RGBtoVB(lPxColor, True)
       Else
         picStatusbar.Print "Farbe: " & lPxColor & "   RGB: (" & CStr(lPxColor And vbRed) & "," & CStr((lPxColor And vbGreen) \ &H100) & "," & CStr((lPxColor And vbBlue) \ &H10000) & ")"
@@ -264,8 +268,7 @@ Dim i As Integer
         Call mnuFaktorX_Click(2)
     End Select
     Call mnuStatus_Click
-    HexColor = CInt(GetSetting(App.Title, "Options", "HexColor", 0))
-    Call mnuColorHEX_Click(CInt(HexColor))
+    Call mnuColorCode_Click(CInt(ColorCode))
     If l < 0 Then l = 50
     If t < 0 Then t = 50
     SetWindowPos hwnd, HWND_TOPMOST, l, t, w, h, 0&
@@ -326,7 +329,7 @@ End Sub
 
 Private Sub mnuColorCollection_Click()
     On Error GoTo mnuColorCollection_Click_Error
-    Call FillMenuColorCollection(Me, 1&) '1 = Position von Menü
+    Call FillMenuColorCollection(Me, 1&) '1 = Position von Menü im MagGlass-Menü
 Exit Sub
 
 mnuColorCollection_Click_Error:
@@ -337,23 +340,38 @@ MsgBox "Fehler: " & Err.Number & vbCrLf & _
  vbCritical
 End Sub
 
-Private Sub mnuColorHEX_Click(Index As Integer)
+Private Sub mnuColorCode_Click(Index As Integer)
     If Index = 0 Then
-      mnuColorHEX(0).Checked = True
-      mnuColorHEX(1).Checked = False
-      mnuColorHEX(2).Checked = False
+        mnuColorCode(0).Checked = True
+        mnuColorCode(1).Checked = False
+        mnuColorCode(2).Checked = False
+        With frmMenu
+            .mnuColorCode(0).Checked = True
+            .mnuColorCode(1).Checked = False
+            .mnuColorCode(2).Checked = False
+        End With
     ElseIf Index = 1 Then
-      mnuColorHEX(0).Checked = False
-      mnuColorHEX(1).Checked = True
-      mnuColorHEX(2).Checked = False
+        mnuColorCode(0).Checked = False
+        mnuColorCode(1).Checked = True
+        mnuColorCode(2).Checked = False
+        With frmMenu
+            .mnuColorCode(0).Checked = False
+            .mnuColorCode(1).Checked = True
+            .mnuColorCode(2).Checked = False
+        End With
     Else
-      mnuColorHEX(0).Checked = False
-      mnuColorHEX(1).Checked = False
-      mnuColorHEX(2).Checked = True
+        mnuColorCode(0).Checked = False
+        mnuColorCode(1).Checked = False
+        mnuColorCode(2).Checked = True
+        With frmMenu
+            .mnuColorCode(0).Checked = False
+            .mnuColorCode(1).Checked = False
+            .mnuColorCode(2).Checked = True
+        End With
     End If
-    HexColor = Index
+    ColorCode = Index
     On Error Resume Next
-    SaveSetting App.Title, "Options", "HEXColor", HexColor
+    SaveSetting App.Title, "Options", "ColorCode", ColorCode
 End Sub
 
 Private Sub mnuCopyRGB_Click()
@@ -374,6 +392,7 @@ Private Sub mnuFaktorX_Click(Index As Integer)
         Case 0: SetFactorX 2
         Case 1: SetFactorX 4
         Case 2: SetFactorX 6
+        Case 3: SetFactorX 8
     End Select
 End Sub
 
@@ -381,11 +400,13 @@ Public Sub SetFactorX(newFaktor As Integer)
     mnuFaktorX(0).Checked = False
     mnuFaktorX(1).Checked = False
     mnuFaktorX(2).Checked = False
+    mnuFaktorX(3).Checked = False
     xFaktor = newFaktor
     Select Case newFaktor
         Case 2: mnuFaktorX(0).Checked = True
         Case 4: mnuFaktorX(1).Checked = True
         Case 6: mnuFaktorX(2).Checked = True
+        Case 8: mnuFaktorX(3).Checked = True
     End Select
     ForceRefresh = FORCE_REFRESH_RES
     Call Form_Resize

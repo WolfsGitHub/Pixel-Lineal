@@ -50,8 +50,8 @@ Public Const GWL_STYLE = -16
 Public Declare Function SetWindowPos Lib "user32" ( _
     ByVal hwnd As Long, _
     ByVal hWndInsertAfter As Long, _
-    ByVal x As Long, _
-    ByVal y As Long, _
+    ByVal X As Long, _
+    ByVal Y As Long, _
     ByVal cx As Long, _
     ByVal cy As Long, _
     ByVal wFlags As Long) As Long
@@ -71,8 +71,8 @@ Public Declare Function ReleaseDC Lib "user32" (ByVal hwnd As Long, ByVal hDC As
 Public Declare Function ReleaseCapture Lib "user32" () As Long
 Public Declare Function StretchBlt Lib "gdi32" ( _
     ByVal hDC As Long, _
-    ByVal x As Long, _
-    ByVal y As Long, _
+    ByVal X As Long, _
+    ByVal Y As Long, _
     ByVal nWidth As Long, _
     ByVal nHeight As Long, _
     ByVal hSrcDC As Long, _
@@ -84,12 +84,12 @@ Public Declare Function StretchBlt Lib "gdi32" ( _
 Public Const SRCCOPY = &HCC0020
 
 Public Declare Function GetCursorPos Lib "user32" (ByRef lngPunkte As POINTAPI) As Long
-Public Declare Function SetCursorPos Lib "user32" (ByVal x As Long, ByVal y As Long) As Long
+Public Declare Function SetCursorPos Lib "user32" (ByVal X As Long, ByVal Y As Long) As Long
 Public Declare Function ClientToScreen Lib "user32" (ByVal hwnd As Long, lpPoint As POINTAPI) As Long
 
 Public Type POINTAPI
-    x As Long
-    y As Long
+    X As Long
+    Y As Long
 End Type
 
 Public Enum MousePos
@@ -113,7 +113,7 @@ Public Const SC_SIZE_Top As Long = &HF003&
 Public Const SC_SIZE_Right As Long = &HF002&
 Public Const SC_SIZE_Left As Long = &HF001&
 
-Public Declare Function GetPixel Lib "gdi32" (ByVal hDC As Long, ByVal x As Long, ByVal y As Long) As Long
+Public Declare Function GetPixel Lib "gdi32" (ByVal hDC As Long, ByVal X As Long, ByVal Y As Long) As Long
         
 Private Declare Function ShellExecuteA Lib "shell32.dll" ( _
   ByVal hwnd As Long, ByVal lpOperation As String, _
@@ -160,7 +160,7 @@ Public RulerScaleMode As PL_ScaleMode
 Public RulerScaleMulti As Double
 
 
-Public Enum PL_HEXCOLOR
+Public Enum PL_ColorCode
   PL_HEXHTML = 0
   PL_HEXVB = 1
   PL_OLE = 2
@@ -184,7 +184,7 @@ Public Const MF_BYPOSITION = &H400&
 Public Const MF_MENUBARBREAK = &H20&
 Public Const MF_MENUBREAK = &H40&
 Public ColorCollection() As Long
-Public HexColor As PL_HEXCOLOR
+Public ColorCode As PL_ColorCode
 
 '####Transparenz####
 Declare Function SetLayeredWindowAttributes Lib "user32.dll" ( _
@@ -378,7 +378,7 @@ Public Declare Function CreateSolidBrush Lib "gdi32" (ByVal crColor As Long) As 
 Public Declare Function SelectObject Lib "gdi32" (ByVal hDC As Long, ByVal hObject As Long) As Long
 Public Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
 Public Declare Function ExtFloodFill Lib "gdi32" (ByVal _
-      hDC As Long, ByVal x As Long, ByVal y As Long, ByVal _
+      hDC As Long, ByVal X As Long, ByVal Y As Long, ByVal _
       crColor As Long, ByVal wFillType As Long) As Long
 Public Const FLOODFILLSURFACE = 1
 
@@ -417,7 +417,7 @@ Dim tCursorPos As POINTAPI
     
     lDeskDC = GetDC(0&)
     GetCursorPos tCursorPos
-    GetPxColor = GetPixel(lDeskDC, tCursorPos.x, tCursorPos.y)
+    GetPxColor = GetPixel(lDeskDC, tCursorPos.X, tCursorPos.Y)
     ReleaseDC 0&, lDeskDC
     Exit Function
     
@@ -425,27 +425,28 @@ GetPxColor_Error:
     If lDeskDC Then ReleaseDC 0&, lDeskDC
 End Function
 
-Public Sub CopyRGB(lPxColor As Long)
+Public Sub CopyRGB(lPxColor As Long, Optional cpy As Boolean = True)
 Dim tCursorPos As POINTAPI
-  Clipboard.Clear
-  If HexColor = PL_HEXHTML Then
-    Clipboard.SetText RGBtoHTML(lPxColor), vbCFText
-  ElseIf HexColor = PL_HEXVB Then
-    Clipboard.SetText RGBtoVB(lPxColor), vbCFText
-  Else
-    Clipboard.SetText lPxColor, vbCFText
-  End If
-  If Not MagGlass Is Nothing Then
-    GetCursorPos tCursorPos
-    MagGlass.PrintStatus lPxColor, tCursorPos, True
-  End If
-'auf doppelte Farben prüfen
-  Dim i As Integer
-  For i = 0 To UBound(ColorCollection)
-    If ColorCollection(i) = lPxColor Then Exit Sub
-  Next i
-  AddColor lPxColor
-
+Dim i As Integer
+    If cpy Then
+        Clipboard.Clear
+        If ColorCode = PL_HEXHTML Then
+            Clipboard.SetText RGBtoHTML(lPxColor), vbCFText
+        ElseIf ColorCode = PL_HEXVB Then
+            Clipboard.SetText RGBtoVB(lPxColor), vbCFText
+        Else
+            Clipboard.SetText lPxColor, vbCFText
+        End If
+        If Not MagGlass Is Nothing Then
+            GetCursorPos tCursorPos
+            MagGlass.PrintStatus lPxColor, tCursorPos, True
+        End If
+    End If
+    'auf doppelte Farben prüfen
+    For i = 0 To UBound(ColorCollection)
+        If ColorCollection(i) = lPxColor Then Exit Sub
+    Next i
+    AddColor lPxColor
 End Sub
 
 Public Function FileExists(FileName As String) As Boolean
@@ -462,9 +463,9 @@ Dim mnuID As Long, h1 As Long, h2 As Long, h3 As Long
     h2 = GetSubMenu(h1, 0)
     h3 = GetSubMenu(h2, Id)
     For i = 0 To UBound(ColorCollection)
-        If HexColor = PL_HEXHTML Then
+        If ColorCode = PL_HEXHTML Then
             f.mnuColorCollectionItems(i).Caption = RGBtoHTML(ColorCollection(i))
-        ElseIf HexColor = PL_HEXVB Then
+        ElseIf ColorCode = PL_HEXVB Then
             f.mnuColorCollectionItems(i).Caption = RGBtoVB(ColorCollection(i))
         Else
             f.mnuColorCollectionItems(i).Caption = ColorCollection(i)
@@ -483,12 +484,12 @@ Public Function GetFileExtension(FilePath As String)
 End Function
 
 
-Public Function GetMousePos(Parent As Object, x As Single, y As Single, Optional Border As Single = 100) As MousePos
+Public Function GetMousePos(Parent As Object, X As Single, Y As Single, Optional Border As Single = 100) As MousePos
 Dim IsLeft As Boolean, IsTop As Boolean, IsRight As Boolean, IsBottom As Boolean
-    IsLeft = x < Border
-    IsTop = y < Border
-    IsRight = x > Parent.ScaleWidth - Border
-    IsBottom = y > Parent.ScaleHeight - Border
+    IsLeft = X < Border
+    IsTop = Y < Border
+    IsRight = X > Parent.ScaleWidth - Border
+    IsBottom = Y > Parent.ScaleHeight - Border
     Select Case True
         Case IsTop And IsLeft:      GetMousePos = mpTopLeft
         Case IsBottom And IsLeft:   GetMousePos = mpBottomLeft
