@@ -411,19 +411,69 @@ Dim i As Integer, u As Integer
     
 End Sub
 
-Public Function GetPxColor() As Long
-Dim lDeskDC As Long
-Dim tCursorPos As POINTAPI
+Public Sub CheckVersion(Optional autoCheck As Boolean)
+Dim xmlhttp As Object
+Dim lastVerInfo As String, lastVerDate As String
+Dim lastVerArray() As String
+    On Error GoTo CheckVersion_Error
+    If autoCheck Then
+        lastVerDate = GetSetting(App.Title, "Options", "VerInfo", "")
+        If IsDate(lastVerDate) Then
+            If DateDiff("d", Now, CDate(lastVerDate)) < 2 Then Exit Sub
+        Else
+            Exit Sub
+        End If
+    End If
+    Set xmlhttp = CreateObject("MSXML2.ServerXMLHTTP")
+    With xmlhttp
+        .Open "GET", "https://docs.ww-a.de/lib/exe/fetch.php/pixellineal:verinfo.txt", False
+        .setRequestHeader "Content-Type", "text/plain"
+        .setRequestHeader "Connection", "keep-alive"
+        .send
+        lastVerInfo = .responseText
+    End With
+    If Len(lastVerInfo) Then
+        lastVerArray = Split(lastVerInfo, vbTab)
+        If LCase(lastVerArray(0)) = "pixlin.exe" Then
+            lastVerDate = lastVerArray(2)
+            lastVerInfo = lastVerArray(1)
+            lastVerArray = Split(lastVerInfo, ".")
+            If App.Major < CInt(lastVerArray(0)) Or _
+               App.Minor < CInt(lastVerArray(1)) Or _
+               App.Revision < CInt(lastVerArray(3)) Then
+                    If MsgBox("Neue Version " & lastVerInfo & " vom " & lastVerDate & " gefunden." & vbCrLf & "Möchtest du jetzt die neue Version herunterladen?", vbYesNo Or vbInformation Or vbDefaultButton1, "Pixel-Lineal V" & App.Major & "." & App.Minor & ".0." & App.Revision) = vbYes Then
+                        On Error GoTo ShellExec_Error
+                        CloseApp = True
+                        ShellExec "https://docs.ww-a.de/doku.php/pixellineal:installation", vbNormalFocus
+                    End If
+            Else
+                If autoCheck = False Then
+                    If MsgBox("Die Version " & App.Major & "." & App.Minor & ".0." & App.Revision & " ist aktuell." & vbCrLf & _
+                              "Soll zukünftig automatisch auf neue Versionen geprüft werden?", vbQuestion Or vbYesNo Or vbDefaultButton1, "Online-Update") = vbYes Then
+                        SaveSetting App.Title, "Options", "VerInfo", Format$(Now, "dd.mm.yyyy")
+                    Else
+                        On Error Resume Next
+                        DeleteSetting App.Title, "Options", "VerInfo"
+                    End If
+                End If
+            End If
+            If autoCheck Then SaveSetting App.Title, "Options", "VerInfo", Format$(Now, "dd.mm.yyyy")
+        End If
+    End If
     
-    lDeskDC = GetDC(0&)
-    GetCursorPos tCursorPos
-    GetPxColor = GetPixel(lDeskDC, tCursorPos.X, tCursorPos.Y)
-    ReleaseDC 0&, lDeskDC
-    Exit Function
     
-GetPxColor_Error:
-    If lDeskDC Then ReleaseDC 0&, lDeskDC
-End Function
+    Exit Sub
+    
+CheckVersion_Error:
+    Exit Sub
+    
+ShellExec_Error:
+    Screen.MousePointer = vbDefault
+    MsgBox "Fehler: " & Err.Number & vbCrLf & _
+     "Beschreibung: " & Err.Description & vbCrLf & _
+     "Quelle: CheckVersion." & Erl & vbCrLf & Err.Source, _
+     vbCritical
+End Sub
 
 Public Sub CopyRGB(lPxColor As Long, Optional cpy As Boolean = True)
 Dim tCursorPos As POINTAPI
@@ -483,8 +533,18 @@ Public Function GetFileExtension(FilePath As String)
   GetFileExtension = Right$(FilePath, Len(FilePath) - InStrRev(FilePath, "."))
 End Function
 
+Public Function GetInfo() As String
+  Dim s As String
+  s = "P I X E L - L I N E A L" & vbCrLf & vbCrLf
+  s = s & "Version: " & App.Major & "." & App.Minor & "." & App.Revision & vbCrLf
+  s = s & "-Freeware-" & vbCrLf & vbCrLf
+  s = s & "Autor: WW-Anwendungsentwicklung" & vbCrLf
+  s = s & "https://www.ww-a.de"
+  GetInfo = s
+End Function
 
-Public Function GetMousePos(Parent As Object, X As Single, Y As Single, Optional Border As Single = 100) As MousePos
+
+Public Function GetMousePos(Parent As Object, X As Single, Y As Single, Optional Border As Single = 90) As MousePos
 Dim IsLeft As Boolean, IsTop As Boolean, IsRight As Boolean, IsBottom As Boolean
     IsLeft = X < Border
     IsTop = Y < Border
@@ -501,6 +561,20 @@ Dim IsLeft As Boolean, IsTop As Boolean, IsRight As Boolean, IsBottom As Boolean
         Case IsBottom:  GetMousePos = mpBottom
         Case Else:      GetMousePos = mpOther
       End Select
+End Function
+
+Public Function GetPxColor() As Long
+Dim lDeskDC As Long
+Dim tCursorPos As POINTAPI
+    
+    lDeskDC = GetDC(0&)
+    GetCursorPos tCursorPos
+    GetPxColor = GetPixel(lDeskDC, tCursorPos.X, tCursorPos.Y)
+    ReleaseDC 0&, lDeskDC
+    Exit Function
+    
+GetPxColor_Error:
+    If lDeskDC Then ReleaseDC 0&, lDeskDC
 End Function
 
 Public Function IsLightColor(c As Long, Optional ref As Long = 700) As Boolean
@@ -694,77 +768,4 @@ Public Sub TransparencyRuler(hwnd As Long, Rate As Byte)
     End If
 End Sub
 
-Public Function GetInfo() As String
-  Dim s As String
-  s = "P I X E L - L I N E A L" & vbCrLf & vbCrLf
-  s = s & "Version: " & App.Major & "." & App.Minor & "." & App.Revision & vbCrLf
-  s = s & "-Freeware-" & vbCrLf & vbCrLf
-  s = s & "Autor: WW-Anwendungsentwicklung" & vbCrLf
-  s = s & "https://www.ww-a.de"
-  GetInfo = s
-End Function
-
-Public Sub CheckVersion(Optional autoCheck As Boolean)
-Dim xmlhttp As Object
-Dim lastVerInfo As String, lastVerDate As String
-Dim lastVerArray() As String
-    On Error GoTo CheckVersion_Error
-    If autoCheck Then
-        lastVerDate = GetSetting(App.Title, "Options", "VerInfo", "")
-        If IsDate(lastVerDate) Then
-            If DateDiff("d", Now, CDate(lastVerDate)) < 2 Then Exit Sub
-        Else
-            Exit Sub
-        End If
-    End If
-    Set xmlhttp = CreateObject("MSXML2.ServerXMLHTTP")
-    With xmlhttp
-        .Open "GET", "https://docs.ww-a.de/lib/exe/fetch.php/pixellineal:verinfo.txt", False
-        .setRequestHeader "Content-Type", "text/plain"
-        .setRequestHeader "Connection", "keep-alive"
-        .send
-        lastVerInfo = .responseText
-    End With
-    If Len(lastVerInfo) Then
-        lastVerArray = Split(lastVerInfo, vbTab)
-        If LCase(lastVerArray(0)) = "pixlin.exe" Then
-            lastVerDate = lastVerArray(2)
-            lastVerInfo = lastVerArray(1)
-            lastVerArray = Split(lastVerInfo, ".")
-            If App.Major < CInt(lastVerArray(0)) Or _
-               App.Minor < CInt(lastVerArray(1)) Or _
-               App.Revision < CInt(lastVerArray(3)) Then
-                    If MsgBox("Neue Version " & lastVerInfo & " vom " & lastVerDate & " gefunden." & vbCrLf & "Möchtest du jetzt die neue Version herunterladen?", vbYesNo Or vbInformation Or vbDefaultButton1, "Pixel-Lineal V" & App.Major & "." & App.Minor & ".0." & App.Revision) = vbYes Then
-                        On Error GoTo ShellExec_Error
-                        CloseApp = True
-                        ShellExec "https://docs.ww-a.de/doku.php/pixellineal:installation", vbNormalFocus
-                    End If
-            Else
-                If autoCheck = False Then
-                    If MsgBox("Die Version " & App.Major & "." & App.Minor & ".0." & App.Revision & " ist aktuell." & vbCrLf & _
-                              "Soll zukünftig automatisch auf neue Versionen geprüft werden?", vbQuestion Or vbYesNo Or vbDefaultButton1, "Online-Update") = vbYes Then
-                        SaveSetting App.Title, "Options", "VerInfo", Format$(Now, "dd.mm.yyyy")
-                    Else
-                        On Error Resume Next
-                        DeleteSetting App.Title, "Options", "VerInfo"
-                    End If
-                End If
-            End If
-            If autoCheck Then SaveSetting App.Title, "Options", "VerInfo", Format$(Now, "dd.mm.yyyy")
-        End If
-    End If
-    
-    
-    Exit Sub
-    
-CheckVersion_Error:
-    Exit Sub
-    
-ShellExec_Error:
-    Screen.MousePointer = vbDefault
-    MsgBox "Fehler: " & Err.Number & vbCrLf & _
-     "Beschreibung: " & Err.Description & vbCrLf & _
-     "Quelle: CheckVersion." & Erl & vbCrLf & Err.Source, _
-     vbCritical
-End Sub
 

@@ -1596,81 +1596,6 @@ Dim i As Integer, j As Integer
 
 End Sub
 
-Private Sub mnuColorCode_Click(Index As Integer)
-    If Index = 0 Then
-        mnuColorCode(0).Checked = True
-        mnuColorCode(1).Checked = False
-        mnuColorCode(2).Checked = False
-        If Not MagGlass Is Nothing Then
-            With MagGlass
-                .mnuColorCode(0).Checked = True
-                .mnuColorCode(1).Checked = False
-                .mnuColorCode(2).Checked = False
-            End With
-        End If
-    ElseIf Index = 1 Then
-        mnuColorCode(0).Checked = False
-        mnuColorCode(1).Checked = True
-        mnuColorCode(2).Checked = False
-        If Not MagGlass Is Nothing Then
-            With MagGlass
-                .mnuColorCode(0).Checked = False
-                .mnuColorCode(1).Checked = True
-                .mnuColorCode(2).Checked = False
-            End With
-        End If
-    Else
-        mnuColorCode(0).Checked = False
-        mnuColorCode(1).Checked = False
-        mnuColorCode(2).Checked = True
-        If Not MagGlass Is Nothing Then
-            With MagGlass
-                .mnuColorCode(0).Checked = False
-                .mnuColorCode(1).Checked = False
-                .mnuColorCode(2).Checked = True
-            End With
-        End If
-    End If
-    ColorCode = Index
-    On Error Resume Next
-    SaveSetting App.Title, "Options", "ColorCode", ColorCode
-
-End Sub
-
-Private Sub mnuMagColor_Click()
-Dim isMagGlass As Boolean
-    On Error GoTo mnuMagColor_Click_Error
-    If Not MagGlass Is Nothing Then
-        isMagGlass = True
-        MagGlass.Visible = False
-        Set MagGlass = Nothing
-    End If
-    Set MagColor = New frmMagColor
-    MagColor.Show vbModal, Me
-    Unload MagColor
-    If MagColor.PipColor <> &H1000000 Then
-        If MagColor.PipColor > 0 Then CopyRGB MagColor.PipColor
-    End If
-    Set MagColor = Nothing
-    
-
-mnuMagColor_Click_Resume:
-    On Error Resume Next
-    If isMagGlass Then
-        Set MagGlass = frmMagGlass
-        MagGlass.Visible = True
-    End If
-    Exit Sub
-    
-mnuMagColor_Click_Error:
-    Screen.MousePointer = vbDefault
-    MsgBox "Fehler: " & Err.Number & vbCrLf & _
-     "Beschreibung: " & Err.Description & vbCrLf & _
-     "Quelle: frmMenu.mnuMagColor_Click." & Erl & vbCrLf & Err.Source, _
-     vbCritical
-     Resume mnuMagColor_Click_Resume
-End Sub
-
 Public Sub mnuMarker_Click()
     On Error GoTo mnuMarker_Click_Error
     If mnuMarker.Tag = "+" Then frmRuler.SetMarker Else frmRuler.RemoveMarker CInt(mnuMarker.Tag)
@@ -1683,11 +1608,6 @@ MsgBox "Fehler: " & Err.Number & vbCrLf & _
  "Beschreibung: " & Err.Description & vbCrLf & _
  "Quelle: frmMenu.mnuMarker_Click." & Erl & vbCrLf & Err.Source, _
  vbCritical
-End Sub
-
-Private Sub mnuReset_Click()
-    mPopupMenuName = "mnuReset"
-    mPopupMenuIndex = -1
 End Sub
 
 
@@ -1855,7 +1775,6 @@ Dim h1 As Long, h2 As Long, h3 As Long
         SetMenuItemBitmaps h2, 2, MF_BYPOSITION, picMenuRuler(3).Picture, picMenuRuler(3).Picture
         SetMenuItemBitmaps h2, 3, MF_BYPOSITION, picMenuRuler(4).Picture, picMenuRuler(4).Picture
         SetMenuItemBitmaps h2, 13, MF_BYPOSITION, picMenuFile(4).Picture, picMenuFile(4).Picture
-        SetMenuItemBitmaps h2, 14, MF_BYPOSITION, picMenuFile(7).Picture, picMenuFile(7).Picture
         mnuColors_Click
         
     h2 = GetSubMenu(h1, 1&)     'MScreenShot
@@ -1936,12 +1855,6 @@ Private Sub Form_Unload(cancel As Integer)
     Set frmMenu = Nothing
 End Sub
 
-
-
-Private Sub mnuUpdates_Click()
-    Call modMain.CheckVersion
-End Sub
-
 Private Sub MRuler_Click()
     If Capture Is Nothing And isImgEditor = False Then mnuEnd.Caption = "Beenden" Else mnuEnd.Caption = "Schlieﬂen"
 End Sub
@@ -1997,6 +1910,47 @@ Private Sub mnuClose_Click()
     On Error Resume Next
     Unload Capture
     Set Capture = Nothing
+End Sub
+
+Private Sub mnuColorCode_Click(Index As Integer)
+    If Index = 0 Then
+        mnuColorCode(0).Checked = True
+        mnuColorCode(1).Checked = False
+        mnuColorCode(2).Checked = False
+        If Not MagGlass Is Nothing Then
+            With MagGlass
+                .mnuColorCode(0).Checked = True
+                .mnuColorCode(1).Checked = False
+                .mnuColorCode(2).Checked = False
+            End With
+        End If
+    ElseIf Index = 1 Then
+        mnuColorCode(0).Checked = False
+        mnuColorCode(1).Checked = True
+        mnuColorCode(2).Checked = False
+        If Not MagGlass Is Nothing Then
+            With MagGlass
+                .mnuColorCode(0).Checked = False
+                .mnuColorCode(1).Checked = True
+                .mnuColorCode(2).Checked = False
+            End With
+        End If
+    Else
+        mnuColorCode(0).Checked = False
+        mnuColorCode(1).Checked = False
+        mnuColorCode(2).Checked = True
+        If Not MagGlass Is Nothing Then
+            With MagGlass
+                .mnuColorCode(0).Checked = False
+                .mnuColorCode(1).Checked = False
+                .mnuColorCode(2).Checked = True
+            End With
+        End If
+    End If
+    ColorCode = Index
+    On Error Resume Next
+    SaveSetting App.Title, "Options", "ColorCode", ColorCode
+
 End Sub
 
 Private Sub mnuColorCollectionItems_Click(Index As Integer)
@@ -2259,6 +2213,40 @@ mnuInternet_Click_Error:
      vbCritical
 End Sub
 
+Private Sub mnuMagColor_Click()
+Dim isMagGlass As Boolean
+    On Error GoTo mnuMagColor_Click_Error
+    If Not MagGlass Is Nothing Then
+        isMagGlass = True
+        MagGlass.Visible = False
+        Set MagGlass = Nothing
+    End If
+    Set MagColor = New frmMagColor
+    MagColor.Show vbModal, Me
+    Unload MagColor
+    If MagColor.PipColor <> &H1000000 Then
+        If MagColor.PipColor > 0 Then CopyRGB MagColor.PipColor
+    End If
+    Set MagColor = Nothing
+    
+
+mnuMagColor_Click_Resume:
+    On Error Resume Next
+    If isMagGlass Then
+        Set MagGlass = frmMagGlass
+        MagGlass.Visible = True
+    End If
+    Exit Sub
+    
+mnuMagColor_Click_Error:
+    Screen.MousePointer = vbDefault
+    MsgBox "Fehler: " & Err.Number & vbCrLf & _
+     "Beschreibung: " & Err.Description & vbCrLf & _
+     "Quelle: frmMenu.mnuMagColor_Click." & Erl & vbCrLf & Err.Source, _
+     vbCritical
+     Resume mnuMagColor_Click_Resume
+End Sub
+
 Private Sub mnuMarkColor_Click()
 On Error GoTo errMarkColor
   Dim col As Long
@@ -2306,6 +2294,11 @@ mnuRMagGlass_Click_Error:
      "Beschreibung: " & Err.Description & vbCrLf & _
      "Quelle: frmMenu.mnuRMagGlass_Click." & Erl & vbCrLf & Err.Source, _
      vbCritical
+End Sub
+
+Private Sub mnuReset_Click()
+    mPopupMenuName = "mnuReset"
+    mPopupMenuIndex = -1
 End Sub
 
 
@@ -2391,6 +2384,12 @@ Private Sub mnuShowSize_Click()
     SaveSetting App.Title, "Options", "ShowSize", Abs(mnuShowSize.Checked)
 End Sub
 
+
+
+Private Sub mnuUpdates_Click()
+    Call modMain.CheckVersion
+End Sub
+
 Private Sub mruFile_Click(Index As Integer)
     mPopupMenuName = "mruFile"
     mPopupMenuCaption = mruFile(Index).Caption
@@ -2404,4 +2403,5 @@ Private Sub mruPaste_Click(Index As Integer)
     mPopupMenuIndex = Index
     mPopupMenuChecked = mruPaste(Index).Checked
 End Sub
+
 

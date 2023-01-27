@@ -16,6 +16,15 @@ Const MAX_UNDO_STEPS As Integer = 24
 Private mCur As Integer
 Private mStackPicture(MAX_UNDO_STEPS) As StdPicture
 
+Public Function CanRedo() As Boolean
+    If mCur > UBound(mStackPicture) Then Exit Function
+    CanRedo = Not mStackPicture(mCur) Is Nothing
+End Function
+
+Public Function CanUndo() As Boolean
+    CanUndo = (mCur > 1)
+End Function
+
 Public Sub CreateUndoStep(p As StdPicture)
 Dim i As Integer
     If mCur > UBound(mStackPicture) Then
@@ -32,13 +41,12 @@ Dim i As Integer
     End If
 End Sub
 
-Public Function CanUndo() As Boolean
-    CanUndo = (mCur > 1)
-End Function
-
-Public Function CanRedo() As Boolean
-    If mCur > UBound(mStackPicture) Then Exit Function
-    CanRedo = Not mStackPicture(mCur) Is Nothing
+Public Function GetRedo(ByRef Picture As StdPicture) As Boolean
+    If mCur <= UBound(mStackPicture) Then
+        Set Picture = mStackPicture(mCur)
+        mCur = mCur + 1
+        GetRedo = True
+    End If
 End Function
 
 Public Function GetUndo(ByRef Picture As StdPicture) As Boolean
@@ -46,14 +54,6 @@ Public Function GetUndo(ByRef Picture As StdPicture) As Boolean
         mCur = mCur - 1
         Set Picture = mStackPicture(mCur - 1)
         GetUndo = True
-    End If
-End Function
-
-Public Function GetRedo(ByRef Picture As StdPicture) As Boolean
-    If mCur <= UBound(mStackPicture) Then
-        Set Picture = mStackPicture(mCur)
-        mCur = mCur + 1
-        GetRedo = True
     End If
 End Function
 

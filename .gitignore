@@ -1,0 +1,13 @@
+# Exclude binary files
+*.exe
+*.dll
+*.ocx
+*.zip
+
+# Exclude user-specific files
+*.vbw
+*.csi
+*.lvw
+Thumbs.db
+sync.ffs_db
+

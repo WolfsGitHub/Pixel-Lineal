@@ -37,6 +37,11 @@ End Enum
 Private Const MIM_BACKGROUND As Long = &H2&
 Private Const MIM_APPLYTOSUBMENUS As Long = &H80000000
 
+Public Function Convert_OLEtoRBG(ByVal OLEcolor As Long) As Long
+Const CLR_INVALID = -1
+    If OleTranslateColor(OLEcolor, 0, Convert_OLEtoRBG) Then Convert_OLEtoRBG = CLR_INVALID
+End Function
+
 
 Public Function Set_MenuColor(SetWhat As MenuNFO, _
     ByVal hwnd As Long, ByVal Color As Long, _
@@ -84,15 +89,11 @@ Set_MenuColor_Error:
 
 End Function
 
-Public Function Convert_OLEtoRBG(ByVal OLEcolor As Long) As Long
-Const CLR_INVALID = -1
-    If OleTranslateColor(OLEcolor, 0, Convert_OLEtoRBG) Then Convert_OLEtoRBG = CLR_INVALID
+Private Function Get_MenuHwnd(ByVal hwnd As Long) As Long
+    Get_MenuHwnd = GetMenu(hwnd)
 End Function
 
 Private Function Get_MenuItemCount(ByVal hwnd As Long) As Long
     Get_MenuItemCount = GetMenuItemCountA(Get_MenuHwnd(hwnd))
 End Function
 
-Private Function Get_MenuHwnd(ByVal hwnd As Long) As Long
-    Get_MenuHwnd = GetMenu(hwnd)
-End Function

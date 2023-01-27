@@ -423,10 +423,6 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
-'Private Declare Function SetCapture Lib "user32.dll" (ByVal hwnd As Long) As Long
-'Private Declare Function ReleaseCapture Lib "user32.dll" () As Long
-
-'Private mHover As tbButtons
 Private mSelected As Integer
 Private mFontSize As Single
 Private mArrowStyle As Integer

@@ -93,6 +93,17 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
     Me.Hide
 End Sub
 
+Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Dim tCursorPos As POINTAPI
+    GetCursorPos tCursorPos
+    PrintMagColor tCursorPos
+End Sub
+
+Private Sub Form_Resize()
+    lScaleWidth = Me.ScaleWidth
+    lScaleHeight = Me.ScaleHeight
+End Sub
+
 Private Sub SetPipColor(Optional Button As Integer = vbLeftButton)
 Dim tCursorPos As POINTAPI
 Dim lDeskDC As Long
@@ -105,15 +116,6 @@ Dim lDeskDC As Long
     End If
 End Sub
 
-Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-Dim tCursorPos As POINTAPI
-    GetCursorPos tCursorPos
-    PrintMagColor tCursorPos
-End Sub
 
-Private Sub Form_Resize()
-    lScaleWidth = Me.ScaleWidth
-    lScaleHeight = Me.ScaleHeight
-End Sub
 
 

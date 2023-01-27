@@ -53,8 +53,8 @@ Begin VB.Form frmImage
       TabIndex        =   3
       Top             =   0
       Width           =   13275
-      _extentx        =   23416
-      _extenty        =   661
+      _ExtentX        =   23416
+      _ExtentY        =   661
    End
    Begin PixelLineal.StatusBar SBar 
       Align           =   2  'Unten ausrichten
@@ -63,8 +63,8 @@ Begin VB.Form frmImage
       TabIndex        =   2
       Top             =   4440
       Width           =   13275
-      _extentx        =   23416
-      _extenty        =   794
+      _ExtentX        =   23416
+      _ExtentY        =   794
    End
    Begin VB.PictureBox picPaste 
       Appearance      =   0  '2D
@@ -485,6 +485,94 @@ Dim w As Long, h As Long
     PaintGrading
     mUndoStack.CreateUndoStep gdiplus.CopyStdPicture(picImage.Image)
     TBar.Enabled(tbUndo) = True: TBar.Enabled(tbRedo) = False
+End Sub
+
+
+Public Sub TextStyle(Optional reset As Boolean)
+Dim TmpFName As String
+
+  Dim LFnt As LOGFONT
+  Dim CF_T As CHOOSEFONT_TYPE
+  On Error GoTo mnuFonts_Click_Error
+      If Not reset Then
+          With CF_T
+            .nSizeMax = 72
+            .nSizeMin = 4
+            .iPointSize = 100
+            .Flags = CF_SCREENFONTS Or CF_FORCEFONTEXIST Or CF_EFFECTS Or CF_INITTOLOGFONTSTRUCT Or CF_LIMITSIZE Or CF_NOSCRIPTSEL
+            .hWndOwner = Me.hwnd
+            .lStructSize = Len(CF_T)
+            .lpLogFont = VarPtr(LFnt)
+            .hInstance = App.hInstance
+            .hDC = 0
+            .nFontType = SCREEN_FONTTYPE
+            .rgbColors = Convert_OLEtoRBG(TBar.FontColor)
+          End With
+      
+          TmpFName = TBar.FontName
+          TmpFName = StrConv(TmpFName, vbFromUnicode)
+          LFnt.lfFaceName = TmpFName & vbNullChar
+          With LFnt
+              .lfHeight = TBar.FontSize * -20 / LTwipsPerPixelY 'Alternativ: 'MM_TEXT mapping mode: lfHeight = -MulDiv(PointSize, GetDeviceCaps(hDC, LOGPIXELSY), 72);
+              .lfWeight = IIf(TBar.FontBold, FW_BOLD, FW_NORMAL)
+              .lfItalic = Abs(TBar.FontItalic)
+              .lfUnderline = Abs(TBar.FontUnderline)
+              .lfStrikeOut = Abs(TBar.FontStrikethru)
+              .lfOutPrecision = OUT_TT_PRECIS
+              .lfQuality = ANTIALIASED_QUALITY
+              .lfCharSet = DEFAULT_CHARSET
+              .lfPitchAndFamily = VARIABLE_PITCH
+          End With
+       
+        ' Dialog aufrufen
+        If ChooseFont(CF_T) = 0 Then GoTo FinalizeProc
+        TmpFName = StrConv(LFnt.lfFaceName, vbUnicode)
+    End If
+    With TBar
+      If reset Then
+          .FontColor = vbBlack
+          .FontSize = 9
+          .FontName = "Verdana"
+          .FontBold = False
+          .FontItalic = False
+          .FontUnderline = False
+          .FontStrikethru = False
+      Else
+          .FontColor = CF_T.rgbColors
+          .FontSize = CF_T.iPointSize \ 10
+          .FontName = Left$(TmpFName, InStr(1, TmpFName, vbNullChar) - 1)
+          .FontBold = CBool(LFnt.lfWeight >= FW_BOLD)
+          .FontItalic = CBool(LFnt.lfItalic)
+          .FontUnderline = CBool(LFnt.lfUnderline)
+          .FontStrikethru = CBool(LFnt.lfStrikeOut)
+           SaveSetting App.Title, "Textbox", "FontName", .FontName
+           SaveSetting App.Title, "Textbox", "FontBold", Abs(.FontBold)
+           SaveSetting App.Title, "Textbox", "FontItalic", Abs(.FontItalic)
+           SaveSetting App.Title, "Textbox", "FontUnderline", Abs(.FontUnderline)
+           SaveSetting App.Title, "Textbox", "FontStrikethru", Abs(.FontStrikethru)
+           SaveSetting App.Title, "Textbox", "FontSize", .FontSize
+           SaveSetting App.Title, "Textbox", "Color", .FontColor
+      End If
+      
+    End With
+
+  SyncFontAndColor
+  SendMessageL txtEditBox.hwnd, EM_SETMARGINS, EC_LEFTMARGIN, 3
+  txtEditBox_Change
+
+  
+FinalizeProc:
+  On Error Resume Next
+  Me.SetFocus
+  Exit Sub
+
+mnuFonts_Click_Error:
+Screen.MousePointer = vbDefault
+MsgBox "Fehler: " & Err.Number & vbCrLf & _
+ "Beschreibung: " & Err.Description & vbCrLf & _
+ "Quelle: frmMenu.mnuFonts_Click." & Erl & vbCrLf & Err.Source, _
+ vbCritical
+ Resume FinalizeProc
 End Sub
 
 Private Sub CreateTestImage(Optional ShowImgPaste As Boolean)
@@ -1862,94 +1950,6 @@ Dim i As Integer
 End Sub
 
 
-Public Sub TextStyle(Optional reset As Boolean)
-Dim TmpFName As String
-
-  Dim LFnt As LOGFONT
-  Dim CF_T As CHOOSEFONT_TYPE
-  On Error GoTo mnuFonts_Click_Error
-      If Not reset Then
-          With CF_T
-            .nSizeMax = 72
-            .nSizeMin = 4
-            .iPointSize = 100
-            .Flags = CF_SCREENFONTS Or CF_FORCEFONTEXIST Or CF_EFFECTS Or CF_INITTOLOGFONTSTRUCT Or CF_LIMITSIZE Or CF_NOSCRIPTSEL
-            .hWndOwner = Me.hwnd
-            .lStructSize = Len(CF_T)
-            .lpLogFont = VarPtr(LFnt)
-            .hInstance = App.hInstance
-            .hDC = 0
-            .nFontType = SCREEN_FONTTYPE
-            .rgbColors = Convert_OLEtoRBG(TBar.FontColor)
-          End With
-      
-          TmpFName = TBar.FontName
-          TmpFName = StrConv(TmpFName, vbFromUnicode)
-          LFnt.lfFaceName = TmpFName & vbNullChar
-          With LFnt
-              .lfHeight = TBar.FontSize * -20 / LTwipsPerPixelY 'Alternativ: 'MM_TEXT mapping mode: lfHeight = -MulDiv(PointSize, GetDeviceCaps(hDC, LOGPIXELSY), 72);
-              .lfWeight = IIf(TBar.FontBold, FW_BOLD, FW_NORMAL)
-              .lfItalic = Abs(TBar.FontItalic)
-              .lfUnderline = Abs(TBar.FontUnderline)
-              .lfStrikeOut = Abs(TBar.FontStrikethru)
-              .lfOutPrecision = OUT_TT_PRECIS
-              .lfQuality = ANTIALIASED_QUALITY
-              .lfCharSet = DEFAULT_CHARSET
-              .lfPitchAndFamily = VARIABLE_PITCH
-          End With
-       
-        ' Dialog aufrufen
-        If ChooseFont(CF_T) = 0 Then GoTo FinalizeProc
-        TmpFName = StrConv(LFnt.lfFaceName, vbUnicode)
-    End If
-    With TBar
-      If reset Then
-          .FontColor = vbBlack
-          .FontSize = 9
-          .FontName = "Verdana"
-          .FontBold = False
-          .FontItalic = False
-          .FontUnderline = False
-          .FontStrikethru = False
-      Else
-          .FontColor = CF_T.rgbColors
-          .FontSize = CF_T.iPointSize \ 10
-          .FontName = Left$(TmpFName, InStr(1, TmpFName, vbNullChar) - 1)
-          .FontBold = CBool(LFnt.lfWeight >= FW_BOLD)
-          .FontItalic = CBool(LFnt.lfItalic)
-          .FontUnderline = CBool(LFnt.lfUnderline)
-          .FontStrikethru = CBool(LFnt.lfStrikeOut)
-           SaveSetting App.Title, "Textbox", "FontName", .FontName
-           SaveSetting App.Title, "Textbox", "FontBold", Abs(.FontBold)
-           SaveSetting App.Title, "Textbox", "FontItalic", Abs(.FontItalic)
-           SaveSetting App.Title, "Textbox", "FontUnderline", Abs(.FontUnderline)
-           SaveSetting App.Title, "Textbox", "FontStrikethru", Abs(.FontStrikethru)
-           SaveSetting App.Title, "Textbox", "FontSize", .FontSize
-           SaveSetting App.Title, "Textbox", "Color", .FontColor
-      End If
-      
-    End With
-
-  SyncFontAndColor
-  SendMessageL txtEditBox.hwnd, EM_SETMARGINS, EC_LEFTMARGIN, 3
-  txtEditBox_Change
-
-  
-FinalizeProc:
-  On Error Resume Next
-  Me.SetFocus
-  Exit Sub
-
-mnuFonts_Click_Error:
-Screen.MousePointer = vbDefault
-MsgBox "Fehler: " & Err.Number & vbCrLf & _
- "Beschreibung: " & Err.Description & vbCrLf & _
- "Quelle: frmMenu.mnuFonts_Click." & Erl & vbCrLf & Err.Source, _
- vbCritical
- Resume FinalizeProc
-End Sub
-
-
 '=====picImage========================================
 Private Sub picImage_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     On Error GoTo picImage_MouseDown_Error
@@ -2227,4 +2227,5 @@ Private Sub txtEditBox_MouseUp(Button As Integer, Shift As Integer, X As Single,
         txtEditBox.MousePointer = vbDefault
     End If
 End Sub
+
 

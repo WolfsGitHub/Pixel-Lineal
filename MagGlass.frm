@@ -132,6 +132,43 @@ Public Sub Form_Resize()
     
 End Sub
 
+Public Sub SetFactorX(newFaktor As Integer)
+    mnuFaktorX(0).Checked = False
+    mnuFaktorX(1).Checked = False
+    mnuFaktorX(2).Checked = False
+    mnuFaktorX(3).Checked = False
+    xFaktor = newFaktor
+    Select Case newFaktor
+        Case 2: mnuFaktorX(0).Checked = True
+        Case 4: mnuFaktorX(1).Checked = True
+        Case 6: mnuFaktorX(2).Checked = True
+        Case 8: mnuFaktorX(3).Checked = True
+    End Select
+    ForceRefresh = FORCE_REFRESH_RES
+    Call Form_Resize
+End Sub
+
+Public Property Get StatusBarVisible() As Boolean
+    StatusBarVisible = bStatus
+End Property
+
+Public Property Let StatusBarVisible(ByVal vNewValue As Boolean)
+  On Error GoTo StatusBarVisible_Error
+  bStatus = vNewValue
+  mnuStatus.Checked = bStatus
+  picStatusbar.Visible = bStatus
+  ForceRefresh = FORCE_REFRESH_RES
+Exit Property
+
+StatusBarVisible_Error:
+Screen.MousePointer = vbDefault
+MsgBox "Fehler: " & Err.Number & vbCrLf & _
+ "Beschreibung: " & Err.Description & vbCrLf & _
+ "Quelle: frmMagGlass.StatusBarVisible." & Erl & vbCrLf & Err.Source, _
+ vbCritical
+
+End Property
+
 Public Sub mnuHelp_Click()
     On Error GoTo mnuHelp_Click_Error
     ShellExec "https://docs.ww-a.de/doku.php/pixellineal:bildschirmlupe", vbNormalFocus
@@ -313,33 +350,6 @@ Private Sub mnuClose_Click()
   Unload Me
 End Sub
 
-Private Sub mnuColorCollectionItems_Click(Index As Integer)
-  On Error GoTo mnuColorCollectionItems_Click_Error
-  Clipboard.Clear
-  Clipboard.SetText mnuColorCollectionItems(Index).Caption, vbCFText
-Exit Sub
-
-mnuColorCollectionItems_Click_Error:
-Screen.MousePointer = vbDefault
-MsgBox "Fehler: " & Err.Number & vbCrLf & _
- "Beschreibung: " & Err.Description & vbCrLf & _
- "Quelle: frmMagGlass.mnuColorCollectionItems_Click." & Erl & vbCrLf & Err.Source, _
- vbCritical
-End Sub
-
-Private Sub mnuColorCollection_Click()
-    On Error GoTo mnuColorCollection_Click_Error
-    Call FillMenuColorCollection(Me, 1&) '1 = Position von Menü im MagGlass-Menü
-Exit Sub
-
-mnuColorCollection_Click_Error:
-Screen.MousePointer = vbDefault
-MsgBox "Fehler: " & Err.Number & vbCrLf & _
- "Beschreibung: " & Err.Description & vbCrLf & _
- "Quelle: frmMagGlass.mnuColorCollection_Click." & Erl & vbCrLf & Err.Source, _
- vbCritical
-End Sub
-
 Private Sub mnuColorCode_Click(Index As Integer)
     If Index = 0 Then
         mnuColorCode(0).Checked = True
@@ -374,6 +384,33 @@ Private Sub mnuColorCode_Click(Index As Integer)
     SaveSetting App.Title, "Options", "ColorCode", ColorCode
 End Sub
 
+Private Sub mnuColorCollectionItems_Click(Index As Integer)
+  On Error GoTo mnuColorCollectionItems_Click_Error
+  Clipboard.Clear
+  Clipboard.SetText mnuColorCollectionItems(Index).Caption, vbCFText
+Exit Sub
+
+mnuColorCollectionItems_Click_Error:
+Screen.MousePointer = vbDefault
+MsgBox "Fehler: " & Err.Number & vbCrLf & _
+ "Beschreibung: " & Err.Description & vbCrLf & _
+ "Quelle: frmMagGlass.mnuColorCollectionItems_Click." & Erl & vbCrLf & Err.Source, _
+ vbCritical
+End Sub
+
+Private Sub mnuColorCollection_Click()
+    On Error GoTo mnuColorCollection_Click_Error
+    Call FillMenuColorCollection(Me, 1&) '1 = Position von Menü im MagGlass-Menü
+Exit Sub
+
+mnuColorCollection_Click_Error:
+Screen.MousePointer = vbDefault
+MsgBox "Fehler: " & Err.Number & vbCrLf & _
+ "Beschreibung: " & Err.Description & vbCrLf & _
+ "Quelle: frmMagGlass.mnuColorCollection_Click." & Erl & vbCrLf & Err.Source, _
+ vbCritical
+End Sub
+
 Private Sub mnuCopyRGB_Click()
     On Error GoTo mnuCopyRGB_Click_Error
     CopyRGB GetPxColor
@@ -394,22 +431,6 @@ Private Sub mnuFaktorX_Click(Index As Integer)
         Case 2: SetFactorX 6
         Case 3: SetFactorX 8
     End Select
-End Sub
-
-Public Sub SetFactorX(newFaktor As Integer)
-    mnuFaktorX(0).Checked = False
-    mnuFaktorX(1).Checked = False
-    mnuFaktorX(2).Checked = False
-    mnuFaktorX(3).Checked = False
-    xFaktor = newFaktor
-    Select Case newFaktor
-        Case 2: mnuFaktorX(0).Checked = True
-        Case 4: mnuFaktorX(1).Checked = True
-        Case 6: mnuFaktorX(2).Checked = True
-        Case 8: mnuFaktorX(3).Checked = True
-    End Select
-    ForceRefresh = FORCE_REFRESH_RES
-    Call Form_Resize
 End Sub
 
 Private Sub mnuInfo_Click()
@@ -454,30 +475,10 @@ Private Sub mnuStatus_Click()
     StatusBarVisible = Not StatusBarVisible
 End Sub
 
-Public Property Get StatusBarVisible() As Boolean
-    StatusBarVisible = bStatus
-End Property
-
-Public Property Let StatusBarVisible(ByVal vNewValue As Boolean)
-  On Error GoTo StatusBarVisible_Error
-  bStatus = vNewValue
-  mnuStatus.Checked = bStatus
-  picStatusbar.Visible = bStatus
-  ForceRefresh = FORCE_REFRESH_RES
-Exit Property
-
-StatusBarVisible_Error:
-Screen.MousePointer = vbDefault
-MsgBox "Fehler: " & Err.Number & vbCrLf & _
- "Beschreibung: " & Err.Description & vbCrLf & _
- "Quelle: frmMagGlass.StatusBarVisible." & Erl & vbCrLf & Err.Source, _
- vbCritical
-
-End Property
-
 
 Private Sub mnuUpdates_Click()
     Call modMain.CheckVersion
 End Sub
+
 
 
