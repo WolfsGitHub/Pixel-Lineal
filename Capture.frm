@@ -19,6 +19,11 @@ Begin VB.Form frmCapture
    ScaleHeight     =   3360
    ScaleWidth      =   4335
    ShowInTaskbar   =   0   'False
+   Begin VB.Timer timAlpha 
+      Interval        =   150
+      Left            =   2145
+      Top             =   495
+   End
    Begin VB.PictureBox picToSave 
       AutoRedraw      =   -1  'True
       BorderStyle     =   0  'Kein
@@ -54,7 +59,6 @@ Begin VB.Form frmCapture
    End
    Begin VB.Shape shBorder 
       BorderColor     =   &H000040C0&
-      BorderWidth     =   5
       Height          =   1830
       Left            =   30
       Top             =   30
@@ -120,16 +124,6 @@ Private Const LWA_ALPHA = &H2
 Private Const GWL_EXSTYLE As Long = -20&
 Private Const WS_EX_LAYERED As Long = &H80000
 
-Private Type tRange
-    Mode As Integer
-    x0 As Long
-    y0 As Long
-    x1 As Long
-    y1 As Long
-    x2 As Long
-    y2 As Long
-End Type
-Dim range As tRange
 
 '###Fenster bewegen###
 Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" ( _
@@ -237,9 +231,14 @@ Private Sub Form_KeyPress(KeyAscii As Integer)
     If KeyAscii = 13 Or KeyAscii = 32 Then Form_DblClick
 End Sub
 
+Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
+    If Shift And vbKeyShift Then
+        If MousePointer = vbSizeAll Then MousePointer = vbCustom
+    End If
+End Sub
+
 Private Sub Form_Load()
-Dim WinInfo As Long
-Dim w As Integer, h As Integer
+Dim X As Long, Y As Long, w As Long, h As Long
 
     On Error Resume Next
     w = Abs(CInt(GetSetting(App.Title, "ScreenShot", "Width", 400)))
@@ -248,13 +247,9 @@ Dim w As Integer, h As Integer
     If h < 16 Then h = 16
     If w > Screen.Width \ LTwipsPerPixelX Then w = Screen.Width \ LTwipsPerPixelX
     If h > Screen.Height \ LTwipsPerPixelY Then h = Screen.Height \ LTwipsPerPixelY
-    SetWindowPos hwnd, HWND_TOPMOST, (Me.ScaleX(Screen.Width, vbTwips, vbPixels) - w) \ 2, (Me.ScaleX(Screen.Height, vbTwips, vbPixels) - h) \ 2, w, h, 0&
-    
-    WinInfo = GetWindowLong(hwnd, GWL_EXSTYLE)
-    WinInfo = WinInfo Or WS_EX_LAYERED
-    SetWindowLong hwnd, GWL_EXSTYLE, WinInfo
-    SetLayeredWindowAttributes hwnd, 0&, 64&, LWA_ALPHA
-    
+    X = (Me.ScaleX(Screen.Width, vbTwips, vbPixels) - w) \ 2
+    Y = (Me.ScaleX(Screen.Height, vbTwips, vbPixels) - h) \ 2
+    SetWindowPos hwnd, HWND_TOPMOST, X, Y, w, h, 0&
     frmMenu.mnuScreenShot.Checked = True
     lblSize.Visible = frmMenu.mnuShowSize.Checked
 
@@ -314,20 +309,14 @@ Dim w As Long, h As Long
         h = 180
         Height = h
     End If
-    lblSize.Caption = (w \ LTwipsPerPixelX) & "×" & (h \ LTwipsPerPixelX)
+    lblSize.Caption = (w \ LTwipsPerPixelX) & "×" & (h \ LTwipsPerPixelY)
     If w < 600 Or h < 600 Then
-        shBorder.BorderWidth = 3
-        shBorder.Move 15, 15, w - 30, h - 30
-        lblSize.Move Abs(w - lblSize.Width - 30), 15
-    ElseIf w < 1200 Or h < 1200 Then
-        shBorder.BorderWidth = 4
-        shBorder.Move 30, 30, w - 45, h - 45
-        lblSize.Move w - lblSize.Width - 75, 45
+        lblSize.Visible = False
     Else
-        shBorder.BorderWidth = 5
-        shBorder.Move 30, 30, w - 60, h - 60
-        lblSize.Move w - lblSize.Width - 75, 60
+        lblSize.Visible = True
+        lblSize.Move w - lblSize.Width - (5 * LTwipsPerPixelX), (4 * LTwipsPerPixelX)
     End If
+    shBorder.Move 0, 0, w, h
     
 End Sub
 
@@ -350,5 +339,27 @@ Dim f As Form
     End If
     
 End Sub
+
+
+Private Sub timAlpha_Timer()
+Static WinInfo As Long
+Static alphaValue As Long
+    alphaValue = alphaValue + 40&
+    If alphaValue > 180& Then
+        timAlpha.Enabled = False
+        Exit Sub
+    End If
+    If WinInfo = 0 Then
+        WinInfo = GetWindowLong(hwnd, GWL_EXSTYLE)
+        WinInfo = WinInfo Or WS_EX_LAYERED
+        SetWindowLong hwnd, GWL_EXSTYLE, WinInfo
+        SetCursorPos (Me.Left + (Me.Width \ 2)) \ LTwipsPerPixelX, (Me.Top + (Me.Height \ 2)) \ LTwipsPerPixelY
+    End If
+    SetLayeredWindowAttributes hwnd, 0&, 255& - alphaValue, LWA_ALPHA
+End Sub
+
+
+
+
 
 

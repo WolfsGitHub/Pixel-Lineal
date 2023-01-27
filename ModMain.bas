@@ -50,8 +50,8 @@ Public Const GWL_STYLE = -16
 Public Declare Function SetWindowPos Lib "user32" ( _
     ByVal hwnd As Long, _
     ByVal hWndInsertAfter As Long, _
-    ByVal x As Long, _
-    ByVal y As Long, _
+    ByVal X As Long, _
+    ByVal Y As Long, _
     ByVal cx As Long, _
     ByVal cy As Long, _
     ByVal wFlags As Long) As Long
@@ -71,8 +71,8 @@ Public Declare Function ReleaseDC Lib "user32" (ByVal hwnd As Long, ByVal hDC As
 Public Declare Function ReleaseCapture Lib "user32" () As Long
 Public Declare Function StretchBlt Lib "gdi32" ( _
     ByVal hDC As Long, _
-    ByVal x As Long, _
-    ByVal y As Long, _
+    ByVal X As Long, _
+    ByVal Y As Long, _
     ByVal nWidth As Long, _
     ByVal nHeight As Long, _
     ByVal hSrcDC As Long, _
@@ -84,12 +84,12 @@ Public Declare Function StretchBlt Lib "gdi32" ( _
 Public Const SRCCOPY = &HCC0020
 
 Public Declare Function GetCursorPos Lib "user32" (ByRef lngPunkte As POINTAPI) As Long
-Public Declare Function SetCursorPos Lib "user32" (ByVal x As Long, ByVal y As Long) As Long
+Public Declare Function SetCursorPos Lib "user32" (ByVal X As Long, ByVal Y As Long) As Long
 Public Declare Function ClientToScreen Lib "user32" (ByVal hwnd As Long, lpPoint As POINTAPI) As Long
 
 Public Type POINTAPI
-    x As Long
-    y As Long
+    X As Long
+    Y As Long
 End Type
 
 Public Enum MousePos
@@ -113,7 +113,7 @@ Public Const SC_SIZE_Top As Long = &HF003&
 Public Const SC_SIZE_Right As Long = &HF002&
 Public Const SC_SIZE_Left As Long = &HF001&
 
-Public Declare Function GetPixel Lib "gdi32" (ByVal hDC As Long, ByVal x As Long, ByVal y As Long) As Long
+Public Declare Function GetPixel Lib "gdi32" (ByVal hDC As Long, ByVal X As Long, ByVal Y As Long) As Long
         
 Private Declare Function ShellExecuteA Lib "shell32.dll" ( _
   ByVal hwnd As Long, ByVal lpOperation As String, _
@@ -160,7 +160,7 @@ Public RulerScaleMode As PL_ScaleMode
 Public RulerScaleMulti As Double
 
 
-Public Enum PL_HEXCOLOR
+Public Enum PL_ColorCode
   PL_HEXHTML = 0
   PL_HEXVB = 1
   PL_OLE = 2
@@ -184,7 +184,7 @@ Public Const MF_BYPOSITION = &H400&
 Public Const MF_MENUBARBREAK = &H20&
 Public Const MF_MENUBREAK = &H40&
 Public ColorCollection() As Long
-Public HexColor As PL_HEXCOLOR
+Public ColorCode As PL_ColorCode
 
 '####Transparenz####
 Declare Function SetLayeredWindowAttributes Lib "user32.dll" ( _
@@ -378,7 +378,7 @@ Public Declare Function CreateSolidBrush Lib "gdi32" (ByVal crColor As Long) As 
 Public Declare Function SelectObject Lib "gdi32" (ByVal hDC As Long, ByVal hObject As Long) As Long
 Public Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
 Public Declare Function ExtFloodFill Lib "gdi32" (ByVal _
-      hDC As Long, ByVal x As Long, ByVal y As Long, ByVal _
+      hDC As Long, ByVal X As Long, ByVal Y As Long, ByVal _
       crColor As Long, ByVal wFillType As Long) As Long
 Public Const FLOODFILLSURFACE = 1
 
@@ -411,41 +411,92 @@ Dim i As Integer, u As Integer
     
 End Sub
 
-Public Function GetPxColor() As Long
-Dim lDeskDC As Long
-Dim tCursorPos As POINTAPI
+Public Sub CheckVersion(Optional autoCheck As Boolean)
+Dim xmlhttp As Object
+Dim lastVerInfo As String, lastVerDate As String
+Dim lastVerArray() As String
+    On Error GoTo CheckVersion_Error
+    If autoCheck Then
+        lastVerDate = GetSetting(App.Title, "Options", "VerInfo", "")
+        If IsDate(lastVerDate) Then
+            If DateDiff("d", Now, CDate(lastVerDate)) < 2 Then Exit Sub
+        Else
+            Exit Sub
+        End If
+    End If
+    Set xmlhttp = CreateObject("MSXML2.ServerXMLHTTP")
+    With xmlhttp
+        .Open "GET", "https://docs.ww-a.de/lib/exe/fetch.php/pixellineal:verinfo.txt", False
+        .setRequestHeader "Content-Type", "text/plain"
+        .setRequestHeader "Connection", "keep-alive"
+        .send
+        lastVerInfo = .responseText
+    End With
+    If Len(lastVerInfo) Then
+        lastVerArray = Split(lastVerInfo, vbTab)
+        If LCase(lastVerArray(0)) = "pixlin.exe" Then
+            lastVerDate = lastVerArray(2)
+            lastVerInfo = lastVerArray(1)
+            lastVerArray = Split(lastVerInfo, ".")
+            If App.Major < CInt(lastVerArray(0)) Or _
+               App.Minor < CInt(lastVerArray(1)) Or _
+               App.Revision < CInt(lastVerArray(3)) Then
+                    If MsgBox("Neue Version " & lastVerInfo & " vom " & lastVerDate & " gefunden." & vbCrLf & "Möchtest du jetzt die neue Version herunterladen?", vbYesNo Or vbInformation Or vbDefaultButton1, "Pixel-Lineal V" & App.Major & "." & App.Minor & ".0." & App.Revision) = vbYes Then
+                        On Error GoTo ShellExec_Error
+                        CloseApp = True
+                        ShellExec "https://docs.ww-a.de/doku.php/pixellineal:installation", vbNormalFocus
+                    End If
+            Else
+                If autoCheck = False Then
+                    If MsgBox("Die Version " & App.Major & "." & App.Minor & ".0." & App.Revision & " ist aktuell." & vbCrLf & _
+                              "Soll zukünftig automatisch auf neue Versionen geprüft werden?", vbQuestion Or vbYesNo Or vbDefaultButton1, "Online-Update") = vbYes Then
+                        SaveSetting App.Title, "Options", "VerInfo", Format$(Now, "dd.mm.yyyy")
+                    Else
+                        On Error Resume Next
+                        DeleteSetting App.Title, "Options", "VerInfo"
+                    End If
+                End If
+            End If
+            If autoCheck Then SaveSetting App.Title, "Options", "VerInfo", Format$(Now, "dd.mm.yyyy")
+        End If
+    End If
     
-    lDeskDC = GetDC(0&)
-    GetCursorPos tCursorPos
-    GetPxColor = GetPixel(lDeskDC, tCursorPos.x, tCursorPos.y)
-    ReleaseDC 0&, lDeskDC
-    Exit Function
     
-GetPxColor_Error:
-    If lDeskDC Then ReleaseDC 0&, lDeskDC
-End Function
+    Exit Sub
+    
+CheckVersion_Error:
+    Exit Sub
+    
+ShellExec_Error:
+    Screen.MousePointer = vbDefault
+    MsgBox "Fehler: " & Err.Number & vbCrLf & _
+     "Beschreibung: " & Err.Description & vbCrLf & _
+     "Quelle: CheckVersion." & Erl & vbCrLf & Err.Source, _
+     vbCritical
+End Sub
 
-Public Sub CopyRGB(lPxColor As Long)
+Public Sub CopyRGB(lPxColor As Long, Optional cpy As Boolean = True)
 Dim tCursorPos As POINTAPI
-  Clipboard.Clear
-  If HexColor = PL_HEXHTML Then
-    Clipboard.SetText RGBtoHTML(lPxColor), vbCFText
-  ElseIf HexColor = PL_HEXVB Then
-    Clipboard.SetText RGBtoVB(lPxColor), vbCFText
-  Else
-    Clipboard.SetText lPxColor, vbCFText
-  End If
-  If Not MagGlass Is Nothing Then
-    GetCursorPos tCursorPos
-    MagGlass.PrintStatus lPxColor, tCursorPos, True
-  End If
-'auf doppelte Farben prüfen
-  Dim i As Integer
-  For i = 0 To UBound(ColorCollection)
-    If ColorCollection(i) = lPxColor Then Exit Sub
-  Next i
-  AddColor lPxColor
-
+Dim i As Integer
+    If cpy Then
+        Clipboard.Clear
+        If ColorCode = PL_HEXHTML Then
+            Clipboard.SetText RGBtoHTML(lPxColor), vbCFText
+        ElseIf ColorCode = PL_HEXVB Then
+            Clipboard.SetText RGBtoVB(lPxColor), vbCFText
+        Else
+            Clipboard.SetText lPxColor, vbCFText
+        End If
+        If Not MagGlass Is Nothing Then
+            GetCursorPos tCursorPos
+            MagGlass.PrintStatus lPxColor, tCursorPos, True
+        End If
+    End If
+    'auf doppelte Farben prüfen
+    For i = 0 To UBound(ColorCollection)
+        If ColorCollection(i) = lPxColor Then Exit Sub
+    Next i
+    AddColor lPxColor
 End Sub
 
 Public Function FileExists(FileName As String) As Boolean
@@ -462,9 +513,9 @@ Dim mnuID As Long, h1 As Long, h2 As Long, h3 As Long
     h2 = GetSubMenu(h1, 0)
     h3 = GetSubMenu(h2, Id)
     For i = 0 To UBound(ColorCollection)
-        If HexColor = PL_HEXHTML Then
+        If ColorCode = PL_HEXHTML Then
             f.mnuColorCollectionItems(i).Caption = RGBtoHTML(ColorCollection(i))
-        ElseIf HexColor = PL_HEXVB Then
+        ElseIf ColorCode = PL_HEXVB Then
             f.mnuColorCollectionItems(i).Caption = RGBtoVB(ColorCollection(i))
         Else
             f.mnuColorCollectionItems(i).Caption = ColorCollection(i)
@@ -482,13 +533,23 @@ Public Function GetFileExtension(FilePath As String)
   GetFileExtension = Right$(FilePath, Len(FilePath) - InStrRev(FilePath, "."))
 End Function
 
+Public Function GetInfo() As String
+  Dim s As String
+  s = "P I X E L - L I N E A L" & vbCrLf & vbCrLf
+  s = s & "Version: " & App.Major & "." & App.Minor & "." & App.Revision & vbCrLf
+  s = s & "-Freeware-" & vbCrLf & vbCrLf
+  s = s & "Autor: WW-Anwendungsentwicklung" & vbCrLf
+  s = s & "https://www.ww-a.de"
+  GetInfo = s
+End Function
 
-Public Function GetMousePos(Parent As Object, x As Single, y As Single, Optional Border As Single = 100) As MousePos
+
+Public Function GetMousePos(Parent As Object, X As Single, Y As Single, Optional Border As Single = 90) As MousePos
 Dim IsLeft As Boolean, IsTop As Boolean, IsRight As Boolean, IsBottom As Boolean
-    IsLeft = x < Border
-    IsTop = y < Border
-    IsRight = x > Parent.ScaleWidth - Border
-    IsBottom = y > Parent.ScaleHeight - Border
+    IsLeft = X < Border
+    IsTop = Y < Border
+    IsRight = X > Parent.ScaleWidth - Border
+    IsBottom = Y > Parent.ScaleHeight - Border
     Select Case True
         Case IsTop And IsLeft:      GetMousePos = mpTopLeft
         Case IsBottom And IsLeft:   GetMousePos = mpBottomLeft
@@ -500,6 +561,20 @@ Dim IsLeft As Boolean, IsTop As Boolean, IsRight As Boolean, IsBottom As Boolean
         Case IsBottom:  GetMousePos = mpBottom
         Case Else:      GetMousePos = mpOther
       End Select
+End Function
+
+Public Function GetPxColor() As Long
+Dim lDeskDC As Long
+Dim tCursorPos As POINTAPI
+    
+    lDeskDC = GetDC(0&)
+    GetCursorPos tCursorPos
+    GetPxColor = GetPixel(lDeskDC, tCursorPos.X, tCursorPos.Y)
+    ReleaseDC 0&, lDeskDC
+    Exit Function
+    
+GetPxColor_Error:
+    If lDeskDC Then ReleaseDC 0&, lDeskDC
 End Function
 
 Public Function IsLightColor(c As Long, Optional ref As Long = 700) As Boolean
@@ -693,77 +768,4 @@ Public Sub TransparencyRuler(hwnd As Long, Rate As Byte)
     End If
 End Sub
 
-Public Function GetInfo() As String
-  Dim s As String
-  s = "P I X E L - L I N E A L" & vbCrLf & vbCrLf
-  s = s & "Version: " & App.Major & "." & App.Minor & "." & App.Revision & vbCrLf
-  s = s & "-Freeware-" & vbCrLf & vbCrLf
-  s = s & "Autor: WW-Anwendungsentwicklung" & vbCrLf
-  s = s & "https://www.ww-a.de"
-  GetInfo = s
-End Function
-
-Public Sub CheckVersion(Optional autoCheck As Boolean)
-Dim xmlhttp As Object
-Dim lastVerInfo As String, lastVerDate As String
-Dim lastVerArray() As String
-    On Error GoTo CheckVersion_Error
-    If autoCheck Then
-        lastVerDate = GetSetting(App.Title, "Options", "VerInfo", "")
-        If IsDate(lastVerDate) Then
-            If DateDiff("d", Now, CDate(lastVerDate)) < 2 Then Exit Sub
-        Else
-            Exit Sub
-        End If
-    End If
-    Set xmlhttp = CreateObject("MSXML2.ServerXMLHTTP")
-    With xmlhttp
-        .Open "GET", "https://docs.ww-a.de/lib/exe/fetch.php/pixellineal:verinfo.txt", False
-        .setRequestHeader "Content-Type", "text/plain"
-        .setRequestHeader "Connection", "keep-alive"
-        .send
-        lastVerInfo = .responseText
-    End With
-    If Len(lastVerInfo) Then
-        lastVerArray = Split(lastVerInfo, vbTab)
-        If LCase(lastVerArray(0)) = "pixlin.exe" Then
-            lastVerDate = lastVerArray(2)
-            lastVerInfo = lastVerArray(1)
-            lastVerArray = Split(lastVerInfo, ".")
-            If App.Major < CInt(lastVerArray(0)) Or _
-               App.Minor < CInt(lastVerArray(1)) Or _
-               App.Revision < CInt(lastVerArray(3)) Then
-                    If MsgBox("Neue Version " & lastVerInfo & " vom " & lastVerDate & " gefunden." & vbCrLf & "Möchtest du jetzt die neue Version herunterladen?", vbYesNo Or vbInformation Or vbDefaultButton1, "Pixel-Lineal V" & App.Major & "." & App.Minor & ".0." & App.Revision) = vbYes Then
-                        On Error GoTo ShellExec_Error
-                        CloseApp = True
-                        ShellExec "https://docs.ww-a.de/doku.php/pixellineal:installation", vbNormalFocus
-                    End If
-            Else
-                If autoCheck = False Then
-                    If MsgBox("Die Version " & App.Major & "." & App.Minor & ".0." & App.Revision & " ist aktuell." & vbCrLf & _
-                              "Soll zukünftig automatisch auf neue Versionen geprüft werden?", vbQuestion Or vbYesNo Or vbDefaultButton1, "Online-Update") = vbYes Then
-                        SaveSetting App.Title, "Options", "VerInfo", Format$(Now, "dd.mm.yyyy")
-                    Else
-                        On Error Resume Next
-                        DeleteSetting App.Title, "Options", "VerInfo"
-                    End If
-                End If
-            End If
-            If autoCheck Then SaveSetting App.Title, "Options", "VerInfo", Format$(Now, "dd.mm.yyyy")
-        End If
-    End If
-    
-    
-    Exit Sub
-    
-CheckVersion_Error:
-    Exit Sub
-    
-ShellExec_Error:
-    Screen.MousePointer = vbDefault
-    MsgBox "Fehler: " & Err.Number & vbCrLf & _
-     "Beschreibung: " & Err.Description & vbCrLf & _
-     "Quelle: CheckVersion." & Erl & vbCrLf & Err.Source, _
-     vbCritical
-End Sub
 

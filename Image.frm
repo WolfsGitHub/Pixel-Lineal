@@ -84,233 +84,333 @@ Begin VB.Form frmImage
    End
    Begin VB.Image curPointer 
       Appearance      =   0  '2D
-      Height          =   480
-      Index           =   40
-      Left            =   5280
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   63
+      Left            =   6930
       Picture         =   "Image.frx":038A
-      Top             =   1320
+      Top             =   3135
       Visible         =   0   'False
-      Width           =   480
+      Width           =   510
    End
    Begin VB.Image curPointer 
       Appearance      =   0  '2D
-      Height          =   480
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   62
+      Left            =   6930
+      Picture         =   "Image.frx":04DC
+      Top             =   2475
+      Visible         =   0   'False
+      Width           =   510
+   End
+   Begin VB.Image curPointer 
+      Appearance      =   0  '2D
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   61
+      Left            =   6930
+      Picture         =   "Image.frx":062E
+      Top             =   1815
+      Visible         =   0   'False
+      Width           =   510
+   End
+   Begin VB.Image curPointer 
+      Appearance      =   0  '2D
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   60
+      Left            =   6930
+      Picture         =   "Image.frx":0780
+      Top             =   1155
+      Visible         =   0   'False
+      Width           =   510
+   End
+   Begin VB.Image curPointer 
+      Appearance      =   0  '2D
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   53
+      Left            =   6270
+      Picture         =   "Image.frx":08D2
+      Top             =   3135
+      Visible         =   0   'False
+      Width           =   510
+   End
+   Begin VB.Image curPointer 
+      Appearance      =   0  '2D
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   52
+      Left            =   6270
+      Picture         =   "Image.frx":0A24
+      Top             =   2475
+      Visible         =   0   'False
+      Width           =   510
+   End
+   Begin VB.Image curPointer 
+      Appearance      =   0  '2D
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   51
+      Left            =   6270
+      Picture         =   "Image.frx":0B76
+      Top             =   1815
+      Visible         =   0   'False
+      Width           =   510
+   End
+   Begin VB.Image curPointer 
+      Appearance      =   0  '2D
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   50
+      Left            =   6270
+      Picture         =   "Image.frx":0CC8
+      Top             =   1155
+      Visible         =   0   'False
+      Width           =   510
+   End
+   Begin VB.Image curPointer 
+      Appearance      =   0  '2D
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   40
+      Left            =   5610
+      Picture         =   "Image.frx":0E1A
+      Top             =   1155
+      Visible         =   0   'False
+      Width           =   510
+   End
+   Begin VB.Image curPointer 
+      Appearance      =   0  '2D
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
       Index           =   4
-      Left            =   3465
-      Picture         =   "Image.frx":1054
-      Top             =   2805
-      Visible         =   0   'False
-      Width           =   480
-   End
-   Begin VB.Image curPointer 
-      Appearance      =   0  '2D
-      Height          =   480
-      Index           =   9
-      Left            =   3840
-      Picture         =   "Image.frx":11A6
-      Top             =   2805
-      Visible         =   0   'False
-      Width           =   480
-   End
-   Begin VB.Image curPointer 
-      Appearance      =   0  '2D
-      Height          =   480
-      Index           =   14
-      Left            =   4125
-      Picture         =   "Image.frx":12F8
-      Top             =   2805
-      Visible         =   0   'False
-      Width           =   480
-   End
-   Begin VB.Image curPointer 
-      Appearance      =   0  '2D
-      Height          =   480
-      Index           =   19
-      Left            =   4620
-      Picture         =   "Image.frx":144A
-      Top             =   2805
-      Visible         =   0   'False
-      Width           =   480
-   End
-   Begin VB.Image curPointer 
-      Appearance      =   0  '2D
-      Height          =   480
-      Index           =   43
-      Left            =   5280
-      Picture         =   "Image.frx":159C
-      Top             =   2760
-      Visible         =   0   'False
-      Width           =   480
-   End
-   Begin VB.Image curPointer 
-      Appearance      =   0  '2D
-      Height          =   480
-      Index           =   42
-      Left            =   5280
-      Picture         =   "Image.frx":16EE
-      Top             =   2280
-      Visible         =   0   'False
-      Width           =   480
-   End
-   Begin VB.Image curPointer 
-      Appearance      =   0  '2D
-      Height          =   480
-      Index           =   41
-      Left            =   5280
-      Picture         =   "Image.frx":1840
-      Top             =   1800
-      Visible         =   0   'False
-      Width           =   480
-   End
-   Begin VB.Image curPointer 
-      Appearance      =   0  '2D
-      Height          =   480
-      Index           =   102
-      Left            =   5775
-      Picture         =   "Image.frx":1992
-      Top             =   2310
-      Visible         =   0   'False
-      Width           =   480
-   End
-   Begin VB.Image curPointer 
-      Appearance      =   0  '2D
-      Height          =   480
-      Index           =   17
-      Left            =   4680
+      Left            =   2970
       Picture         =   "Image.frx":1AE4
-      Top             =   2400
+      Top             =   3135
       Visible         =   0   'False
-      Width           =   480
+      Width           =   510
    End
    Begin VB.Image curPointer 
       Appearance      =   0  '2D
-      Height          =   480
-      Index           =   12
-      Left            =   4200
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   9
+      Left            =   3630
       Picture         =   "Image.frx":1C36
-      Top             =   2520
+      Top             =   3135
       Visible         =   0   'False
-      Width           =   480
+      Width           =   510
    End
    Begin VB.Image curPointer 
       Appearance      =   0  '2D
-      Height          =   480
-      Index           =   7
-      Left            =   3840
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   14
+      Left            =   4290
       Picture         =   "Image.frx":1D88
-      Top             =   2280
+      Top             =   3135
       Visible         =   0   'False
-      Width           =   480
+      Width           =   510
    End
    Begin VB.Image curPointer 
       Appearance      =   0  '2D
-      Height          =   480
-      Index           =   2
-      Left            =   3360
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   19
+      Left            =   4950
       Picture         =   "Image.frx":1EDA
-      Top             =   2400
+      Top             =   3135
       Visible         =   0   'False
-      Width           =   480
+      Width           =   510
    End
    Begin VB.Image curPointer 
       Appearance      =   0  '2D
-      Height          =   480
-      Index           =   16
-      Left            =   4680
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   43
+      Left            =   5610
       Picture         =   "Image.frx":202C
-      Top             =   2040
+      Top             =   3135
       Visible         =   0   'False
-      Width           =   480
+      Width           =   510
    End
    Begin VB.Image curPointer 
       Appearance      =   0  '2D
-      Height          =   480
-      Index           =   11
-      Left            =   4200
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   42
+      Left            =   5610
       Picture         =   "Image.frx":217E
-      Top             =   2160
+      Top             =   2475
       Visible         =   0   'False
-      Width           =   480
+      Width           =   510
    End
    Begin VB.Image curPointer 
       Appearance      =   0  '2D
-      Height          =   480
-      Index           =   6
-      Left            =   3840
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   41
+      Left            =   5610
       Picture         =   "Image.frx":22D0
-      Top             =   1920
+      Top             =   1815
       Visible         =   0   'False
-      Width           =   480
+      Width           =   510
    End
    Begin VB.Image curPointer 
       Appearance      =   0  '2D
-      Height          =   480
-      Index           =   1
-      Left            =   3360
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   71
+      Left            =   7590
       Picture         =   "Image.frx":2422
-      Top             =   2040
+      Top             =   1815
       Visible         =   0   'False
-      Width           =   480
+      Width           =   510
    End
    Begin VB.Image curPointer 
       Appearance      =   0  '2D
-      Height          =   480
-      Index           =   15
-      Left            =   4680
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   17
+      Left            =   4950
       Picture         =   "Image.frx":2574
-      Top             =   1680
+      Top             =   2475
       Visible         =   0   'False
-      Width           =   480
+      Width           =   510
    End
    Begin VB.Image curPointer 
       Appearance      =   0  '2D
-      Height          =   480
-      Index           =   10
-      Left            =   4200
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   12
+      Left            =   4290
       Picture         =   "Image.frx":26C6
-      Top             =   1800
+      Top             =   2475
       Visible         =   0   'False
-      Width           =   480
+      Width           =   510
    End
    Begin VB.Image curPointer 
       Appearance      =   0  '2D
-      Height          =   480
-      Index           =   5
-      Left            =   3840
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   7
+      Left            =   3630
       Picture         =   "Image.frx":2818
-      Top             =   1560
+      Top             =   2475
       Visible         =   0   'False
-      Width           =   480
+      Width           =   510
    End
    Begin VB.Image curPointer 
       Appearance      =   0  '2D
-      Height          =   480
-      Index           =   0
-      Left            =   3360
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   2
+      Left            =   2970
       Picture         =   "Image.frx":296A
-      Top             =   1680
+      Top             =   2475
       Visible         =   0   'False
-      Width           =   480
+      Width           =   510
    End
    Begin VB.Image curPointer 
       Appearance      =   0  '2D
-      Height          =   480
-      Index           =   101
-      Left            =   5775
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   16
+      Left            =   4950
       Picture         =   "Image.frx":2ABC
-      Top             =   1650
+      Top             =   1815
       Visible         =   0   'False
-      Width           =   480
+      Width           =   510
    End
    Begin VB.Image curPointer 
       Appearance      =   0  '2D
-      Height          =   480
-      Index           =   100
-      Left            =   5775
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   11
+      Left            =   4290
       Picture         =   "Image.frx":2C0E
-      Top             =   1485
+      Top             =   1815
       Visible         =   0   'False
-      Width           =   480
+      Width           =   510
+   End
+   Begin VB.Image curPointer 
+      Appearance      =   0  '2D
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   6
+      Left            =   3630
+      Picture         =   "Image.frx":2D60
+      Top             =   1815
+      Visible         =   0   'False
+      Width           =   510
+   End
+   Begin VB.Image curPointer 
+      Appearance      =   0  '2D
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   1
+      Left            =   2970
+      Picture         =   "Image.frx":2EB2
+      Top             =   1815
+      Visible         =   0   'False
+      Width           =   510
+   End
+   Begin VB.Image curPointer 
+      Appearance      =   0  '2D
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   15
+      Left            =   4950
+      Picture         =   "Image.frx":3004
+      Top             =   1155
+      Visible         =   0   'False
+      Width           =   510
+   End
+   Begin VB.Image curPointer 
+      Appearance      =   0  '2D
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   10
+      Left            =   4290
+      Picture         =   "Image.frx":3156
+      Top             =   1155
+      Visible         =   0   'False
+      Width           =   510
+   End
+   Begin VB.Image curPointer 
+      Appearance      =   0  '2D
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   5
+      Left            =   3630
+      Picture         =   "Image.frx":32A8
+      Top             =   1155
+      Visible         =   0   'False
+      Width           =   510
+   End
+   Begin VB.Image curPointer 
+      Appearance      =   0  '2D
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   0
+      Left            =   2970
+      Picture         =   "Image.frx":33FA
+      Top             =   1155
+      Visible         =   0   'False
+      Width           =   510
+   End
+   Begin VB.Image curPointer 
+      Appearance      =   0  '2D
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
+      Index           =   70
+      Left            =   7590
+      Picture         =   "Image.frx":354C
+      Top             =   1155
+      Visible         =   0   'False
+      Width           =   510
    End
 End
 Attribute VB_Name = "frmImage"
@@ -385,6 +485,94 @@ Dim w As Long, h As Long
     PaintGrading
     mUndoStack.CreateUndoStep gdiplus.CopyStdPicture(picImage.Image)
     TBar.Enabled(tbUndo) = True: TBar.Enabled(tbRedo) = False
+End Sub
+
+
+Public Sub TextStyle(Optional reset As Boolean)
+Dim TmpFName As String
+
+  Dim LFnt As LOGFONT
+  Dim CF_T As CHOOSEFONT_TYPE
+  On Error GoTo mnuFonts_Click_Error
+      If Not reset Then
+          With CF_T
+            .nSizeMax = 72
+            .nSizeMin = 4
+            .iPointSize = 100
+            .Flags = CF_SCREENFONTS Or CF_FORCEFONTEXIST Or CF_EFFECTS Or CF_INITTOLOGFONTSTRUCT Or CF_LIMITSIZE Or CF_NOSCRIPTSEL
+            .hWndOwner = Me.hwnd
+            .lStructSize = Len(CF_T)
+            .lpLogFont = VarPtr(LFnt)
+            .hInstance = App.hInstance
+            .hDC = 0
+            .nFontType = SCREEN_FONTTYPE
+            .rgbColors = Convert_OLEtoRBG(TBar.FontColor)
+          End With
+      
+          TmpFName = TBar.FontName
+          TmpFName = StrConv(TmpFName, vbFromUnicode)
+          LFnt.lfFaceName = TmpFName & vbNullChar
+          With LFnt
+              .lfHeight = TBar.FontSize * -20 / LTwipsPerPixelY 'Alternativ: 'MM_TEXT mapping mode: lfHeight = -MulDiv(PointSize, GetDeviceCaps(hDC, LOGPIXELSY), 72);
+              .lfWeight = IIf(TBar.FontBold, FW_BOLD, FW_NORMAL)
+              .lfItalic = Abs(TBar.FontItalic)
+              .lfUnderline = Abs(TBar.FontUnderline)
+              .lfStrikeOut = Abs(TBar.FontStrikethru)
+              .lfOutPrecision = OUT_TT_PRECIS
+              .lfQuality = ANTIALIASED_QUALITY
+              .lfCharSet = DEFAULT_CHARSET
+              .lfPitchAndFamily = VARIABLE_PITCH
+          End With
+       
+        ' Dialog aufrufen
+        If ChooseFont(CF_T) = 0 Then GoTo FinalizeProc
+        TmpFName = StrConv(LFnt.lfFaceName, vbUnicode)
+    End If
+    With TBar
+      If reset Then
+          .FontColor = vbBlack
+          .FontSize = 9
+          .FontName = "Verdana"
+          .FontBold = False
+          .FontItalic = False
+          .FontUnderline = False
+          .FontStrikethru = False
+      Else
+          .FontColor = CF_T.rgbColors
+          .FontSize = CF_T.iPointSize \ 10
+          .FontName = Left$(TmpFName, InStr(1, TmpFName, vbNullChar) - 1)
+          .FontBold = CBool(LFnt.lfWeight >= FW_BOLD)
+          .FontItalic = CBool(LFnt.lfItalic)
+          .FontUnderline = CBool(LFnt.lfUnderline)
+          .FontStrikethru = CBool(LFnt.lfStrikeOut)
+           SaveSetting App.Title, "Textbox", "FontName", .FontName
+           SaveSetting App.Title, "Textbox", "FontBold", Abs(.FontBold)
+           SaveSetting App.Title, "Textbox", "FontItalic", Abs(.FontItalic)
+           SaveSetting App.Title, "Textbox", "FontUnderline", Abs(.FontUnderline)
+           SaveSetting App.Title, "Textbox", "FontStrikethru", Abs(.FontStrikethru)
+           SaveSetting App.Title, "Textbox", "FontSize", .FontSize
+           SaveSetting App.Title, "Textbox", "Color", .FontColor
+      End If
+      
+    End With
+
+  SyncFontAndColor
+  SendMessageL txtEditBox.hwnd, EM_SETMARGINS, EC_LEFTMARGIN, 3
+  txtEditBox_Change
+
+  
+FinalizeProc:
+  On Error Resume Next
+  Me.SetFocus
+  Exit Sub
+
+mnuFonts_Click_Error:
+Screen.MousePointer = vbDefault
+MsgBox "Fehler: " & Err.Number & vbCrLf & _
+ "Beschreibung: " & Err.Description & vbCrLf & _
+ "Quelle: frmMenu.mnuFonts_Click." & Erl & vbCrLf & Err.Source, _
+ vbCritical
+ Resume FinalizeProc
 End Sub
 
 Private Sub CreateTestImage(Optional ShowImgPaste As Boolean)
@@ -892,7 +1080,7 @@ Dim l As Integer
                 picImage.Font = txtEditBox.Font
                 picImage.FontSize = txtEditBox.FontSize
                 l = SBar.Line - 1: If l < 1 Then l = 1
-                TextOut picImage.hDC, .Left + 3, .Top + l, .Text, Len(.Text)
+                TextOut picImage.hDC, .Left + 3, .Top, .Text, Len(.Text)
                 mUndoStack.CreateUndoStep gdiplus.CopyStdPicture(picImage.Image)
                 TBar.Enabled(tbUndo) = True: TBar.Enabled(tbRedo) = False
             End If
@@ -1089,6 +1277,10 @@ Dim f As Form
             If TypeOf f Is frmCapture Then Exit Sub
             If TypeOf f Is frmImage And Not f Is Me Then Exit Sub
         Next
+        If Not MagGlass Is Nothing Then
+            Unload MagGlass
+            Set MagGlass = Nothing
+        End If
         Set f = Nothing
         modMain.CloseApp = True
     End If
@@ -1271,21 +1463,24 @@ End Sub
 Private Sub ResetCursor(Optional ByVal newValue As tbButtons = -1)
     If newValue < 0 Then newValue = TBar.Selected
     Select Case newValue
+        Case tbFreehand, tbLine, tbRectangle, tbCyrcle
+            picImage.MousePointer = vbCustom
+            picImage.MouseIcon = curPointer(50 + SBar.Line).Picture
+        Case tbMarker
+            picImage.MousePointer = vbCustom
+            picImage.MouseIcon = curPointer(60 + SBar.Line).Picture
         Case tbText
             picImage.MousePointer = vbCustom
-            picImage.MouseIcon = curPointer(101).Picture
+            picImage.MouseIcon = curPointer(70).Picture
+        Case tbFill
+            picImage.MousePointer = vbCustom
+            picImage.MouseIcon = curPointer(71).Picture
         Case tbArrow
             picImage.MousePointer = vbCustom
             picImage.MouseIcon = curPointer(TBar.Arrow).Picture
         Case tbLegend
             picImage.MousePointer = vbCustom
             picImage.MouseIcon = curPointer(40 + SBar.Line).Picture
-        Case tbText
-            picImage.MousePointer = vbCustom
-            picImage.MouseIcon = curPointer(101).Picture
-        Case tbFill
-            picImage.MousePointer = vbCustom
-            picImage.MouseIcon = curPointer(102).Picture
         Case tbCrop
             picImage.MousePointer = vbCrosshair
         Case Else
@@ -1295,7 +1490,7 @@ End Sub
 
 
 Private Sub SBar_Click(Button As sbButtons)
-
+Dim isMagGlass As Boolean
     On Error GoTo SBar_Click_Error
     Select Case Button
         Case sbLine0, sbLine1, sbLine2, sbLine3
@@ -1304,13 +1499,18 @@ Private Sub SBar_Click(Button As sbButtons)
         Case sbForeColor, sbBackColor, sbFill0, sbFill1, sbFill2
             SyncFontAndColor
         Case sbPicker
+            If Not MagGlass Is Nothing Then
+                isMagGlass = True
+                MagGlass.Visible = False
+                Set MagGlass = Nothing
+            End If
             Set MagColor = New frmMagColor
             MagColor.Show vbModal, Me
             Unload MagColor
             If MagColor.PipColor <> &H1000000 Then
                 If MagColor.PipColor > 0 Then
                     SBar.ForeColor = MagColor.PipColor
-                    CopyRGB MagColor.PipColor
+                    CopyRGB MagColor.PipColor, False
                 Else
                     SBar.BackColor = MagColor.PipColor * -1
                     CopyRGB MagColor.PipColor
@@ -1320,6 +1520,12 @@ Private Sub SBar_Click(Button As sbButtons)
             Set MagColor = Nothing
     End Select
     
+SBar_Click_Resume:
+    On Error Resume Next
+    If isMagGlass Then
+        Set MagGlass = frmMagGlass
+        MagGlass.Visible = True
+    End If
     Exit Sub
     
 SBar_Click_Error:
@@ -1328,6 +1534,7 @@ SBar_Click_Error:
      "Beschreibung: " & Err.Description & vbCrLf & _
      "Quelle: frmImage.SBar_Click." & Erl & vbCrLf & Err.Source, _
      vbCritical
+     Resume SBar_Click_Resume
 End Sub
 
 Private Sub Shrink()
@@ -1743,94 +1950,6 @@ Dim i As Integer
 End Sub
 
 
-Public Sub TextStyle(Optional reset As Boolean)
-Dim TmpFName As String
-
-  Dim LFnt As LOGFONT
-  Dim CF_T As CHOOSEFONT_TYPE
-  On Error GoTo mnuFonts_Click_Error
-      If Not reset Then
-          With CF_T
-            .nSizeMax = 72
-            .nSizeMin = 4
-            .iPointSize = 100
-            .Flags = CF_SCREENFONTS Or CF_FORCEFONTEXIST Or CF_EFFECTS Or CF_INITTOLOGFONTSTRUCT Or CF_LIMITSIZE Or CF_NOSCRIPTSEL
-            .hWndOwner = Me.hwnd
-            .lStructSize = Len(CF_T)
-            .lpLogFont = VarPtr(LFnt)
-            .hInstance = App.hInstance
-            .hDC = 0
-            .nFontType = SCREEN_FONTTYPE
-            .rgbColors = Convert_OLEtoRBG(TBar.FontColor)
-          End With
-      
-          TmpFName = TBar.FontName
-          TmpFName = StrConv(TmpFName, vbFromUnicode)
-          LFnt.lfFaceName = TmpFName & vbNullChar
-          With LFnt
-              .lfHeight = TBar.FontSize * -20 / LTwipsPerPixelY 'Alternativ: 'MM_TEXT mapping mode: lfHeight = -MulDiv(PointSize, GetDeviceCaps(hDC, LOGPIXELSY), 72);
-              .lfWeight = IIf(TBar.FontBold, FW_BOLD, FW_NORMAL)
-              .lfItalic = Abs(TBar.FontItalic)
-              .lfUnderline = Abs(TBar.FontUnderline)
-              .lfStrikeOut = Abs(TBar.FontStrikethru)
-              .lfOutPrecision = OUT_TT_PRECIS
-              .lfQuality = ANTIALIASED_QUALITY
-              .lfCharSet = DEFAULT_CHARSET
-              .lfPitchAndFamily = VARIABLE_PITCH
-          End With
-       
-        ' Dialog aufrufen
-        If ChooseFont(CF_T) = 0 Then GoTo FinalizeProc
-        TmpFName = StrConv(LFnt.lfFaceName, vbUnicode)
-    End If
-    With TBar
-      If reset Then
-          .FontColor = vbBlack
-          .FontSize = 9
-          .FontName = "Verdana"
-          .FontBold = False
-          .FontItalic = False
-          .FontUnderline = False
-          .FontStrikethru = False
-      Else
-          .FontColor = CF_T.rgbColors
-          .FontSize = CF_T.iPointSize \ 10
-          .FontName = Left$(TmpFName, InStr(1, TmpFName, vbNullChar) - 1)
-          .FontBold = CBool(LFnt.lfWeight >= FW_BOLD)
-          .FontItalic = CBool(LFnt.lfItalic)
-          .FontUnderline = CBool(LFnt.lfUnderline)
-          .FontStrikethru = CBool(LFnt.lfStrikeOut)
-           SaveSetting App.Title, "Textbox", "FontName", .FontName
-           SaveSetting App.Title, "Textbox", "FontBold", Abs(.FontBold)
-           SaveSetting App.Title, "Textbox", "FontItalic", Abs(.FontItalic)
-           SaveSetting App.Title, "Textbox", "FontUnderline", Abs(.FontUnderline)
-           SaveSetting App.Title, "Textbox", "FontStrikethru", Abs(.FontStrikethru)
-           SaveSetting App.Title, "Textbox", "FontSize", .FontSize
-           SaveSetting App.Title, "Textbox", "Color", .FontColor
-      End If
-      
-    End With
-
-  SyncFontAndColor
-  SendMessageL txtEditBox.hwnd, EM_SETMARGINS, EC_LEFTMARGIN, 3
-  txtEditBox_Change
-
-  
-FinalizeProc:
-  On Error Resume Next
-  Me.SetFocus
-  Exit Sub
-
-mnuFonts_Click_Error:
-Screen.MousePointer = vbDefault
-MsgBox "Fehler: " & Err.Number & vbCrLf & _
- "Beschreibung: " & Err.Description & vbCrLf & _
- "Quelle: frmMenu.mnuFonts_Click." & Erl & vbCrLf & Err.Source, _
- vbCritical
- Resume FinalizeProc
-End Sub
-
-
 '=====picImage========================================
 Private Sub picImage_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     On Error GoTo picImage_MouseDown_Error
@@ -2108,4 +2227,5 @@ Private Sub txtEditBox_MouseUp(Button As Integer, Shift As Integer, X As Single,
         txtEditBox.MousePointer = vbDefault
     End If
 End Sub
+
 

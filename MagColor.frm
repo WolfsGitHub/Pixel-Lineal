@@ -43,12 +43,13 @@ Public PipColor As Long
 Friend Sub PrintMagColor(tCursorPos As POINTAPI)
 Dim lDeskDC As Long, lPxColor As Long
 Dim i As Integer
-    Me.Move tCursorPos.x * LTwipsPerPixelX, tCursorPos.y * LTwipsPerPixelY
+Const DELTA_SHIFT As Long = 8
+    Me.Move (tCursorPos.X - DELTA_SHIFT) * LTwipsPerPixelX, (tCursorPos.Y - DELTA_SHIFT) * LTwipsPerPixelY
     'Bild übertragen
     lDeskDC = GetDC(0&)
-    lPxColor = GetPixel(lDeskDC, tCursorPos.x, tCursorPos.y)
+    lPxColor = GetPixel(lDeskDC, tCursorPos.X, tCursorPos.Y)
     StretchBlt picMagColor.hDC, 0, 0, lScaleWidth * XFACTOR, lScaleHeight * XFACTOR, _
-      lDeskDC, tCursorPos.x - (XFACTOR \ 2), tCursorPos.y - (XFACTOR \ 2), lScaleWidth, lScaleHeight, SRCCOPY
+      lDeskDC, tCursorPos.X - (XFACTOR \ 2), tCursorPos.Y - (XFACTOR \ 2), lScaleWidth, lScaleHeight, SRCCOPY
     ReleaseDC 0&, lDeskDC
     For i = 7 To 64 Step 8
         picMagColor.Line (0, i)-(71, i)
@@ -72,8 +73,8 @@ Dim tCursorPos As POINTAPI
     End Select
     If deltaX <> 0 Or deltaY <> 0 Then
         GetCursorPos tCursorPos
-        If SetCursorPos(tCursorPos.x + deltaX, tCursorPos.y + deltaY) Then
-            Me.Move (tCursorPos.x + deltaX) * LTwipsPerPixelX, (tCursorPos.y + deltaY) * LTwipsPerPixelY
+        If SetCursorPos(tCursorPos.X + deltaX, tCursorPos.Y + deltaY) Then
+            Me.Move (tCursorPos.X + deltaX) * LTwipsPerPixelX, (tCursorPos.Y + deltaY) * LTwipsPerPixelY
         End If
     End If
 End Sub
@@ -87,9 +88,20 @@ Private Sub Form_Load()
     SetLayeredWindowAttributes Me.hwnd, vbCyan, 0&, LWA_COLORKEY
 End Sub
 
-Private Sub Form_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     SetPipColor Button
     Me.Hide
+End Sub
+
+Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Dim tCursorPos As POINTAPI
+    GetCursorPos tCursorPos
+    PrintMagColor tCursorPos
+End Sub
+
+Private Sub Form_Resize()
+    lScaleWidth = Me.ScaleWidth
+    lScaleHeight = Me.ScaleHeight
 End Sub
 
 Private Sub SetPipColor(Optional Button As Integer = vbLeftButton)
@@ -98,15 +110,12 @@ Dim lDeskDC As Long
     lDeskDC = GetDC(0&)
     GetCursorPos tCursorPos
     If Button = vbLeftButton Then
-        PipColor = GetPixel(lDeskDC, tCursorPos.x, tCursorPos.y)
+        PipColor = GetPixel(lDeskDC, tCursorPos.X, tCursorPos.Y)
     ElseIf Button = vbRightButton Then
-        PipColor = GetPixel(lDeskDC, tCursorPos.x, tCursorPos.y) * -1
+        PipColor = GetPixel(lDeskDC, tCursorPos.X, tCursorPos.Y) * -1
     End If
 End Sub
 
-Private Sub Form_Resize()
-    lScaleWidth = Me.ScaleWidth
-    lScaleHeight = Me.ScaleHeight
-End Sub
+
 
 

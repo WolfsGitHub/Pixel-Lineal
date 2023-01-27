@@ -11,7 +11,7 @@ Private Declare Function lstrlenW Lib "kernel32" (lpString As Any) As Long
 Private Declare Function lstrcpyW Lib "kernel32" (lpString1 As Any, lpString2 As Any) As Long
 Private Declare Sub OleCreatePictureIndirect Lib "oleaut32.dll" (lpPictDesc As PictDesc, riid As GUID, ByVal fOwn As Boolean, lplpvObj As Object)
 Private Declare Function SelectClipRgn Lib "gdi32" (ByVal hDC As Long, ByVal hRgn As Long) As Long
-Private Declare Function TranslateColor Lib "olepro32.dll" Alias "OleTranslateColor" (ByVal clr As OLE_COLOR, ByVal palet As Long, Col As Long) As Long
+Private Declare Function TranslateColor Lib "olepro32.dll" Alias "OleTranslateColor" (ByVal clr As OLE_COLOR, ByVal palet As Long, col As Long) As Long
 
 Private Declare Function GdiplusStartup Lib "gdiplus" (ByRef token As Long, ByRef lpInput As GDIPlusStartupInput, Optional ByRef lpOutput As Any) As Long
 Private Declare Function GdiplusShutdown Lib "gdiplus" (ByVal token As Long) As Long
@@ -492,6 +492,7 @@ Dim GdipStartupInput As GDIPlusStartupInput
     GdipStartupInput.GdiPlusVersion = 1&
     Call GdiplusStartup(mGdipToken, GdipStartupInput, ByVal 0)
 End Sub
+
 
 
 

@@ -489,14 +489,6 @@ Public Property Let Fill(ByVal vNewValue As Integer)
         End Select
 End Property
 
-Public Property Get Palette() As Integer
-    Palette = mPalette
-End Property
-
-Public Property Let Palette(ByVal vNewValue As Integer)
-    mPalette = vNewValue
-End Property
-
 Public Property Get ForeColor() As Long
     ForeColor = sbColor(0).BackColor
 End Property
@@ -561,6 +553,14 @@ Public Property Let Line(ByVal vNewValue As Integer)
             mLine = 0
             shLine.Move sbTool(sbLine0).Left - 1, sbTool(sbLine0).Top - 1
         End Select
+End Property
+
+Public Property Get Palette() As Integer
+    Palette = mPalette
+End Property
+
+Public Property Let Palette(ByVal vNewValue As Integer)
+    mPalette = vNewValue
 End Property
 
 
