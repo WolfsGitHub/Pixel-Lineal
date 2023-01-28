@@ -14,15 +14,25 @@ Begin VB.UserControl ToolBar
    ToolboxBitmap   =   "toolbar.ctx":0000
    Begin VB.Timer tRefresh 
       Interval        =   1000
-      Left            =   9735
+      Left            =   10890
       Top             =   0
+   End
+   Begin VB.Image tbTool 
+      Appearance      =   0  '2D
+      Height          =   240
+      Index           =   6
+      Left            =   5655
+      Picture         =   "toolbar.ctx":0402
+      ToolTipText     =   "Verwischen"
+      Top             =   0
+      Width           =   240
    End
    Begin VB.Image imgRuler 
       Appearance      =   0  '2D
       Height          =   240
       Index           =   1
       Left            =   660
-      Picture         =   "toolbar.ctx":0402
+      Picture         =   "toolbar.ctx":078C
       ToolTipText     =   "Pixel-Lineal"
       Top             =   660
       Width           =   240
@@ -32,7 +42,7 @@ Begin VB.UserControl ToolBar
       Height          =   240
       Index           =   0
       Left            =   660
-      Picture         =   "toolbar.ctx":078C
+      Picture         =   "toolbar.ctx":0B16
       ToolTipText     =   "Pixel-Lineal"
       Top             =   450
       Width           =   240
@@ -42,7 +52,7 @@ Begin VB.UserControl ToolBar
       Height          =   240
       Index           =   0
       Left            =   2310
-      Picture         =   "toolbar.ctx":0B16
+      Picture         =   "toolbar.ctx":0EA0
       ToolTipText     =   "Bild zuschneiden"
       Top             =   450
       Visible         =   0   'False
@@ -53,7 +63,7 @@ Begin VB.UserControl ToolBar
       Height          =   240
       Index           =   1
       Left            =   2310
-      Picture         =   "toolbar.ctx":0EA0
+      Picture         =   "toolbar.ctx":122A
       Top             =   660
       Visible         =   0   'False
       Width           =   240
@@ -61,9 +71,9 @@ Begin VB.UserControl ToolBar
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
       Height          =   240
-      Index           =   16
+      Index           =   17
       Left            =   1875
-      Picture         =   "toolbar.ctx":122A
+      Picture         =   "toolbar.ctx":15B4
       ToolTipText     =   "Pixel-Lineal"
       Top             =   0
       Width           =   240
@@ -79,9 +89,9 @@ Begin VB.UserControl ToolBar
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
       Height          =   240
-      Index           =   12
+      Index           =   13
       Left            =   165
-      Picture         =   "toolbar.ctx":15B4
+      Picture         =   "toolbar.ctx":193E
       ToolTipText     =   "Menü"
       Top             =   0
       Width           =   240
@@ -89,9 +99,9 @@ Begin VB.UserControl ToolBar
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
       Height          =   240
-      Index           =   9
-      Left            =   6705
-      Picture         =   "toolbar.ctx":193E
+      Index           =   10
+      Left            =   7005
+      Picture         =   "toolbar.ctx":1CC8
       ToolTipText     =   "Text"
       Top             =   0
       Width           =   240
@@ -101,7 +111,7 @@ Begin VB.UserControl ToolBar
       Height          =   240
       Index           =   0
       Left            =   1710
-      Picture         =   "toolbar.ctx":1CC8
+      Picture         =   "toolbar.ctx":2052
       Top             =   450
       Visible         =   0   'False
       Width           =   240
@@ -111,7 +121,7 @@ Begin VB.UserControl ToolBar
       Height          =   240
       Index           =   1
       Left            =   1710
-      Picture         =   "toolbar.ctx":2052
+      Picture         =   "toolbar.ctx":23DC
       Top             =   690
       Visible         =   0   'False
       Width           =   240
@@ -120,18 +130,18 @@ Begin VB.UserControl ToolBar
       Appearance      =   0  '2D
       Height          =   240
       Index           =   0
-      Left            =   1950
-      Picture         =   "toolbar.ctx":23DC
-      Top             =   450
-      Visible         =   0   'False
-      Width           =   240
-   End
-   Begin VB.Image imgRedo 
-      Appearance      =   0  '2D
-      Height          =   240
-      Index           =   1
       Left            =   1950
       Picture         =   "toolbar.ctx":2766
+      Top             =   450
+      Visible         =   0   'False
+      Width           =   240
+   End
+   Begin VB.Image imgRedo 
+      Appearance      =   0  '2D
+      Height          =   240
+      Index           =   1
+      Left            =   1950
+      Picture         =   "toolbar.ctx":2AF0
       Top             =   690
       Visible         =   0   'False
       Width           =   240
@@ -141,7 +151,7 @@ Begin VB.UserControl ToolBar
       Height          =   240
       Index           =   0
       Left            =   990
-      Picture         =   "toolbar.ctx":2AF0
+      Picture         =   "toolbar.ctx":2E7A
       Top             =   450
       Visible         =   0   'False
       Width           =   240
@@ -151,7 +161,7 @@ Begin VB.UserControl ToolBar
       Height          =   240
       Index           =   1
       Left            =   990
-      Picture         =   "toolbar.ctx":2E7A
+      Picture         =   "toolbar.ctx":3204
       Top             =   690
       Visible         =   0   'False
       Width           =   240
@@ -161,7 +171,7 @@ Begin VB.UserControl ToolBar
       Height          =   240
       Index           =   0
       Left            =   1230
-      Picture         =   "toolbar.ctx":3204
+      Picture         =   "toolbar.ctx":358E
       ToolTipText     =   "Bild in die Zwischenablage kopieren"
       Top             =   450
       Visible         =   0   'False
@@ -172,7 +182,7 @@ Begin VB.UserControl ToolBar
       Height          =   240
       Index           =   1
       Left            =   1230
-      Picture         =   "toolbar.ctx":358E
+      Picture         =   "toolbar.ctx":3918
       ToolTipText     =   "Bild in die Zwischenablage kopieren"
       Top             =   690
       Visible         =   0   'False
@@ -182,16 +192,16 @@ Begin VB.UserControl ToolBar
       Appearance      =   0  '2D
       Height          =   240
       Index           =   2
-      Left            =   6930
-      Picture         =   "toolbar.ctx":3918
+      Left            =   7230
+      Picture         =   "toolbar.ctx":3CA2
       Top             =   0
       Width           =   240
    End
    Begin VB.Image tbTextstyle 
       Appearance      =   0  '2D
       Height          =   105
-      Left            =   9390
-      Picture         =   "toolbar.ctx":3CA2
+      Left            =   9690
+      Picture         =   "toolbar.ctx":402C
       ToolTipText     =   "Schrifteinstellungen"
       Top             =   90
       Width           =   105
@@ -211,7 +221,7 @@ Begin VB.UserControl ToolBar
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   255
-      Left            =   7140
+      Left            =   7440
       TabIndex        =   0
       ToolTipText     =   "Schrifteinstellungen"
       Top             =   0
@@ -222,7 +232,7 @@ Begin VB.UserControl ToolBar
       Height          =   240
       Index           =   0
       Left            =   3795
-      Picture         =   "toolbar.ctx":3DCC
+      Picture         =   "toolbar.ctx":4156
       ToolTipText     =   "Zeiger"
       Top             =   0
       Width           =   240
@@ -232,7 +242,7 @@ Begin VB.UserControl ToolBar
       Height          =   240
       Index           =   1
       Left            =   4095
-      Picture         =   "toolbar.ctx":4156
+      Picture         =   "toolbar.ctx":44E0
       ToolTipText     =   "Freihand"
       Top             =   0
       Width           =   240
@@ -242,7 +252,7 @@ Begin VB.UserControl ToolBar
       Height          =   240
       Index           =   2
       Left            =   4395
-      Picture         =   "toolbar.ctx":44E0
+      Picture         =   "toolbar.ctx":486A
       ToolTipText     =   "Linie"
       Top             =   0
       Width           =   240
@@ -252,7 +262,7 @@ Begin VB.UserControl ToolBar
       Height          =   240
       Index           =   3
       Left            =   4695
-      Picture         =   "toolbar.ctx":486A
+      Picture         =   "toolbar.ctx":4BF4
       ToolTipText     =   "Rechteck"
       Top             =   0
       Width           =   240
@@ -262,7 +272,7 @@ Begin VB.UserControl ToolBar
       Height          =   240
       Index           =   5
       Left            =   5355
-      Picture         =   "toolbar.ctx":4BF4
+      Picture         =   "toolbar.ctx":4F7E
       ToolTipText     =   "Markierer"
       Top             =   0
       Width           =   240
@@ -270,9 +280,9 @@ Begin VB.UserControl ToolBar
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
       Height          =   240
-      Index           =   7
-      Left            =   6075
-      Picture         =   "toolbar.ctx":4F7E
+      Index           =   8
+      Left            =   6375
+      Picture         =   "toolbar.ctx":5308
       ToolTipText     =   "Pfeil"
       Top             =   0
       Width           =   240
@@ -280,9 +290,9 @@ Begin VB.UserControl ToolBar
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
       Height          =   240
-      Index           =   6
-      Left            =   5715
-      Picture         =   "toolbar.ctx":5308
+      Index           =   7
+      Left            =   6015
+      Picture         =   "toolbar.ctx":5692
       ToolTipText     =   "Füllen"
       Top             =   0
       Width           =   240
@@ -292,7 +302,7 @@ Begin VB.UserControl ToolBar
       Height          =   240
       Index           =   4
       Left            =   4995
-      Picture         =   "toolbar.ctx":5692
+      Picture         =   "toolbar.ctx":5A1C
       ToolTipText     =   "Kreis"
       Top             =   0
       Width           =   240
@@ -300,9 +310,9 @@ Begin VB.UserControl ToolBar
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
       Height          =   240
-      Index           =   8
-      Left            =   6375
-      Picture         =   "toolbar.ctx":5A1C
+      Index           =   9
+      Left            =   6675
+      Picture         =   "toolbar.ctx":5DA6
       ToolTipText     =   "Legende"
       Top             =   0
       Width           =   240
@@ -310,9 +320,9 @@ Begin VB.UserControl ToolBar
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
       Height          =   240
-      Index           =   19
+      Index           =   20
       Left            =   3135
-      Picture         =   "toolbar.ctx":5DA6
+      Picture         =   "toolbar.ctx":6130
       ToolTipText     =   "Rückgängig"
       Top             =   0
       Width           =   240
@@ -320,9 +330,9 @@ Begin VB.UserControl ToolBar
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
       Height          =   240
-      Index           =   20
+      Index           =   21
       Left            =   3375
-      Picture         =   "toolbar.ctx":6130
+      Picture         =   "toolbar.ctx":64BA
       ToolTipText     =   "Wiederherstellen"
       Top             =   0
       Width           =   240
@@ -332,16 +342,16 @@ Begin VB.UserControl ToolBar
       Height          =   240
       Index           =   1
       Left            =   3615
-      Picture         =   "toolbar.ctx":64BA
+      Picture         =   "toolbar.ctx":6844
       Top             =   0
       Width           =   240
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
       Height          =   240
-      Index           =   14
+      Index           =   15
       Left            =   855
-      Picture         =   "toolbar.ctx":6844
+      Picture         =   "toolbar.ctx":6BCE
       ToolTipText     =   "Bild in die Zwischenablage kopieren"
       Top             =   0
       Width           =   240
@@ -351,16 +361,16 @@ Begin VB.UserControl ToolBar
       Height          =   240
       Index           =   0
       Left            =   2985
-      Picture         =   "toolbar.ctx":6BCE
+      Picture         =   "toolbar.ctx":6F58
       Top             =   0
       Width           =   240
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
       Height          =   240
-      Index           =   13
+      Index           =   14
       Left            =   495
-      Picture         =   "toolbar.ctx":6F58
+      Picture         =   "toolbar.ctx":72E2
       ToolTipText     =   "Neu aus Screenshot"
       Top             =   0
       Width           =   240
@@ -368,9 +378,9 @@ Begin VB.UserControl ToolBar
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
       Height          =   240
-      Index           =   17
+      Index           =   18
       Left            =   2175
-      Picture         =   "toolbar.ctx":72E2
+      Picture         =   "toolbar.ctx":766C
       ToolTipText     =   "Lupe"
       Top             =   0
       Width           =   240
@@ -378,9 +388,9 @@ Begin VB.UserControl ToolBar
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
       Height          =   240
-      Index           =   11
+      Index           =   12
       Left            =   1215
-      Picture         =   "toolbar.ctx":766C
+      Picture         =   "toolbar.ctx":79F6
       ToolTipText     =   "Bild aus Zwischenablage einfügen"
       Top             =   0
       Width           =   240
@@ -388,9 +398,9 @@ Begin VB.UserControl ToolBar
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
       Height          =   240
-      Index           =   10
+      Index           =   11
       Left            =   2745
-      Picture         =   "toolbar.ctx":79F6
+      Picture         =   "toolbar.ctx":7D80
       ToolTipText     =   "Bild zuschneiden"
       Top             =   0
       Width           =   240
@@ -398,9 +408,9 @@ Begin VB.UserControl ToolBar
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
       Height          =   240
-      Index           =   15
+      Index           =   16
       Left            =   1575
-      Picture         =   "toolbar.ctx":7D80
+      Picture         =   "toolbar.ctx":810A
       ToolTipText     =   "Rahmen/Schatten/Abrisskante(n) einfügen"
       Top             =   0
       Width           =   240
@@ -408,9 +418,9 @@ Begin VB.UserControl ToolBar
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
       Height          =   240
-      Index           =   18
+      Index           =   19
       Left            =   2445
-      Picture         =   "toolbar.ctx":810A
+      Picture         =   "toolbar.ctx":8494
       ToolTipText     =   "Verkleinern"
       Top             =   0
       Width           =   240
@@ -434,25 +444,26 @@ Public Enum tbButtons
     tbRectangle = 3
     tbCyrcle = 4
     tbMarker = 5
-    tbFill = 6
-    tbArrow = 7
-    tbLegend = 8
-    tbText = 9
-    tbCrop = 10
-    tbPaste = 11
+    tbObfus = 6
+    tbFill = 7
+    tbArrow = 8
+    tbLegend = 9
+    tbText = 10
+    tbCrop = 11
+    tbPaste = 12
     
-    tbMenu = 12
-    tbNew = 13
-    tbCopy = 14
-    tbBorderStyle = 15
-    tbLineal = 16
-    tbMagGlass = 17
-    tbScale = 18
-    tbUndo = 19
-    tbRedo = 20
-    tbFont = 21
-    tbTear = 22
-    tbExtend = 23
+    tbMenu = 13
+    tbNew = 14
+    tbCopy = 15
+    tbBorderStyle = 16
+    tbLineal = 17
+    tbMagGlass = 18
+    tbScale = 19
+    tbUndo = 20
+    tbRedo = 21
+    tbFont = 22
+    tbTear = 23
+    tbExtend = 24
 End Enum
 
 Public Enum tbBorder
@@ -612,7 +623,8 @@ Private Sub UserControl_Initialize()
     tbTool(tbRectangle).Move tbTool(tbLine).Left + 20, 4
     tbTool(tbCyrcle).Move tbTool(tbRectangle).Left + 20, 4
     tbTool(tbMarker).Move tbTool(tbCyrcle).Left + 20, 4
-    tbTool(tbFill).Move tbTool(tbMarker).Left + 20, 4
+    tbTool(tbObfus).Move tbTool(tbMarker).Left + 20, 4
+    tbTool(tbFill).Move tbTool(tbObfus).Left + 20, 4
     tbTool(tbArrow).Move tbTool(tbFill).Left + 20, 4
     tbTool(tbLegend).Move tbTool(tbArrow).Left + 20, 4
     tbTool(tbText).Move tbTool(tbLegend).Left + 20, 4

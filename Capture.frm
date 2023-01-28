@@ -316,7 +316,7 @@ Dim w As Long, h As Long
         lblSize.Visible = True
         lblSize.Move w - lblSize.Width - (5 * LTwipsPerPixelX), (4 * LTwipsPerPixelX)
     End If
-    shBorder.Move 15, 15, w - LTwipsPerPixelX, h - LTwipsPerPixelY
+    shBorder.Move 0, 0, w, h
     
 End Sub
 
@@ -353,7 +353,7 @@ Static alphaValue As Long
         WinInfo = GetWindowLong(hwnd, GWL_EXSTYLE)
         WinInfo = WinInfo Or WS_EX_LAYERED
         SetWindowLong hwnd, GWL_EXSTYLE, WinInfo
-        SetCursorPos (Me.Left \ LTwipsPerPixelX) + 7, (Me.Top \ LTwipsPerPixelY) + 7
+        SetCursorPos (Me.Left + (Me.Width \ 2)) \ LTwipsPerPixelX, (Me.Top + (Me.Height \ 2)) \ LTwipsPerPixelY
     End If
     SetLayeredWindowAttributes hwnd, 0&, 255& - alphaValue, LWA_ALPHA
 End Sub

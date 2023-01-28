@@ -325,6 +325,9 @@ Dim i As Integer
     SetMenuItemBitmaps h, 0, MF_BYPOSITION, frmMenu.picMenuFile(4).Picture, frmMenu.picMenuFile(4).Picture
     SetMenuItemBitmaps h, 1, MF_BYPOSITION, frmMenu.picMenuFile(7).Picture, frmMenu.picMenuFile(7).Picture
     SetMenuItemBitmaps h, 2, MF_BYPOSITION, frmMenu.picMenuFile(8).Picture, frmMenu.picMenuFile(8).Picture
+    For i = mnuColorCollectionItems.LBound To mnuColorCollectionItems.UBound
+        mnuColorCollectionItems(i).Visible = frmMenu.mnuColorCollectionItems(i).Visible
+    Next i
 
 
 End Sub

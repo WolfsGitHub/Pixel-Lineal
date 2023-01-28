@@ -123,10 +123,27 @@ Dim hBitmap As Long
         If GdipCreateHBITMAPFromBitmap(lBitmap, hBitmap, 0) = 0 Then
             Set CopyStdPicture = HandleToPicture(hBitmap, vbPicTypeBitmap)
         End If
+
         If lBitmap <> 0 Then GdipDisposeImage lBitmap
     End If
 
 End Function
+
+Public Function BlurPicture(ByVal Pic As StdPicture, Optional sngRadius As Single = 2) As StdPicture
+Dim lBitmap As Long
+Dim hBitmap As Long
+    
+    If mGdipToken = 0 Then InitGDI
+    If GdipCreateBitmapFromHBITMAP(Pic.Handle, 0, lBitmap) = 0 Then
+        mdBlurBitmap.BlurBitmap lBitmap, sngRadius
+        If GdipCreateHBITMAPFromBitmap(lBitmap, hBitmap, 0) = 0 Then
+            Set BlurPicture = HandleToPicture(hBitmap, vbPicTypeBitmap)
+        End If
+        If lBitmap <> 0 Then GdipDisposeImage lBitmap
+    End If
+
+End Function
+
 
 Public Function OpenPicture(ByVal FileName As String) As StdPicture
 Dim ret As Long

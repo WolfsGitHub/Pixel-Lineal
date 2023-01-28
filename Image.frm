@@ -609,13 +609,9 @@ Dim l&, t&, h&, w&
     With mWorkControl
         If .DrawMode = 0 Then Exit Sub
         picImage.Line (.x1, .y1)-(.x2, .y2), , B
-        
-        If .x2 > picImage.ScaleWidth - 1 Then .x2 = picImage.ScaleWidth - 1 'über rechten Rand verhindern
-        If .y2 > picImage.ScaleHeight - 1 Then .y2 = picImage.ScaleHeight - 1 'über unteren Rand verhindern
+        AdjustingWorkControlEdges
         If .x2 < .x1 Then l = .x2 Else l = .x1
         If .y2 < .y1 Then t = .y2 Else t = .y1
-        If .x2 < 0 Then .x2 = 0                'über linken Rand verhindern
-        If .y2 < 0 Then .y2 = 0                'über oberen Rand verhindern
         w = Abs(.x2 - .x1) + 1
         h = Abs(.y2 - .y1) + 1
         .x0 = 0: .y0 = 0: .x1 = 0: .y1 = 0: .x2 = 0: .y2 = 0: .DrawMode = 0
@@ -670,7 +666,7 @@ Dim i As Integer
         .DrawMode = vbCopyPen
         .DrawStyle = vbSolid
         .DrawWidth = 1
-        .FillStyle = 0
+        .FillStyle = vbFSSolid
         
         
         Select Case TBar.Arrow
@@ -1038,6 +1034,54 @@ Dim tCursorPos As POINTAPI
             picImage.Line (.x1, .y1)-(.x2, .y2), , B    'aufheben
             If .x0 <> .x1 And .y0 <> .y1 Then
                 gdiplus.PaintShape picImage, seShapeRectangle, .x1, .y1, .x2 - .x1, .y2 - .y1, vbBSSolid, SBar.ForeColor, 1 + (SBar.Line * 2), SBar.Fill > 0, SBar.BackColor, IIf(SBar.Fill = 1, 50, 100)
+                mUndoStack.CreateUndoStep gdiplus.CopyStdPicture(picImage.Image)
+                TBar.Enabled(tbUndo) = True: TBar.Enabled(tbRedo) = False
+            End If
+            .x0 = 0: .y0 = 0: .x1 = 0: .y1 = 0: .x2 = 0: .y2 = 0: .DrawMode = 0
+        End With
+        If Not MagGlass Is Nothing Then
+            DoEvents
+            GetCursorPos tCursorPos
+            MagGlass.PrintMagGlass tCursorPos
+        End If
+    End If
+End Sub
+
+Private Sub DrawObfus(X As Single, Y As Single, Optional Step As eAction)
+Dim tCursorPos As POINTAPI
+Dim p As StdPicture
+Dim l&, t&, h&, w&
+    If Step = ActionStart Then
+        picImage.DrawMode = vbNotXorPen
+        picImage.DrawStyle = vbDash
+        If modMain.IsLightColor(SBar.ForeColor) Then picImage.ForeColor = &HEEEEEE
+        picImage.DrawMode = vbNotXorPen
+        picImage.DrawStyle = vbDash
+        picImage.DrawWidth = 1
+        With mWorkControl
+            .x0 = X: .y0 = Y: .x1 = X: .y1 = Y: .x2 = X: .y2 = Y
+            .DrawMode = tbObfus
+        End With
+    Else                'Aktion-Ende
+        With mWorkControl
+            .x2 = .x0: .y2 = .y0
+            picImage.Line (.x1, .y1)-(.x2, .y2), , B    'aufheben
+            If .x0 <> .x1 And .y0 <> .y1 Then
+                AdjustingWorkControlEdges
+                If .x2 < .x1 Then l = .x2 Else l = .x1
+                If .y2 < .y1 Then t = .y2 Else t = .y1
+                w = Abs(.x2 - .x1) + 1
+                h = Abs(.y2 - .y1) + 1
+                With picPaste
+                    .Width = w * LTwipsPerPixelX
+                    .Height = h * LTwipsPerPixelY
+                    .PaintPicture picImage.Image, 0, 0, w * LTwipsPerPixelX, h * LTwipsPerPixelY, l * LTwipsPerPixelX, t * LTwipsPerPixelY, w * LTwipsPerPixelX, h * LTwipsPerPixelY
+                    Set p = gdiplus.BlurPicture(.Image, SBar.Line + 8)
+                    .Picture = p
+                    picImage.PaintPicture .Image, x1:=l, y1:=t
+                    Set .Picture = Nothing
+                    .Width = 120: .Height = 120
+                End With
                 mUndoStack.CreateUndoStep gdiplus.CopyStdPicture(picImage.Image)
                 TBar.Enabled(tbUndo) = True: TBar.Enabled(tbRedo) = False
             End If
@@ -1481,7 +1525,7 @@ Private Sub ResetCursor(Optional ByVal newValue As tbButtons = -1)
         Case tbLegend
             picImage.MousePointer = vbCustom
             picImage.MouseIcon = curPointer(40 + SBar.Line).Picture
-        Case tbCrop
+        Case tbCrop, tbObfus
             picImage.MousePointer = vbCrosshair
         Case Else
             picImage.MousePointer = vbDefault
@@ -1960,6 +2004,7 @@ Private Sub picImage_MouseDown(Button As Integer, Shift As Integer, X As Single,
         Case tbRectangle: DrawRectangle X, Y
         Case tbCyrcle:    DrawCyrcle X, Y
         Case tbMarker:    DrawMarker X, Y
+        Case tbObfus:     DrawObfus X, Y
         Case tbFill:      DrawFill X, Y
         Case tbText:      If txtEditBox.Visible Then DrawText Else DrawText X, Y, ActionStart
         Case tbArrow:     DrawArrow X, Y
@@ -2029,7 +2074,7 @@ Dim tCursorPos As POINTAPI
                 End If
                 .x0 = .x2: .y0 = .y2
                 SBar.Coordinates = (X + 1) & "," & (Y + 1)
-            ElseIf .DrawMode = tbRectangle Or .DrawMode = tbCrop Or .DrawMode = tbTear Then  'Rechteck oder Ausschneiden
+            ElseIf .DrawMode = tbRectangle Or .DrawMode = tbObfus Or .DrawMode = tbCrop Or .DrawMode = tbTear Then   'Rechteck oder Ausschneiden
                 If .x1 <> X Or .y1 <> Y Then
                     .x2 = .x0: .y2 = .y0
                     picImage.Line (.x1, .y1)-(.x2, .y2), , B
@@ -2064,6 +2109,7 @@ Private Sub picImage_MouseUp(Button As Integer, Shift As Integer, X As Single, Y
             Case tbRectangle:  DrawRectangle X, Y, ActionEnd
             Case tbCyrcle:     DrawCyrcle X, Y, ActionEnd
             Case tbMarker:     DrawMarker X, Y, ActionEnd
+            Case tbObfus:      DrawObfus X, Y, ActionEnd
             Case tbCrop, tbTear
                 With mWorkControl
                     If .DrawMode = 0 Then Exit Sub
@@ -2229,3 +2275,12 @@ Private Sub txtEditBox_MouseUp(Button As Integer, Shift As Integer, X As Single,
 End Sub
 
 
+
+Private Sub AdjustingWorkControlEdges()
+    With mWorkControl
+        If .x2 > picImage.ScaleWidth - 1 Then .x2 = picImage.ScaleWidth - 1 'über rechten Rand verhindern
+        If .y2 > picImage.ScaleHeight - 1 Then .y2 = picImage.ScaleHeight - 1 'über unteren Rand verhindern
+        If .x2 < 0 Then .x2 = 0                'über linken Rand verhindern
+        If .y2 < 0 Then .y2 = 0                'über oberen Rand verhindern
+    End With
+End Sub
