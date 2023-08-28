@@ -1,21 +1,19 @@
 Attribute VB_Name = "modMain"
 Option Explicit
+Public Const IS_PRO As Boolean = True
 
 Public MagGlass As frmMagGlass
 Public MagColor As frmMagColor
 Public Capture As frmCapture
 Public CloseApp As Boolean
-
-
 Public ForceRefresh As Integer
 Public Const FORCE_REFRESH_RES As Integer = 10  'nicht keiner machen, weil sonst die Anzeige in der Lupe verfälscht wird
 
 Public Declare Function GetAsyncKeyState Lib "user32.dll" (ByVal nVirtKey As Long) As Integer
+Public Const KEY_PRESSED As Long = &H8000
+
 Public Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
 Public Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (pDst As Any, pSrc As Any, ByVal ByteLen As Long)
-
-
-
 
 Public Declare Function PostMessage Lib "user32" Alias "PostMessageA" ( _
     ByVal hwnd As Long, _
@@ -155,10 +153,8 @@ Public Enum PL_ScaleMode
   PL_PIXEL
   PL_TWIPS
   PL_USER
+  PL_RULER
 End Enum
-Public RulerScaleMode As PL_ScaleMode
-Public RulerScaleMulti As Double
-
 
 Public Enum PL_ColorCode
   PL_HEXHTML = 0
@@ -202,8 +198,6 @@ Public Const LWA_ALPHA = &H2
 
 '#### Ende Transparenz ###
 
-Public Const XYFieldMinWidth = 80
-Public XYFieldWidth As Long
 Public LTwipsPerPixelX As Long
 Public LTwipsPerPixelY As Long
 Public LScreenWidth As Long
@@ -373,18 +367,17 @@ Public Const VARIABLE_PITCH = 2
 'Public Const FW_EXTRABOLD = 800    ' extra fett
 'Public Const FW_HEAVY = 900        ' super fett
 
-'Flächen befüllen
-Public Declare Function CreateSolidBrush Lib "gdi32" (ByVal crColor As Long) As Long
-Public Declare Function SelectObject Lib "gdi32" (ByVal hDC As Long, ByVal hObject As Long) As Long
-Public Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
+
 Public Declare Function ExtFloodFill Lib "gdi32" (ByVal _
       hDC As Long, ByVal X As Long, ByVal Y As Long, ByVal _
       crColor As Long, ByVal wFillType As Long) As Long
 Public Const FLOODFILLSURFACE = 1
 
+        
+
 Public Sub AddColor(ColorItem As Long)
 DoEvents
-Dim i As Integer, u As Integer
+Dim i As Integer, u As Integer, j As Integer
     If UBound(ColorCollection) < 15 Then
         If ColorCollection(0) > -1 Then
             ReDim Preserve ColorCollection(UBound(ColorCollection) + 1)
@@ -401,9 +394,16 @@ Dim i As Integer, u As Integer
     With frmMenu
         u = .mnuPal.UBound
         Set .picMenuPal(u).Picture = Nothing
-        For i = 0 To UBound(ColorCollection)
-            .picMenuPal(u).Line (i * 10, 0)-((i + 1) * 10, 18), ColorCollection(i), BF
-        Next i
+        j = UBound(ColorCollection)
+        If WindowsVersion >= 100 Then 'Win10
+            For i = 0 To j
+                .picMenuPal(u).Line (i * 10, 0)-((i + 1) * 10, 18), ColorCollection(i), BF
+            Next i
+        Else
+            For i = 0 To j
+                .picMenuPal(u).Line (i * (16 \ (j + 1)), 0)-((i + 1) * (16 \ (j + 1)), 18), ColorCollection(i), BF
+            Next i
+        End If
         .picMenuPal(u).Picture = .picMenuPal(u).Image
         .mnuPal(u).Visible = True
         SetMenuItemBitmaps GetSubMenu(GetMenu(.hwnd), 5&), u, MF_BYPOSITION, .picMenuPal(u).Picture, .picMenuPal(u).Picture
@@ -413,8 +413,9 @@ End Sub
 
 Public Sub CheckVersion(Optional autoCheck As Boolean)
 Dim xmlhttp As Object
-Dim lastVerInfo As String, lastVerDate As String
+Dim lastVerInfo As String, lastVer As String, lastVerDate As String
 Dim lastVerArray() As String
+Dim i As Integer
     On Error GoTo CheckVersion_Error
     If autoCheck Then
         lastVerDate = GetSetting(App.Title, "Options", "VerInfo", "")
@@ -433,15 +434,22 @@ Dim lastVerArray() As String
         lastVerInfo = .responseText
     End With
     If Len(lastVerInfo) Then
-        lastVerArray = Split(lastVerInfo, vbTab)
-        If LCase(lastVerArray(0)) = "pixlin.exe" Then
+        lastVerArray = Split(lastVerInfo, vbCrLf)
+        If UBound(lastVerArray) > 0 Then
+            lastVerInfo = Mid$(lastVerInfo, InStr(lastVerInfo, vbCrLf) + 2)
+        Else
+            lastVerInfo = ""
+        End If
+        lastVerArray = Split(lastVerArray(0), vbTab)
+        If LCase$(lastVerArray(0)) = "pixlin.exe" Then
             lastVerDate = lastVerArray(2)
-            lastVerInfo = lastVerArray(1)
-            lastVerArray = Split(lastVerInfo, ".")
+            lastVer = lastVerArray(1)
+            lastVerArray = Split(lastVer, ".")
             If App.Major < CInt(lastVerArray(0)) Or _
                App.Minor < CInt(lastVerArray(1)) Or _
                App.Revision < CInt(lastVerArray(3)) Then
-                    If MsgBox("Neue Version " & lastVerInfo & " vom " & lastVerDate & " gefunden." & vbCrLf & "Möchtest du jetzt die neue Version herunterladen?", vbYesNo Or vbInformation Or vbDefaultButton1, "Pixel-Lineal V" & App.Major & "." & App.Minor & ".0." & App.Revision) = vbYes Then
+                    If MsgBox("Neue Version " & lastVer & " vom " & lastVerDate & " gefunden." & vbCrLf & "Möchtest du jetzt die neue Version herunterladen?" & vbCrLf & vbCrLf & _
+                              IIf(Len(lastVerInfo), vbCrLf & vbCrLf & "Details zur aktuellen Version: " & vbCrLf & lastVerInfo, ""), vbYesNo Or vbInformation Or vbDefaultButton1, "Pixel-Lineal V" & App.Major & "." & App.Minor & ".0." & App.Revision) = vbYes Then
                         On Error GoTo ShellExec_Error
                         CloseApp = True
                         ShellExec "https://docs.ww-a.de/doku.php/pixellineal:installation", vbNormalFocus
@@ -489,7 +497,7 @@ Dim i As Integer
         End If
         If Not MagGlass Is Nothing Then
             GetCursorPos tCursorPos
-            MagGlass.PrintStatus lPxColor, tCursorPos, True
+            MagGlass.PrintStatus lPxColor, tCursorPos, Abs(frmRuler.RulerScaleMulti), frmRuler.RulerScaleDec, True
         End If
     End If
     'auf doppelte Farben prüfen
@@ -508,7 +516,7 @@ End Function
 
 Public Sub FillMenuColorCollection(f As Form, Id As Long)
 Dim i As Integer
-Dim mnuID As Long, h1 As Long, h2 As Long, h3 As Long
+Dim h1 As Long, h2 As Long, h3 As Long
     h1 = GetMenu(f.hwnd)
     h2 = GetSubMenu(h1, 0)
     h3 = GetSubMenu(h2, Id)
@@ -523,7 +531,6 @@ Dim mnuID As Long, h1 As Long, h2 As Long, h3 As Long
         With frmMenu
             .picMenuColor(i).Line (0, 0)-(18, 18), ColorCollection(i), BF
             .picMenuColor(i).Picture = .picMenuColor(i).Image
-            mnuID = GetMenuItemID(h3, CLng(i))
             SetMenuItemBitmaps h3, i, MF_BYPOSITION, .picMenuColor(i).Picture, .picMenuColor(i).Picture
         End With
     Next i
@@ -535,11 +542,13 @@ End Function
 
 Public Function GetInfo() As String
   Dim s As String
+  On Error Resume Next
   s = "P I X E L - L I N E A L" & vbCrLf & vbCrLf
   s = s & "Version: " & App.Major & "." & App.Minor & "." & App.Revision & vbCrLf
   s = s & "-Freeware-" & vbCrLf & vbCrLf
   s = s & "Autor: WW-Anwendungsentwicklung" & vbCrLf
-  s = s & "https://www.ww-a.de"
+  s = s & "https://www.ww-a.de" & vbCrLf & vbCrLf
+  s = s & "Windows® " & WindowsVersion
   GetInfo = s
 End Function
 
@@ -563,12 +572,10 @@ Dim IsLeft As Boolean, IsTop As Boolean, IsRight As Boolean, IsBottom As Boolean
       End Select
 End Function
 
-Public Function GetPxColor() As Long
+Public Function GetPxColor(tCursorPos As POINTAPI) As Long
 Dim lDeskDC As Long
-Dim tCursorPos As POINTAPI
     
     lDeskDC = GetDC(0&)
-    GetCursorPos tCursorPos
     GetPxColor = GetPixel(lDeskDC, tCursorPos.X, tCursorPos.Y)
     ReleaseDC 0&, lDeskDC
     Exit Function
@@ -767,5 +774,53 @@ Public Sub TransparencyRuler(hwnd As Long, Rate As Byte)
         SetWindowLong hwnd, GWL_EXSTYLE, WinInfo
     End If
 End Sub
+
+Public Function IsPro() As Boolean
+    If Not IS_PRO Then
+        If MsgBox("Diese Funktion ist nur in der Pro-Version verfügbar." & vbCrLf & "Möchtest du die Vorteile der Pro-Version kennenlernen?", vbQuestion Or vbYesNo Or vbDefaultButton2, "Pro-Version kennenlernen...") = vbYes Then
+            ShellExec "https://docs.ww-a.de/doku.php/pixellineal:proversion", vbNormalFocus
+        End If
+    Else
+        IsPro = True
+    End If
+End Function
+
+
+
+
+
+
+Public Function WindowsVersion() As Long
+    '
+    ' This is independent of any manifest or any compatibility settings.
+    '
+    '    OS              WindowsVersion return
+    ' Windows 10                100
+    ' Windows 8.1                63
+    ' Windows 8.0                62
+    ' Windows 7                  61
+    ' Windows Vista              60
+    ' Windows XP                 51
+    ' Windows 2000               50
+    Static lVersion As Long
+    Dim systemSet As Object, system As Object
+    Dim s As String
+    Dim i As Integer
+    '
+    If lVersion Then
+        WindowsVersion = lVersion
+        Exit Function
+    End If
+    '
+    Set systemSet = GetObject("winmgmts:").InstancesOf("Win32_OperatingSystem")
+    For Each system In systemSet: s = system.Version: Next
+    '
+    i = InStr(s, ".")
+    s = Left$(s, i - 1) & Mid$(s, i + 1)
+    i = InStr(s, ".")
+    If i Then s = Left$(s, i - 1)
+    lVersion = Val(s)
+    WindowsVersion = lVersion
+End Function
 
 

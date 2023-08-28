@@ -19,189 +19,228 @@ Begin VB.UserControl ToolBar
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
+      Index           =   10
+      Left            =   6975
+      Picture         =   "toolbar.ctx":0402
+      ToolTipText     =   "Legende"
+      Top             =   0
+      Width           =   255
+   End
+   Begin VB.Image imgLegend 
+      Appearance      =   0  '2D
+      Height          =   255
+      Index           =   0
+      Left            =   2970
+      Picture         =   "toolbar.ctx":0804
+      Top             =   495
+      Visible         =   0   'False
+      Width           =   255
+   End
+   Begin VB.Image imgLegend 
+      Appearance      =   0  '2D
+      Height          =   255
+      Index           =   2
+      Left            =   2700
+      Picture         =   "toolbar.ctx":0C06
+      Top             =   660
+      Visible         =   0   'False
+      Width           =   255
+   End
+   Begin VB.Image imgLegend 
+      Appearance      =   0  '2D
+      Height          =   255
+      Index           =   1
+      Left            =   2700
+      Picture         =   "toolbar.ctx":1008
+      Top             =   450
+      Visible         =   0   'False
+      Width           =   255
+   End
+   Begin VB.Image tbTool 
+      Appearance      =   0  '2D
+      Height          =   255
       Index           =   6
       Left            =   5655
-      Picture         =   "toolbar.ctx":0402
+      Picture         =   "toolbar.ctx":140A
       ToolTipText     =   "Verwischen"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image imgRuler 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   1
       Left            =   660
-      Picture         =   "toolbar.ctx":078C
+      Picture         =   "toolbar.ctx":180C
       ToolTipText     =   "Pixel-Lineal"
       Top             =   660
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image imgRuler 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   0
       Left            =   660
-      Picture         =   "toolbar.ctx":0B16
-      ToolTipText     =   "Pixel-Lineal"
+      Picture         =   "toolbar.ctx":1C0E
       Top             =   450
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image imgSize 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   0
       Left            =   2310
-      Picture         =   "toolbar.ctx":0EA0
+      Picture         =   "toolbar.ctx":2010
       ToolTipText     =   "Bild zuschneiden"
       Top             =   450
       Visible         =   0   'False
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image imgSize 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   1
       Left            =   2310
-      Picture         =   "toolbar.ctx":122A
+      Picture         =   "toolbar.ctx":2412
       Top             =   660
       Visible         =   0   'False
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
-      Index           =   17
+      Height          =   255
+      Index           =   18
       Left            =   1875
-      Picture         =   "toolbar.ctx":15B4
+      Picture         =   "toolbar.ctx":2814
       ToolTipText     =   "Pixel-Lineal"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Shape shBorder 
       BorderColor     =   &H00C0C000&
-      Height          =   270
-      Left            =   2970
+      Height          =   285
+      Left            =   3630
       Top             =   495
       Visible         =   0   'False
-      Width           =   270
+      Width           =   285
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
-      Index           =   13
+      Height          =   255
+      Index           =   14
       Left            =   165
-      Picture         =   "toolbar.ctx":193E
+      Picture         =   "toolbar.ctx":2C16
       ToolTipText     =   "Menü"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
-      Index           =   10
-      Left            =   7005
-      Picture         =   "toolbar.ctx":1CC8
+      Height          =   255
+      Index           =   11
+      Left            =   7305
+      Picture         =   "toolbar.ctx":3018
       ToolTipText     =   "Text"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image imgUndo 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   0
       Left            =   1710
-      Picture         =   "toolbar.ctx":2052
+      Picture         =   "toolbar.ctx":341A
       Top             =   450
       Visible         =   0   'False
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image imgUndo 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   1
       Left            =   1710
-      Picture         =   "toolbar.ctx":23DC
+      Picture         =   "toolbar.ctx":381C
       Top             =   690
       Visible         =   0   'False
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image imgRedo 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   0
       Left            =   1950
-      Picture         =   "toolbar.ctx":2766
+      Picture         =   "toolbar.ctx":3C1E
       Top             =   450
       Visible         =   0   'False
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image imgRedo 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   1
       Left            =   1950
-      Picture         =   "toolbar.ctx":2AF0
+      Picture         =   "toolbar.ctx":4020
       Top             =   690
       Visible         =   0   'False
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image imgNew 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   0
       Left            =   990
-      Picture         =   "toolbar.ctx":2E7A
+      Picture         =   "toolbar.ctx":4422
       Top             =   450
       Visible         =   0   'False
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image imgNew 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   1
       Left            =   990
-      Picture         =   "toolbar.ctx":3204
+      Picture         =   "toolbar.ctx":4824
       Top             =   690
       Visible         =   0   'False
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image imgCopy 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   0
       Left            =   1230
-      Picture         =   "toolbar.ctx":358E
+      Picture         =   "toolbar.ctx":4C26
       ToolTipText     =   "Bild in die Zwischenablage kopieren"
       Top             =   450
       Visible         =   0   'False
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image imgCopy 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   1
       Left            =   1230
-      Picture         =   "toolbar.ctx":3918
+      Picture         =   "toolbar.ctx":5028
       ToolTipText     =   "Bild in die Zwischenablage kopieren"
       Top             =   690
       Visible         =   0   'False
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbSeparator 
       Appearance      =   0  '2D
       Height          =   240
       Index           =   2
-      Left            =   7230
-      Picture         =   "toolbar.ctx":3CA2
+      Left            =   7515
+      Picture         =   "toolbar.ctx":542A
       Top             =   0
       Width           =   240
    End
    Begin VB.Image tbTextstyle 
       Appearance      =   0  '2D
       Height          =   105
-      Left            =   9690
-      Picture         =   "toolbar.ctx":402C
+      Left            =   9990
+      Picture         =   "toolbar.ctx":57B4
       ToolTipText     =   "Schrifteinstellungen"
       Top             =   90
       Width           =   105
@@ -221,7 +260,7 @@ Begin VB.UserControl ToolBar
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   255
-      Left            =   7440
+      Left            =   7740
       TabIndex        =   0
       ToolTipText     =   "Schrifteinstellungen"
       Top             =   0
@@ -229,201 +268,201 @@ Begin VB.UserControl ToolBar
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   0
       Left            =   3795
-      Picture         =   "toolbar.ctx":4156
+      Picture         =   "toolbar.ctx":58DE
       ToolTipText     =   "Zeiger"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   1
       Left            =   4095
-      Picture         =   "toolbar.ctx":44E0
+      Picture         =   "toolbar.ctx":5CE0
       ToolTipText     =   "Freihand"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   2
       Left            =   4395
-      Picture         =   "toolbar.ctx":486A
+      Picture         =   "toolbar.ctx":60E2
       ToolTipText     =   "Linie"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   3
       Left            =   4695
-      Picture         =   "toolbar.ctx":4BF4
+      Picture         =   "toolbar.ctx":64E4
       ToolTipText     =   "Rechteck"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   5
       Left            =   5355
-      Picture         =   "toolbar.ctx":4F7E
+      Picture         =   "toolbar.ctx":68E6
       ToolTipText     =   "Markierer"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
       Height          =   240
       Index           =   8
       Left            =   6375
-      Picture         =   "toolbar.ctx":5308
+      Picture         =   "toolbar.ctx":6CE8
       ToolTipText     =   "Pfeil"
       Top             =   0
       Width           =   240
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   7
       Left            =   6015
-      Picture         =   "toolbar.ctx":5692
+      Picture         =   "toolbar.ctx":7072
       ToolTipText     =   "Füllen"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   4
       Left            =   4995
-      Picture         =   "toolbar.ctx":5A1C
+      Picture         =   "toolbar.ctx":7474
       ToolTipText     =   "Kreis"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
+      Height          =   255
       Index           =   9
       Left            =   6675
-      Picture         =   "toolbar.ctx":5DA6
+      Picture         =   "toolbar.ctx":7876
       ToolTipText     =   "Legende"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
-      Index           =   20
+      Height          =   255
+      Index           =   21
       Left            =   3135
-      Picture         =   "toolbar.ctx":6130
+      Picture         =   "toolbar.ctx":7C78
       ToolTipText     =   "Rückgängig"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
-      Index           =   21
+      Height          =   255
+      Index           =   22
       Left            =   3375
-      Picture         =   "toolbar.ctx":64BA
+      Picture         =   "toolbar.ctx":807A
       ToolTipText     =   "Wiederherstellen"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbSeparator 
       Appearance      =   0  '2D
       Height          =   240
       Index           =   1
       Left            =   3615
-      Picture         =   "toolbar.ctx":6844
+      Picture         =   "toolbar.ctx":847C
       Top             =   0
       Width           =   240
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
-      Index           =   15
+      Height          =   255
+      Index           =   16
       Left            =   855
-      Picture         =   "toolbar.ctx":6BCE
+      Picture         =   "toolbar.ctx":8806
       ToolTipText     =   "Bild in die Zwischenablage kopieren"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbSeparator 
       Appearance      =   0  '2D
       Height          =   240
       Index           =   0
       Left            =   2985
-      Picture         =   "toolbar.ctx":6F58
+      Picture         =   "toolbar.ctx":8C08
       Top             =   0
       Width           =   240
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
-      Index           =   14
+      Height          =   255
+      Index           =   15
       Left            =   495
-      Picture         =   "toolbar.ctx":72E2
+      Picture         =   "toolbar.ctx":8F92
       ToolTipText     =   "Neu aus Screenshot"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
-      Index           =   18
+      Height          =   255
+      Index           =   19
       Left            =   2175
-      Picture         =   "toolbar.ctx":766C
+      Picture         =   "toolbar.ctx":9394
       ToolTipText     =   "Lupe"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
-      Index           =   12
+      Height          =   255
+      Index           =   13
       Left            =   1215
-      Picture         =   "toolbar.ctx":79F6
+      Picture         =   "toolbar.ctx":9796
       ToolTipText     =   "Bild aus Zwischenablage einfügen"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
-      Index           =   11
+      Height          =   255
+      Index           =   12
       Left            =   2745
-      Picture         =   "toolbar.ctx":7D80
+      Picture         =   "toolbar.ctx":9B98
       ToolTipText     =   "Bild zuschneiden"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
-      Index           =   16
+      Height          =   255
+      Index           =   17
       Left            =   1575
-      Picture         =   "toolbar.ctx":810A
+      Picture         =   "toolbar.ctx":9F9A
       ToolTipText     =   "Rahmen/Schatten/Abrisskante(n) einfügen"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
    Begin VB.Image tbTool 
       Appearance      =   0  '2D
-      Height          =   240
-      Index           =   19
+      Height          =   255
+      Index           =   20
       Left            =   2445
-      Picture         =   "toolbar.ctx":8494
+      Picture         =   "toolbar.ctx":A39C
       ToolTipText     =   "Verkleinern"
       Top             =   0
-      Width           =   240
+      Width           =   255
    End
 End
 Attribute VB_Name = "ToolBar"
@@ -433,7 +472,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
-Private mSelected As Integer
+Private mSelected(1) As Integer
 Private mFontSize As Single
 Private mArrowStyle As Integer
 
@@ -448,22 +487,23 @@ Public Enum tbButtons
     tbFill = 7
     tbArrow = 8
     tbLegend = 9
-    tbText = 10
-    tbCrop = 11
-    tbPaste = 12
+    tbDimension = 10
+    tbText = 11
+    tbCrop = 12
+    tbPaste = 13
     
-    tbMenu = 13
-    tbNew = 14
-    tbCopy = 15
-    tbBorderStyle = 16
-    tbLineal = 17
-    tbMagGlass = 18
-    tbScale = 19
-    tbUndo = 20
-    tbRedo = 21
-    tbFont = 22
-    tbTear = 23
-    tbExtend = 24
+    tbMenu = 14
+    tbNew = 15
+    tbCopy = 16
+    tbBorderStyle = 17
+    tbLineal = 18
+    tbMagGlass = 19
+    tbScale = 20
+    tbUndo = 21
+    tbRedo = 22
+    tbFont = 23
+    tbTear = 24
+    tbExtend = 26
 End Enum
 
 Public Enum tbBorder
@@ -481,7 +521,7 @@ Public Enum tbBorder
 End Enum
     
 
-Public Event Click(ByVal Value As tbButtons, ByVal X As Long)
+Public Event Click(ByVal value As tbButtons, ByVal X As Long)
 Public Event Change(ByVal newValue As tbButtons, ByVal OldValue As tbButtons, ByRef cancel As Boolean)
 Public Event MenuClick(Name As String, Caption As String, Index As Integer, Checked As Boolean)
 
@@ -523,6 +563,11 @@ End Property
 Public Property Let FontBackground(ByVal vNewValue As Long)
     lblTextstyle.BackColor = vNewValue
 End Property
+Public Property Get Font() As StdFont
+    Set Font = New StdFont
+    Font = lblTextstyle.Font
+    Font.Size = mFontSize
+End Property
 Public Property Get FontBold() As Boolean
     FontBold = lblTextstyle.FontBold
 End Property
@@ -542,7 +587,6 @@ End Property
 Public Property Let FontItalic(ByVal vNewValue As Boolean)
     lblTextstyle.FontItalic = vNewValue
 End Property
-
 
 '========================================
 
@@ -575,71 +619,86 @@ End Property
 
 
 Public Property Get Selected() As tbButtons
-    Selected = mSelected
+    Selected = mSelected(0)
 End Property
 
 Public Property Let Selected(ByVal vNewValue As tbButtons)
 Dim i As Integer
     If vNewValue > tbMenu And vNewValue <> tbTear Then vNewValue = tbPointer
-    mSelected = vNewValue
+    mSelected(0) = vNewValue
     For i = tbPointer To tbMenu
-        tbTool(i).BorderStyle = Abs(mSelected = i)
+        tbTool(i).BorderStyle = Abs(mSelected(0) = i)
     Next
 End Property
 
-Public Sub SetButtonShift(Value As Boolean)
-    If Value Then
+Public Property Get SelectedEx() As tbButtons
+    SelectedEx = mSelected(1)
+End Property
+
+Public Sub SetButtonShift(value As Boolean)
+    If value Then
         tbTool(tbNew).Picture = imgNew(1).Picture
         tbTool(tbCopy).Picture = imgCopy(1).Picture
         tbTool(tbCrop).Picture = imgSize(1).Picture
         tbTool(tbLineal).Picture = imgRuler(1).Picture
+        If mSelected(0) = tbLine Then
+            tbTool(tbLegend).Picture = imgLegend(1).Picture
+        ElseIf mSelected(0) = tbArrow Then
+            tbTool(tbLegend).Picture = imgLegend(2).Picture
+        Else
+            tbTool(tbLegend).Picture = imgLegend(0).Picture
+        End If
     Else
         tbTool(tbNew).Picture = imgNew(0).Picture
         tbTool(tbCopy).Picture = imgCopy(0).Picture
         tbTool(tbCrop).Picture = imgSize(0).Picture
         tbTool(tbLineal).Picture = imgRuler(0).Picture
+        If mSelected(1) = -1 Then tbTool(tbLegend).Picture = imgLegend(0).Picture
     End If
 End Sub
 
 Private Sub UserControl_Initialize()
     UserControl.Height = 375
     shBorder.Move 0, 3
-    tbTool(tbMenu).Move 4, 4
-    tbTool(tbNew).Move tbTool(tbMenu).Left + 20, 4
-    tbTool(tbCopy).Move tbTool(tbNew).Left + 20, 4
-    tbTool(tbPaste).Move tbTool(tbCopy).Left + 20, 4
-    tbTool(tbBorderStyle).Move tbTool(tbPaste).Left + 20, 4
-    tbTool(tbLineal).Move tbTool(tbBorderStyle).Left + 20, 4
-    tbTool(tbMagGlass).Move tbTool(tbLineal).Left + 20, 4
-    tbTool(tbScale).Move tbTool(tbMagGlass).Left + 20, 4
-    tbTool(tbCrop).Move tbTool(tbScale).Left + 20, 4
-        tbSeparator(0).Move tbTool(tbCrop).Left + 16, 4
-    tbTool(tbUndo).Move tbSeparator(0).Left + 16, 4: tbTool(tbUndo).Enabled = False
-    tbTool(tbRedo).Move tbTool(tbUndo).Left + 20, 4: tbTool(tbRedo).Enabled = False
-        tbSeparator(1).Move tbTool(tbRedo).Left + 16, 4
-    tbTool(tbPointer).Move tbSeparator(1).Left + 20, 4
-    tbTool(tbFreehand).Move tbTool(tbPointer).Left + 20, 4
-    tbTool(tbLine).Move tbTool(tbFreehand).Left + 20, 4
-    tbTool(tbRectangle).Move tbTool(tbLine).Left + 20, 4
-    tbTool(tbCyrcle).Move tbTool(tbRectangle).Left + 20, 4
-    tbTool(tbMarker).Move tbTool(tbCyrcle).Left + 20, 4
-    tbTool(tbObfus).Move tbTool(tbMarker).Left + 20, 4
-    tbTool(tbFill).Move tbTool(tbObfus).Left + 20, 4
-    tbTool(tbArrow).Move tbTool(tbFill).Left + 20, 4
-    tbTool(tbLegend).Move tbTool(tbArrow).Left + 20, 4
-    tbTool(tbText).Move tbTool(tbLegend).Left + 20, 4
-        tbSeparator(2).Move tbTool(tbText).Left + 16, 4
+    tbTool(tbMenu).Move 4, 4, 17, 17
+    tbTool(tbNew).Move tbTool(tbMenu).Left + 20, 4, 17, 17
+    tbTool(tbCopy).Move tbTool(tbNew).Left + 20, 4, 17, 17
+    tbTool(tbPaste).Move tbTool(tbCopy).Left + 20, 4, 17, 17
+    tbTool(tbBorderStyle).Move tbTool(tbPaste).Left + 20, 4, 17, 17
+    tbTool(tbLineal).Move tbTool(tbBorderStyle).Left + 20, 4, 17, 17
+    tbTool(tbMagGlass).Move tbTool(tbLineal).Left + 20, 4, 17, 17
+    tbTool(tbScale).Move tbTool(tbMagGlass).Left + 20, 4, 17, 17
+    tbTool(tbCrop).Move tbTool(tbScale).Left + 20, 4, 17, 17
+        tbSeparator(0).Move tbTool(tbCrop).Left + 16, 4, 17, 17
+    tbTool(tbUndo).Move tbSeparator(0).Left + 16, 4, 17, 17: tbTool(tbUndo).Enabled = False
+    tbTool(tbRedo).Move tbTool(tbUndo).Left + 20, 4, 17, 17: tbTool(tbRedo).Enabled = False
+        tbSeparator(1).Move tbTool(tbRedo).Left + 16, 4, 17, 17
+    tbTool(tbPointer).Move tbSeparator(1).Left + 20, 4, 17, 17
+    tbTool(tbFreehand).Move tbTool(tbPointer).Left + 20, 4, 17, 17
+    tbTool(tbLine).Move tbTool(tbFreehand).Left + 20, 4, 17, 17
+    tbTool(tbRectangle).Move tbTool(tbLine).Left + 20, 4, 17, 17
+    tbTool(tbCyrcle).Move tbTool(tbRectangle).Left + 20, 4, 17, 17
+    tbTool(tbMarker).Move tbTool(tbCyrcle).Left + 20, 4, 17, 17
+    tbTool(tbObfus).Move tbTool(tbMarker).Left + 20, 4, 17, 17
+    tbTool(tbFill).Move tbTool(tbObfus).Left + 20, 4, 17, 17
+    tbTool(tbArrow).Move tbTool(tbFill).Left + 20, 4, 17, 17
+    tbTool(tbLegend).Move tbTool(tbArrow).Left + 20, 4, 17, 17
+    tbTool(tbDimension).Move tbTool(tbLegend).Left + 20, 4, 17, 17
+    tbTool(tbText).Move tbTool(tbDimension).Left + 20, 4, 17, 17
+        tbSeparator(2).Move tbTool(tbText).Left + 16, 4, 17, 17
     lblTextstyle.Move tbSeparator(2).Left + 20, 4
     tbTextstyle.Move lblTextstyle.Left + lblTextstyle.Width - 12, 8
     tbTextstyle.ZOrder
     mFontSize = 8
     lblTextstyle.Caption = mFontSize & " - " & lblTextstyle.FontName
     shBorder.ZOrder
+    mSelected(1) = -1
     
 End Sub
 
 Private Sub UserControl_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     RaiseEvent Click(-1, CLng(X))
+    'Debug.Print tbTool(0).Height; tbTool(1).Height; tbTool(2).Height; tbTool(3).Height; tbTool(4).Height; tbTool(5).Height; tbTool(6).Height; tbTool(7).Height; tbTool(8).Height; tbTool(9).Height; tbTool(10).Height
 End Sub
 
 Private Sub UserControl_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -647,20 +706,17 @@ Private Sub UserControl_MouseMove(Button As Integer, Shift As Integer, X As Sing
     tRefresh.Enabled = False
 End Sub
 
-Private Sub UserControl_Paint()
-Dim lScaleWidth As Single, lScaleHeight As Single
-    lScaleWidth = UserControl.ScaleWidth
-    lScaleHeight = UserControl.ScaleHeight
-    UserControl.Line (0, lScaleHeight - 1)-(lScaleWidth, lScaleHeight - 1), vbButtonShadow 'H
-End Sub
-
 
 Private Sub UserControl_ReadProperties(PropBag As PropertyBag)
-    If UserControl.Ambient.UserMode Then tbTool(mSelected).BorderStyle = vbFixedSingle
+    If UserControl.Ambient.UserMode Then tbTool(mSelected(0)).BorderStyle = vbFixedSingle
 End Sub
 
 Private Sub UserControl_Resize()
+Dim lScaleWidth As Single, lScaleHeight As Single
     UserControl.Height = 375
+    lScaleWidth = UserControl.ScaleWidth
+    lScaleHeight = UserControl.ScaleHeight
+    UserControl.Line (0, lScaleHeight - 1)-(lScaleWidth, lScaleHeight - 1), vbButtonShadow 'H
 End Sub
 
 
@@ -716,7 +772,7 @@ Dim pmIndex As Integer
 Dim pmChecked As Boolean
 
     If Index < tbMenu Then         'Selektions-Schalter
-        If GetAsyncKeyState(vbKeyShift) And Index = tbCrop Then
+        If CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) And Index = tbCrop Then
             SetButtonShift False
             RaiseEvent Click(tbExtend, tbTool(Index).Left)
             Exit Sub
@@ -725,15 +781,38 @@ Dim pmChecked As Boolean
             pmName = "Arrow"
             If frmMenu.GetPopupMenu(UserControl.Parent, tbTool(Index).Left * LTwipsPerPixelX, UserControl.Height, pmName, pmCaption, pmIndex, pmChecked) Then Me.Arrow = pmIndex
         End If
-        RaiseEvent Change(Index, mSelected, cancel)
-        If cancel Then
-            tbTool(Index).BorderStyle = vbBSNone
+        If CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) And ( _
+                (mSelected(0) = tbLine And Index = tbLegend) Or _
+                (mSelected(0) = tbArrow And Index = tbLegend And Not (mArrowStyle = 4 Or mArrowStyle = 9 Or mArrowStyle = 14 Or mArrowStyle = 19))) Then
+            mSelected(1) = Index
+            If mSelected(0) = tbLine Then tbTool(tbLegend).Picture = imgLegend(1).Picture Else tbTool(tbLegend).Picture = imgLegend(2).Picture
+            RaiseEvent Change(mSelected(0), Index, cancel)
+        ElseIf CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) And ( _
+                (mSelected(0) = tbLegend And Index = tbLine) Or _
+                (mSelected(0) = tbLegend And Index = tbArrow And Not (mArrowStyle = 4 Or mArrowStyle = 9 Or mArrowStyle = 14 Or mArrowStyle = 19))) Then
+            mSelected(1) = mSelected(0)
+            If mSelected(0) = tbLine Then tbTool(tbLegend).Picture = imgLegend(1).Picture Else tbTool(tbLegend).Picture = imgLegend(2).Picture
+            mSelected(0) = Index
+            RaiseEvent Change(mSelected(0), mSelected(1), cancel)
         Else
-            For i = 0 To tbMenu - 1
-                If i = Index Then tbTool(i).BorderStyle = vbFixedSingle Else tbTool(i).BorderStyle = vbBSNone
-            Next
-            mSelected = Index
+            mSelected(1) = -1
+            tbTool(tbLegend).Picture = imgLegend(0).Picture
+            RaiseEvent Change(Index, mSelected(0), cancel)
+            If cancel Then
+                tbTool(Index).BorderStyle = vbBSNone
+                Exit Sub
+            Else
+                mSelected(0) = Index
+            End If
         End If
+        For i = 0 To tbMenu - 1
+            If i = mSelected(0) Or i = mSelected(1) Then
+                tbTool(i).BorderStyle = vbFixedSingle
+            Else
+                tbTool(i).BorderStyle = vbBSNone
+            End If
+        Next
+
     ElseIf Index = tbMenu Then
         RaiseEvent Click(Index, tbTool(Index).Left)
         pmName = "File"

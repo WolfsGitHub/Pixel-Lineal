@@ -20,6 +20,80 @@ Begin VB.Form frmMenu
    ScaleMode       =   3  'Pixel
    ScaleWidth      =   580
    Visible         =   0   'False
+   Begin VB.PictureBox picMenuFile 
+      Appearance      =   0  '2D
+      AutoRedraw      =   -1  'True
+      BackColor       =   &H00F2F2F2&
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H80000008&
+      Height          =   270
+      Index           =   3
+      Left            =   1800
+      Picture         =   "Menu.frx":2CFA
+      ScaleHeight     =   16
+      ScaleMode       =   3  'Pixel
+      ScaleWidth      =   16
+      TabIndex        =   49
+      Top             =   1200
+      Width           =   270
+   End
+   Begin VB.PictureBox picMenuFile 
+      Appearance      =   0  '2D
+      AutoRedraw      =   -1  'True
+      BackColor       =   &H00F2F2F2&
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H80000008&
+      Height          =   270
+      Index           =   10
+      Left            =   1815
+      Picture         =   "Menu.frx":3084
+      ScaleHeight     =   16
+      ScaleMode       =   3  'Pixel
+      ScaleWidth      =   16
+      TabIndex        =   48
+      Top             =   3330
+      Width           =   270
+   End
+   Begin VB.PictureBox picRulerColor 
+      Appearance      =   0  '2D
+      AutoRedraw      =   -1  'True
+      BackColor       =   &H00F2F2F2&
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H80000008&
+      Height          =   270
+      Index           =   0
+      Left            =   495
+      ScaleHeight     =   16
+      ScaleMode       =   3  'Pixel
+      ScaleWidth      =   16
+      TabIndex        =   47
+      Top             =   120
+      Width           =   270
+   End
    Begin VB.PictureBox picMenuRuler 
       Appearance      =   0  '2D
       AutoRedraw      =   -1  'True
@@ -37,7 +111,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   8
       Left            =   7260
-      Picture         =   "Menu.frx":2CFA
+      Picture         =   "Menu.frx":340E
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -62,7 +136,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   7
       Left            =   6930
-      Picture         =   "Menu.frx":3084
+      Picture         =   "Menu.frx":3798
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -87,7 +161,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   6
       Left            =   6600
-      Picture         =   "Menu.frx":340E
+      Picture         =   "Menu.frx":3B22
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -112,7 +186,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   5
       Left            =   6270
-      Picture         =   "Menu.frx":3798
+      Picture         =   "Menu.frx":3EAC
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -137,7 +211,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   4
       Left            =   5940
-      Picture         =   "Menu.frx":3B22
+      Picture         =   "Menu.frx":4236
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -160,64 +234,14 @@ Begin VB.Form frmMenu
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   270
-      Index           =   5
-      Left            =   1800
-      Picture         =   "Menu.frx":3D4C
-      ScaleHeight     =   16
-      ScaleMode       =   3  'Pixel
-      ScaleWidth      =   16
-      TabIndex        =   41
-      Top             =   1560
-      Width           =   270
-   End
-   Begin VB.PictureBox picMenuFile 
-      Appearance      =   0  '2D
-      AutoRedraw      =   -1  'True
-      BackColor       =   &H00F2F2F2&
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H80000008&
-      Height          =   270
       Index           =   6
-      Left            =   1800
-      Picture         =   "Menu.frx":40D6
-      ScaleHeight     =   16
-      ScaleMode       =   3  'Pixel
-      ScaleWidth      =   16
-      TabIndex        =   40
-      Top             =   1920
-      Width           =   270
-   End
-   Begin VB.PictureBox picMenuFile 
-      Appearance      =   0  '2D
-      AutoRedraw      =   -1  'True
-      BackColor       =   &H00F2F2F2&
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H80000008&
-      Height          =   270
-      Index           =   8
       Left            =   1800
       Picture         =   "Menu.frx":4460
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
-      TabIndex        =   39
-      Top             =   2640
+      TabIndex        =   41
+      Top             =   1920
       Width           =   270
    End
    Begin VB.PictureBox picMenuFile 
@@ -241,8 +265,58 @@ Begin VB.Form frmMenu
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
-      TabIndex        =   38
+      TabIndex        =   40
       Top             =   2280
+      Width           =   270
+   End
+   Begin VB.PictureBox picMenuFile 
+      Appearance      =   0  '2D
+      AutoRedraw      =   -1  'True
+      BackColor       =   &H00F2F2F2&
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H80000008&
+      Height          =   270
+      Index           =   9
+      Left            =   1800
+      Picture         =   "Menu.frx":4B74
+      ScaleHeight     =   16
+      ScaleMode       =   3  'Pixel
+      ScaleWidth      =   16
+      TabIndex        =   39
+      Top             =   3000
+      Width           =   270
+   End
+   Begin VB.PictureBox picMenuFile 
+      Appearance      =   0  '2D
+      AutoRedraw      =   -1  'True
+      BackColor       =   &H00F2F2F2&
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H80000008&
+      Height          =   270
+      Index           =   8
+      Left            =   1800
+      Picture         =   "Menu.frx":4EFE
+      ScaleHeight     =   16
+      ScaleMode       =   3  'Pixel
+      ScaleWidth      =   16
+      TabIndex        =   38
+      Top             =   2640
       Width           =   270
    End
    Begin VB.PictureBox picMenuRuler 
@@ -262,7 +336,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   3
       Left            =   5610
-      Picture         =   "Menu.frx":4B74
+      Picture         =   "Menu.frx":5288
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -287,7 +361,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   2
       Left            =   5280
-      Picture         =   "Menu.frx":4EFE
+      Picture         =   "Menu.frx":5612
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -312,7 +386,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   1
       Left            =   4950
-      Picture         =   "Menu.frx":5288
+      Picture         =   "Menu.frx":599C
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -337,7 +411,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   0
       Left            =   4620
-      Picture         =   "Menu.frx":5612
+      Picture         =   "Menu.frx":5D26
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -360,14 +434,14 @@ Begin VB.Form frmMenu
       EndProperty
       ForeColor       =   &H80000008&
       Height          =   270
-      Index           =   4
+      Index           =   5
       Left            =   1815
-      Picture         =   "Menu.frx":599C
+      Picture         =   "Menu.frx":60B0
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
       TabIndex        =   33
-      Top             =   1200
+      Top             =   1560
       Width           =   270
    End
    Begin VB.PictureBox picMenuFile 
@@ -387,7 +461,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   2
       Left            =   1815
-      Picture         =   "Menu.frx":5D26
+      Picture         =   "Menu.frx":643A
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -412,7 +486,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   1
       Left            =   1815
-      Picture         =   "Menu.frx":60B0
+      Picture         =   "Menu.frx":67C4
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -437,7 +511,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   0
       Left            =   1815
-      Picture         =   "Menu.frx":643A
+      Picture         =   "Menu.frx":6B4E
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -462,6 +536,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   0
       Left            =   2310
+      Picture         =   "Menu.frx":6ED8
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   159
@@ -486,7 +561,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   19
       Left            =   5610
-      Picture         =   "Menu.frx":67C4
+      Picture         =   "Menu.frx":7102
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -511,7 +586,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   17
       Left            =   5610
-      Picture         =   "Menu.frx":6B4E
+      Picture         =   "Menu.frx":748C
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -536,7 +611,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   16
       Left            =   5610
-      Picture         =   "Menu.frx":6ED8
+      Picture         =   "Menu.frx":7816
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -561,7 +636,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   15
       Left            =   5610
-      Picture         =   "Menu.frx":7262
+      Picture         =   "Menu.frx":7BA0
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -586,7 +661,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   14
       Left            =   5280
-      Picture         =   "Menu.frx":75EC
+      Picture         =   "Menu.frx":7F2A
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -611,7 +686,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   12
       Left            =   5280
-      Picture         =   "Menu.frx":7976
+      Picture         =   "Menu.frx":82B4
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -636,7 +711,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   11
       Left            =   5280
-      Picture         =   "Menu.frx":7D00
+      Picture         =   "Menu.frx":863E
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -661,7 +736,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   10
       Left            =   5280
-      Picture         =   "Menu.frx":808A
+      Picture         =   "Menu.frx":89C8
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -686,7 +761,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   9
       Left            =   4950
-      Picture         =   "Menu.frx":8414
+      Picture         =   "Menu.frx":8D52
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -711,7 +786,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   7
       Left            =   4950
-      Picture         =   "Menu.frx":879E
+      Picture         =   "Menu.frx":90DC
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -736,7 +811,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   6
       Left            =   4950
-      Picture         =   "Menu.frx":8B28
+      Picture         =   "Menu.frx":9466
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -761,7 +836,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   5
       Left            =   4950
-      Picture         =   "Menu.frx":8EB2
+      Picture         =   "Menu.frx":97F0
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -786,7 +861,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   4
       Left            =   4620
-      Picture         =   "Menu.frx":923C
+      Picture         =   "Menu.frx":9B7A
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -811,7 +886,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   2
       Left            =   4620
-      Picture         =   "Menu.frx":95C6
+      Picture         =   "Menu.frx":9F04
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -836,7 +911,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   1
       Left            =   4620
-      Picture         =   "Menu.frx":9950
+      Picture         =   "Menu.frx":A28E
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -861,7 +936,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   0
       Left            =   4620
-      Picture         =   "Menu.frx":9CDA
+      Picture         =   "Menu.frx":A618
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -877,7 +952,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   6
       Left            =   165
-      Picture         =   "Menu.frx":A064
+      Picture         =   "Menu.frx":A9A2
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   98
@@ -895,7 +970,7 @@ Begin VB.Form frmMenu
       Height          =   150
       Index           =   0
       Left            =   2805
-      Picture         =   "Menu.frx":A3EE
+      Picture         =   "Menu.frx":AD2C
       ScaleHeight     =   10
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   113
@@ -911,7 +986,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   12
       Left            =   2280
-      Picture         =   "Menu.frx":B178
+      Picture         =   "Menu.frx":BAB6
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   131
@@ -927,7 +1002,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   11
       Left            =   2280
-      Picture         =   "Menu.frx":B502
+      Picture         =   "Menu.frx":BE40
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   131
@@ -943,7 +1018,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   10
       Left            =   2280
-      Picture         =   "Menu.frx":B88C
+      Picture         =   "Menu.frx":C1CA
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   131
@@ -959,7 +1034,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   9
       Left            =   2280
-      Picture         =   "Menu.frx":BC16
+      Picture         =   "Menu.frx":C554
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   131
@@ -975,7 +1050,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   7
       Left            =   2280
-      Picture         =   "Menu.frx":BFA0
+      Picture         =   "Menu.frx":C8DE
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   131
@@ -991,7 +1066,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   5
       Left            =   120
-      Picture         =   "Menu.frx":C32A
+      Picture         =   "Menu.frx":CC68
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   99
@@ -1007,7 +1082,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   2
       Left            =   120
-      Picture         =   "Menu.frx":C6B4
+      Picture         =   "Menu.frx":CFF2
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   99
@@ -1023,7 +1098,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   4
       Left            =   120
-      Picture         =   "Menu.frx":CA3E
+      Picture         =   "Menu.frx":D37C
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   99
@@ -1039,7 +1114,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   3
       Left            =   120
-      Picture         =   "Menu.frx":CDC8
+      Picture         =   "Menu.frx":D706
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   99
@@ -1055,7 +1130,7 @@ Begin VB.Form frmMenu
       Height          =   270
       Index           =   0
       Left            =   120
-      Picture         =   "Menu.frx":D152
+      Picture         =   "Menu.frx":DA90
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   99
@@ -1137,7 +1212,7 @@ Begin VB.Form frmMenu
       Begin VB.Menu mnuLine2 
          Caption         =   "-"
       End
-      Begin VB.Menu mnuColors 
+      Begin VB.Menu mnuRulerColors 
          Caption         =   "Lineal Farben"
          Begin VB.Menu mnuBackColor 
             Caption         =   "Hintergrund-Farbe"
@@ -1191,6 +1266,11 @@ Begin VB.Form frmMenu
          Begin VB.Menu mnuScaleMode 
             Caption         =   "Selbstdefiniert"
             Index           =   2
+         End
+         Begin VB.Menu mnuScaleMode 
+            Caption         =   "Pixel-Lineal"
+            Index           =   3
+            Visible         =   0   'False
          End
       End
       Begin VB.Menu mnuLine4 
@@ -1443,6 +1523,9 @@ Begin VB.Form frmMenu
             Caption         =   "Bild laden..."
          End
       End
+      Begin VB.Menu mnuPrint 
+         Caption         =   "Drucken"
+      End
       Begin VB.Menu MFileL1 
          Caption         =   "-"
       End
@@ -1621,10 +1704,23 @@ Public Function GetPopupMenu(ByRef Sender As Form, ByVal X As Long, ByVal Y As L
     mPopupMenuChecked = False
 
     Select Case Name
-        Case "File":    Sender.PopupMenu MFile, vbPopupMenuLeftAlign, X, Y
-        Case "Border":  Sender.PopupMenu MBorderStyle, vbPopupMenuLeftAlign, X, Y
-        Case "Arrow":   Sender.PopupMenu MArrow, vbPopupMenuLeftAlign, X, Y
-        Case "Palette": Sender.PopupMenu MPal, vbPopupMenuLeftAlign, X, Y
+        Case "File":      Sender.PopupMenu MFile, vbPopupMenuLeftAlign, X, Y
+        Case "Border":    Sender.PopupMenu MBorderStyle, vbPopupMenuLeftAlign, X, Y
+        Case "Arrow":     Sender.PopupMenu MArrow, vbPopupMenuLeftAlign, X, Y
+        Case "Palette":   Sender.PopupMenu MPal, vbPopupMenuLeftAlign, X, Y
+        Case "ScaleMode"
+            mnuScale.Tag = ""
+            mnuScaleMode(PL_RULER).Visible = frmRuler.RulerScaleMode = PL_USER And frmRuler.RulerScaleMulti > 0
+            mnuScaleMode(PL_USER).Checked = (Index = PL_USER)
+            mnuScaleMode(PL_TWIPS).Checked = (Index = PL_TWIPS)
+            mnuScaleMode(PL_PIXEL).Checked = (Index = PL_PIXEL)
+            If X <> 0 Or Y <> 0 Then
+                Sender.PopupMenu mnuScale, vbPopupMenuLeftAlign, X, Y
+            Else
+                SetRulerColors
+                Sender.PopupMenu MRuler
+            End If
+            mnuScaleMode(PL_RULER).Visible = False
     End Select
     If Len(mPopupMenuName) > 0 Then
         Name = mPopupMenuName
@@ -1711,28 +1807,32 @@ MsgBox "Fehler: " & Err.Number & vbCrLf & _
 End Sub
 
 
+Private Sub mnuPrint_Click()
+    mPopupMenuName = "mnuPrint"
+    mPopupMenuCaption = mnuFileOpen.Caption
+    mPopupMenuIndex = -1
+    mPopupMenuChecked = mnuPrint.Checked
+End Sub
+
 Public Sub mnuScaleMode_Click(Index As Integer)
     On Error GoTo mnuScaleMode_Click_Error
-    mnuScaleMode(PL_USER).Checked = Index = PL_USER
-    mnuScaleMode(PL_TWIPS).Checked = Index = PL_TWIPS
-    mnuScaleMode(PL_PIXEL).Checked = Index = PL_PIXEL
-    RulerScaleMode = Index
-    Select Case RulerScaleMode
-    Case PL_PIXEL
-      RulerScaleMulti = 1
-      XYFieldWidth = XYFieldMinWidth
-    Case PL_TWIPS
-      If frmRuler.Orientation = PL_HORIZONTAL Then
-        RulerScaleMulti = LTwipsPerPixelX
-      Else
-        RulerScaleMulti = LTwipsPerPixelY
-      End If
-      XYFieldWidth = XYFieldMinWidth + Len(CStr(Round(RulerScaleMulti * 1000))) * 8
-    Case PL_USER
-      RulerScaleMulti = -1
-    End Select
-    frmRuler.ProcRefreshRuler frmRuler.Left, frmRuler.Top
-    SaveSetting App.Title, "Options", "ScaleMode", RulerScaleMode
+    mnuScaleMode(PL_USER).Checked = (Index = PL_USER)
+    mnuScaleMode(PL_TWIPS).Checked = (Index = PL_TWIPS)
+    mnuScaleMode(PL_PIXEL).Checked = (Index = PL_PIXEL)
+    mPopupMenuIndex = Index
+    mPopupMenuName = "mnuScaleMode"
+    mPopupMenuCaption = mnuScaleMode(Index).Caption
+    If mnuScale.Tag = "Ruler" Then
+        mnuScale.Tag = ""
+        If Index = 0 Then
+            frmRuler.RulerScaleMulti = 1
+        ElseIf Index = PL_TWIPS Then
+            If frmRuler.Orientation = PL_HORIZONTAL Then frmRuler.RulerScaleMulti = LTwipsPerPixelX Else frmRuler.RulerScaleMulti = LTwipsPerPixelY
+        Else
+            frmRuler.RulerScaleMulti = -1
+        End If
+        frmRuler.RulerScaleMode = Index
+    End If
 Exit Sub
 
 mnuScaleMode_Click_Error:
@@ -1775,7 +1875,7 @@ End Sub
 
 Private Sub FillPalettes()
 Dim i As Integer, j As Integer
-Dim r As Byte, s As Byte
+Dim r As Byte
     mPalette(0, 0) = &H0&
     mPalette(0, 1) = &H80&
     mPalette(0, 2) = &H8000&
@@ -1817,11 +1917,19 @@ Dim r As Byte, s As Byte
         End If
     Next
     
-    For j = 0 To 7 'UBound(mPalette, 1)
-        For i = 0 To 15
-            picMenuPal(j).Line (i * 10, 0)-((i + 1) * 10, 18), mPalette(j, i), BF
-        Next i
-    Next j
+    If WindowsVersion >= 100 Then 'Win10
+        For j = 0 To 7 'UBound(mPalette, 1)
+            For i = 0 To 15
+                picMenuPal(j).Width = 161
+                picMenuPal(j).Line (i * 10, 0)-((i + 1) * 10, 18), mPalette(j, i), BF
+            Next i
+        Next j
+    Else
+        For j = 0 To 7 'UBound(mPalette, 1)
+            picMenuPal(j).Width = 18
+            If j > 0 Then picMenuPal(j).Line (0, 0)-(18, 18), mPalette(j, 7), BF
+        Next j
+    End If
     
 End Sub
 
@@ -1835,7 +1943,8 @@ Dim h1 As Long, h2 As Long, h3 As Long
       Load mnuColorCollectionItems(i)
       mnuColorCollectionItems(i).Visible = False
       Load picMenuColor(i)
-      If i <= 8 Then
+      If i <= 4 Then Load picRulerColor(i)
+      If i <= 8 Then    '7 Plaletten + 1 gesamelte Farben
         Load picMenuPal(i)
         If App.LogMode = 0 Then
             picMenuPal(i).Visible = True
@@ -1875,16 +1984,18 @@ Dim h1 As Long, h2 As Long, h3 As Long
         SetMenuItemBitmaps h2, 2, MF_BYPOSITION, picMenuRuler(3).Picture, picMenuRuler(3).Picture   'mnuScreenShot
         SetMenuItemBitmaps h2, 3, MF_BYPOSITION, picMenuRuler(4).Picture, picMenuRuler(4).Picture   'mnuMagColor
         SetMenuItemBitmaps h2, 4, MF_BYPOSITION, picMenuRuler(5).Picture, picMenuRuler(5).Picture   'mnuMarker
-        SetMenuItemBitmaps h2, 9, MF_BYPOSITION, picMenuRuler(6).Picture, picMenuRuler(6).Picture   'mnuColors
+        SetMenuItemBitmaps h2, 9, MF_BYPOSITION, picMenuRuler(6).Picture, picMenuRuler(6).Picture   'mnuRulerColors
         SetMenuItemBitmaps h2, 10, MF_BYPOSITION, picMenuRuler(7).Picture, picMenuRuler(7).Picture  'mnuTransparency
         SetMenuItemBitmaps h2, 11, MF_BYPOSITION, picMenuRuler(8).Picture, picMenuRuler(8).Picture  'mnuScale
-        SetMenuItemBitmaps h2, 13, MF_BYPOSITION, picMenuFile(4).Picture, picMenuFile(4).Picture    'mnuHelpR
-        mnuColors_Click
+        SetMenuItemBitmaps h2, 13, MF_BYPOSITION, picMenuFile(5).Picture, picMenuFile(5).Picture    'mnuHelpR
+        SetMenuItemBitmaps h2, 14, MF_BYPOSITION, picMenuFile(10).Picture, picMenuFile(10).Picture    'mnuEnd
+        'mnuRulerColors_Click
         
     h2 = GetSubMenu(h1, 1&)     'MScreenShot
         SetMenuItemBitmaps h2, 0, MF_BYPOSITION, picMenuRuler(0).Picture, picMenuRuler(0).Picture   'mnuRuler
         SetMenuItemBitmaps h2, 1, MF_BYPOSITION, picMenuRuler(2).Picture, picMenuRuler(2).Picture   'mnuSMagGlass
-        SetMenuItemBitmaps h2, 5, MF_BYPOSITION, picMenuFile(4).Picture, picMenuFile(4).Picture     'mnuHelpS
+        SetMenuItemBitmaps h2, 5, MF_BYPOSITION, picMenuFile(5).Picture, picMenuFile(5).Picture     'mnuHelpS
+        SetMenuItemBitmaps h2, 6, MF_BYPOSITION, picMenuFile(10).Picture, picMenuFile(10).Picture     'mnuClose
         
     h2 = GetSubMenu(h1, 2&)     'MBorderStyle
     For i = 0 To mnuBorder.UBound
@@ -1903,7 +2014,7 @@ Dim h1 As Long, h2 As Long, h3 As Long
     
     h2 = GetSubMenu(h1, 3&)     'MFile
     For i = 0 To picMenuFile.UBound
-        If i <> 3 Then
+        If i <> 4 Then  'Trennlinie zwischen Drucker und Hilfe
             SetMenuItemBitmaps h2, i, MF_BYPOSITION, picMenuFile(i).Picture, picMenuFile(i).Picture
         End If
     Next
@@ -2084,41 +2195,45 @@ MsgBox "Fehler: " & Err.Number & vbCrLf & _
  vbCritical
 End Sub
 
-Private Sub mnuColors_Click()
-Dim mnuID As Long, h1 As Long, h2 As Long, h3 As Long
-    On Error GoTo mnuColors_Click_Error
+Public Sub SetRulerColors()
+Dim h1 As Long, h2 As Long, h3 As Long
+    On Error GoTo SetRulerColors_Error
     h1 = GetMenu(Me.hwnd)   'Hauptmenü
     h2 = GetSubMenu(h1, 0)  'MRuler
     h3 = GetSubMenu(h2, 9)  'Lineal-Farben / mnuColorCollection
 
-    picMenuColor(0).Line (0, 0)-(18, 18), frmRuler.picRuler.BackColor, BF
-    picMenuColor(0).Picture = picMenuColor(0).Image
-    SetMenuItemBitmaps h3, 0, MF_BYPOSITION, picMenuColor(0).Picture, picMenuColor(0).Picture
+    picRulerColor(0).Line (0, 0)-(18, 18), frmRuler.picRuler.BackColor, BF
+    picRulerColor(0).Picture = picRulerColor(0).Image
+    SetMenuItemBitmaps h3, 0, MF_BYPOSITION, picRulerColor(0).Picture, picRulerColor(0).Picture
 
-    picMenuColor(1).Line (0, 0)-(18, 18), frmRuler.picRuler.ForeColor, BF
-    picMenuColor(1).Picture = picMenuColor(1).Image
-    SetMenuItemBitmaps h3, 1, MF_BYPOSITION, picMenuColor(1).Picture, picMenuColor(1).Picture
+    picRulerColor(1).Line (0, 0)-(18, 18), frmRuler.picRuler.ForeColor, BF
+    picRulerColor(1).Picture = picRulerColor(1).Image
+    SetMenuItemBitmaps h3, 1, MF_BYPOSITION, picRulerColor(1).Picture, picRulerColor(1).Picture
 
-    picMenuColor(2).Line (0, 0)-(18, 18), frmRuler.picRuler.ForeColor, BF
-    picMenuColor(2).Picture = picMenuColor(2).Image
-    SetMenuItemBitmaps h3, 2, MF_BYPOSITION, picMenuColor(2).Picture, picMenuColor(2).Picture
+    picRulerColor(2).Line (0, 0)-(18, 18), frmRuler.picRuler.ForeColor, BF
+    picRulerColor(2).Picture = picRulerColor(2).Image
+    SetMenuItemBitmaps h3, 2, MF_BYPOSITION, picRulerColor(2).Picture, picRulerColor(2).Picture
 
-    picMenuColor(3).Line (0, 0)-(18, 18), frmRuler.MarkerColor, BF
-    picMenuColor(3).Picture = picMenuColor(3).Image
-    SetMenuItemBitmaps h3, 3, MF_BYPOSITION, picMenuColor(3).Picture, picMenuColor(3).Picture
+    picRulerColor(3).Line (0, 0)-(18, 18), frmRuler.MarkerColor, BF
+    picRulerColor(3).Picture = picRulerColor(3).Image
+    SetMenuItemBitmaps h3, 3, MF_BYPOSITION, picRulerColor(3).Picture, picRulerColor(3).Picture
 Exit Sub
 
-mnuColors_Click_Error:
+SetRulerColors_Error:
 Screen.MousePointer = vbDefault
 MsgBox "Fehler: " & Err.Number & vbCrLf & _
  "Beschreibung: " & Err.Description & vbCrLf & _
- "Quelle: frmMenu.mnuColors_Click." & Erl & vbCrLf & Err.Source, _
+ "Quelle: frmMenu.SetRulerColors." & Erl & vbCrLf & Err.Source, _
  vbCritical
 End Sub
 
 Private Sub mnuEnd_Click()
     On Error Resume Next
-    If mnuEnd.Caption = "Schließen" Then frmRuler.Hide Else Unload frmRuler
+    If mnuEnd.Caption = "Schließen" Then
+        frmRuler.Hide
+    Else
+        Unload frmRuler
+    End If
 End Sub
 
 Private Sub mnuFileOpen_Click()
@@ -2321,9 +2436,11 @@ Private Sub mnuMagColor_Click()
 Dim isMagGlass As Boolean
     On Error GoTo mnuMagColor_Click_Error
     If Not MagGlass Is Nothing Then
-        isMagGlass = True
-        MagGlass.Visible = False
-        Set MagGlass = Nothing
+        If WindowsVersion >= 100 Then
+            isMagGlass = True
+            MagGlass.Visible = False
+            Set MagGlass = Nothing
+        End If
     End If
     Set MagColor = New frmMagColor
     MagColor.Show vbModal, Me
@@ -2380,7 +2497,6 @@ MsgBox "Fehler: " & Err.Number & vbCrLf & _
 End Sub
 
 Private Sub mnuPal_Click(Index As Integer)
-Dim i As Integer
     mPopupMenuName = "mnuPal"
     mPopupMenuIndex = Index
     mPopupMenuChecked = mnuBorder(Index).Checked
@@ -2489,8 +2605,8 @@ Private Sub mnuShowSize_Click()
 End Sub
 
 
-
 Private Sub mnuUpdates_Click()
+    On Error Resume Next
     Call modMain.CheckVersion
 End Sub
 

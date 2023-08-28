@@ -3,14 +3,20 @@ Option Explicit
 
 Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, Source As Any, ByVal Length As Long)
 Private Declare Function CLSIDFromString Lib "ole32" (ByVal str As Long, Id As GUID) As Long
+Public Declare Function CreateFont Lib "gdi32" Alias "CreateFontA" (ByVal h As Long, ByVal w As Long, _
+        ByVal e As Long, ByVal O As Long, ByVal w As Long, ByVal i As Long, ByVal u As Long, ByVal s As Long, ByVal c As Long, ByVal OP As Long, ByVal _
+        CP As Long, ByVal Q As Long, ByVal PAF As Long, ByVal f As String) As Long
 Private Declare Function CreateRectRgn Lib "gdi32" (ByVal x1 As Long, ByVal y1 As Long, ByVal x2 As Long, ByVal y2 As Long) As Long
-Private Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
+Public Declare Function CreateSolidBrush Lib "gdi32" (ByVal crColor As Long) As Long
+Public Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
 Private Declare Function GetClipRgn Lib "gdi32" (ByVal hDC As Long, ByVal hRgn As Long) As Long
 Private Declare Function GetRgnBox Lib "gdi32" (ByVal hRgn As Long, lpRect As RECT) As Long
 Private Declare Function lstrlenW Lib "kernel32" (lpString As Any) As Long
 Private Declare Function lstrcpyW Lib "kernel32" (lpString1 As Any, lpString2 As Any) As Long
 Private Declare Sub OleCreatePictureIndirect Lib "oleaut32.dll" (lpPictDesc As PictDesc, riid As GUID, ByVal fOwn As Boolean, lplpvObj As Object)
+Public Declare Function SelectObject Lib "gdi32" (ByVal hDC As Long, ByVal hObject As Long) As Long
 Private Declare Function SelectClipRgn Lib "gdi32" (ByVal hDC As Long, ByVal hRgn As Long) As Long
+Public Declare Function TextOut Lib "gdi32" Alias "TextOutA" (ByVal hDC As Long, ByVal X As Long, ByVal Y As Long, ByVal lpString As String, ByVal nCount As Long) As Long
 Private Declare Function TranslateColor Lib "olepro32.dll" Alias "OleTranslateColor" (ByVal clr As OLE_COLOR, ByVal palet As Long, col As Long) As Long
 
 Private Declare Function GdiplusStartup Lib "gdiplus" (ByRef token As Long, ByRef lpInput As GDIPlusStartupInput, Optional ByRef lpOutput As Any) As Long
@@ -50,7 +56,7 @@ Private Type EncoderParameter
     EncoderGUID As GUID
     NumberOfValues As Long
     Type As Long
-    Value As Long
+    value As Long
 End Type
 
 Private Type EncoderParameters
@@ -257,20 +263,20 @@ Dim prevScaleMode As ScaleModeConstants
     
 End Sub
 
-Public Function ResizePicture(Canvas As PictureBox, Width As Long, Height As Long) As StdPicture
+Public Sub ResizePicture(Canvas As PictureBox, Width As Long, Height As Long, Optional targetDC As Long) 'As StdPicture
     Dim lBitmap As Long, hBitmap   As Long
     Const InterpolationMode As Long = 7&
     
     If GdipCreateBitmapFromHBITMAP(Canvas.Picture.Handle, 0, lBitmap) = 0 Then
-        GdipCreateFromHDC Canvas.hDC, hBitmap
+        If targetDC = 0 Then targetDC = Canvas.hDC
+        GdipCreateFromHDC targetDC, hBitmap
         GdipSetInterpolationMode hBitmap, InterpolationMode
         GdipDrawImageRectI hBitmap, lBitmap, 0, 0, Width, Height
         If hBitmap <> 0 Then GdipDeleteGraphics hBitmap
         If lBitmap <> 0 Then GdipDisposeImage lBitmap
     End If
-    Set ResizePicture = Canvas.Image
-
-End Function
+    'Set ResizePicture = Canvas.Image
+End Sub
 
 Public Function SavePicture(ByVal Pic As StdPicture, ByRef FileName As String, Optional ByVal Quality As Long = 85) As Boolean
 Dim lBitmap As Long
@@ -298,7 +304,7 @@ Const ENCODER_QUALITY As String = "{1D5BE4B5-FA4A-452D-9CDD-5DB35105E7EB}"
             CLSIDFromString StrPtr(ENCODER_QUALITY), .EncoderGUID
             .NumberOfValues = 1
             .Type = ENCODER_PARAMETER_VALUE_TYPE_LONG
-            .Value = VarPtr(Quality)
+            .value = VarPtr(Quality)
         End With
     End If
     

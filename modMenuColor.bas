@@ -1,9 +1,10 @@
 Attribute VB_Name = "modMenuColor"
+Option Explicit
 'Dieser Source stammt von http://www.activevb.de
 'und kann frei verwendet werden. Für eventuelle Schäden wird nicht gehaftet.
 'Geschrieben von Wolfgang Ehrhardt woeh@gmx.de
    
-Public Declare Function CreateSolidBrush Lib "gdi32" (ByVal crColor As Long) As Long
+'Public Declare Function CreateSolidBrush Lib "gdi32" (ByVal crColor As Long) As Long
 Public Declare Function DrawMenuBar Lib "user32" (ByVal hwnd As Long) As Long
 Public Declare Function GetMenu Lib "user32" (ByVal hwnd As Long) As Long
 Public Declare Function GetSystemMenu Lib "user32" (ByVal hwnd As Long, ByVal bRevert As Long) As Long

@@ -42,6 +42,20 @@ Begin VB.UserControl StatusBar
       Top             =   375
       Width           =   180
    End
+   Begin VB.Label sbColor 
+      Appearance      =   0  '2D
+      BackColor       =   &H00000000&
+      BorderStyle     =   1  'Fest Einfach
+      ForeColor       =   &H80000008&
+      Height          =   210
+      Index           =   2
+      Left            =   9360
+      TabIndex        =   21
+      ToolTipText     =   "Vordergrund-, Linie- und Rahmen-Farbe"
+      Top             =   600
+      Visible         =   0   'False
+      Width           =   210
+   End
    Begin VB.Image sbTool 
       Appearance      =   0  '2D
       Height          =   180
@@ -433,6 +447,10 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
+Public RulerScaleMode As PL_ScaleMode
+Public RulerScaleMulti As Single
+Public RulerScaleDec As Integer
+
 Private Declare Function SetCapture Lib "user32.dll" (ByVal hwnd As Long) As Long
 Private Declare Function ReleaseCapture Lib "user32.dll" () As Long
 
@@ -446,7 +464,7 @@ Public Enum sbButtons
     sbFill2 = 6
     sbForeColor = 7
     sbBackColor = 8
-    sbReset = 26
+    sbPalette = 26
     sbPicker = 27
 End Enum
 
@@ -457,19 +475,38 @@ Private mLegend As Boolean
 Private mPalette As Integer
 
 Public Event Click(Button As sbButtons)
+Public Event ChangeScaleMode()
 
 Public Property Get BackColor() As Long
     BackColor = sbColor(1).BackColor
 End Property
 
 Public Property Let BackColor(ByVal vNewValue As Long)
+Dim isChanged As Boolean
     If vNewValue > 16777215 Then vNewValue = 16777215
+    If sbColor(1).BackColor <> vNewValue Then isChanged = True
     sbColor(1).BackColor = vNewValue
+    If isChanged Then RaiseEvent Click(sbBackColor)
 End Property
 
-Public Property Let Coordinates(ByVal vNewValue As String)
-    lblKoordinaten.Caption = vNewValue
-End Property
+Public Sub Coordinates(ByVal X As Single, Y As Single, Optional Width As Single, Optional Height As Single)
+Dim value As String
+    Select Case RulerScaleMode
+        Case PL_PIXEL
+            If Width <> 0 Or Height <> 0 Then
+                value = X & ":" & Y & " L×B:" & Width & "×" & Height
+            Else
+                value = X & ":" & Y
+            End If
+        Case PL_TWIPS, PL_USER
+            If Width <> 0 Or Height <> 0 Then
+                value = Round(X * Abs(RulerScaleMulti), RulerScaleDec) & ":" & Round(Y * Abs(RulerScaleMulti), RulerScaleDec) & " L×B:" & Round(Width * Abs(RulerScaleMulti), RulerScaleDec) & "×" & Round(Height * Abs(RulerScaleMulti), RulerScaleDec)
+            Else
+                value = Round(X * Abs(RulerScaleMulti), RulerScaleDec) & ":" & Round(Y * Abs(RulerScaleMulti), RulerScaleDec)
+            End If
+    End Select
+    lblKoordinaten.Caption = value
+End Sub
 
 Public Property Get Fill() As Integer
     Fill = mFill
@@ -494,8 +531,11 @@ Public Property Get ForeColor() As Long
 End Property
 
 Public Property Let ForeColor(ByVal vNewValue As Long)
+Dim isChanged As Boolean
     If vNewValue > 16777215 Then vNewValue = 16777215
+    If sbColor(0).BackColor <> vNewValue Then isChanged = True
     sbColor(0).BackColor = vNewValue
+    If isChanged Then RaiseEvent Click(sbForeColor)
 End Property
 
 Public Property Get Legend() As Boolean
@@ -560,9 +600,43 @@ Public Property Get Palette() As Integer
 End Property
 
 Public Property Let Palette(ByVal vNewValue As Integer)
+Dim palColors() As Long
+Dim j As Integer
     mPalette = vNewValue
+    palColors = frmMenu.GetPalColors(mPalette)
+    For j = 0 To UBound(palColors)
+        If palColors(j) >= 0 Then sbColor(j + 10).BackColor = palColors(j)
+    Next j
 End Property
 
+
+Private Sub lblKoordinaten_Click()
+Dim X As Single, Y As Single
+Dim Index As Integer
+    Index = CInt(RulerScaleMode)
+    X = lblKoordinaten.Left * LTwipsPerPixelX
+    If Parent.Top + Parent.Height + (160 * LTwipsPerPixelY) > Screen.Height Then Y = Parent.ScaleHeight - UserControl.Height + (lblKoordinaten.Top * LTwipsPerPixelY) Else Y = Parent.ScaleHeight - (lblKoordinaten.Top * LTwipsPerPixelY)
+    If frmMenu.GetPopupMenu(UserControl.Parent, X, Y, "ScaleMode", "", Index, False) Then
+        If Index = PL_PIXEL Then
+            RulerScaleMulti = 1
+            lblKoordinaten = "Pixel"
+        ElseIf Index = PL_TWIPS Then
+            If frmRuler.Orientation = PL_HORIZONTAL Then RulerScaleMulti = LTwipsPerPixelX Else RulerScaleMulti = LTwipsPerPixelY
+            lblKoordinaten = "Twips"
+        ElseIf Index = PL_RULER Then
+            lblKoordinaten = "Pixel-Lineal"
+            RulerScaleMulti = frmRuler.RulerScaleMulti
+            RulerScaleDec = frmRuler.RulerScaleDec
+            Index = PL_USER
+        Else
+            lblKoordinaten = "Selbstdefiniert"
+            RulerScaleMulti = -1
+        End If
+        RulerScaleMode = Index
+        RaiseEvent ChangeScaleMode
+    End If
+
+End Sub
 
 Private Sub UserControl_DblClick()
 Dim col As Long
@@ -578,6 +652,7 @@ End Sub
 
 Private Sub UserControl_Initialize()
     mHover = -1
+    RulerScaleMulti = 1
     UserControl.Height = 450
     shBorder.Move 0, 5
     sbTool(sbLine0).Move 4, 6
@@ -599,7 +674,7 @@ Private Sub UserControl_Initialize()
     sbColor(15).Move sbColor(14).Left + 16, 3
     sbColor(16).Move sbColor(15).Left + 16, 3
     sbColor(17).Move sbColor(16).Left + 16, 3
-    sbTool(sbReset).Move sbColor(17).Left + 18, 3
+    sbTool(sbPalette).Move sbColor(17).Left + 18, 3
     
     sbColor(18).Move sbSeparator(1).Left + 40, 16
     sbColor(19).Move sbColor(18).Left + 16, 16
@@ -610,7 +685,8 @@ Private Sub UserControl_Initialize()
     sbColor(24).Move sbColor(23).Left + 16, 16
     sbColor(25).Move sbColor(24).Left + 16, 16
     sbTool(sbPicker).Move sbColor(25).Left + 18, 16
-        sbSeparator(2).Move sbTool(sbReset).Left + 16, 8
+    sbColor(2).Move sbColor(25).Left + 18, 16
+        sbSeparator(2).Move sbTool(sbPalette).Left + 16, 8
     lblLegend.Move sbSeparator(2).Left + 14, 7
     txtLegend.Move lblLegend.Left + lblLegend.Width + 4, 6
     lblKoordinaten.Move txtLegend.Left + txtLegend.Width + 8, 7
@@ -650,10 +726,10 @@ Dim i As Integer
             End If
         End With
     Next i
-    With sbTool(sbReset)
+    With sbTool(sbPalette)
         If X > .Left And X < .Left + 16 And Y > 3 And Y < 15 Then
             shBorder.Move .Left - 1, .Top - 1, .Width + 2, .Height + 2
-            mHover = sbReset
+            mHover = sbPalette
             GoTo Finaly
         End If
     End With
@@ -722,16 +798,18 @@ Dim palColors() As Long
             Exit Sub
         End If
     Next i
-    With sbTool(sbReset)
+    With sbTool(sbPalette)
         j = 0
         If X > .Left And X < .Left + 16 And Y > 3 And Y < 15 Then
-            X = sbTool(sbReset).Left * LTwipsPerPixelX
+            X = sbTool(sbPalette).Left * LTwipsPerPixelX
             If Parent.Top + Parent.Height + (160 * LTwipsPerPixelY) > Screen.Height Then Y = Parent.ScaleHeight - UserControl.Height Else Y = Parent.ScaleHeight - (UserControl.Height / 2)
             If frmMenu.GetPopupMenu(UserControl.Parent, X, Y, "Palette", "", j, False) Then
                 palColors = frmMenu.GetPalColors(j)
+                mPalette = j
                 For j = 0 To 15
                     sbColor(j + 10).BackColor = palColors(j)
                 Next j
+                RaiseEvent Click(sbPalette)
             End If
             Exit Sub
         End If
@@ -803,3 +881,14 @@ Private Sub txtLegend_GotFocus()
     txtLegend.SelLength = 1
 End Sub
 
+
+Public Function GetPickerColor(Optional reset As Boolean) As Label
+    If reset Then
+        sbTool(sbPicker).Visible = True
+        sbColor(2).Visible = False
+    Else
+        sbTool(sbPicker).Visible = False
+        sbColor(2).Visible = True
+        Set GetPickerColor = sbColor(2)
+    End If
+End Function

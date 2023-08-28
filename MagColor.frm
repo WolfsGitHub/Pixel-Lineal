@@ -36,18 +36,17 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Private lScaleWidth As Long, lScaleHeight As Long
-Private lDeltaX As Long, lDeltaY As Long
 Private Const XFACTOR As Long = 8
 Public PipColor As Long
+Public PicColorTarget As Label
 
 Friend Sub PrintMagColor(tCursorPos As POINTAPI)
-Dim lDeskDC As Long, lPxColor As Long
+Dim lDeskDC As Long
 Dim i As Integer
 Const DELTA_SHIFT As Long = 8
     Me.Move (tCursorPos.X - DELTA_SHIFT) * LTwipsPerPixelX, (tCursorPos.Y - DELTA_SHIFT) * LTwipsPerPixelY
     'Bild übertragen
     lDeskDC = GetDC(0&)
-    lPxColor = GetPixel(lDeskDC, tCursorPos.X, tCursorPos.Y)
     StretchBlt picMagColor.hDC, 0, 0, lScaleWidth * XFACTOR, lScaleHeight * XFACTOR, _
       lDeskDC, tCursorPos.X - (XFACTOR \ 2), tCursorPos.Y - (XFACTOR \ 2), lScaleWidth, lScaleHeight, SRCCOPY
     ReleaseDC 0&, lDeskDC
@@ -80,22 +79,32 @@ Dim tCursorPos As POINTAPI
 End Sub
 
 Private Sub Form_Load()
-    PipColor = &H1000000
-    Me.Width = (picMagColor.Left + picMagColor.Width) * LTwipsPerPixelX
-    Me.Height = (picMagColor.Top + picMagColor.Height) * LTwipsPerPixelY
-    Me.BackColor = vbCyan
-    SetWindowLong Me.hwnd, GWL_EXSTYLE, GetWindowLong(Me.hwnd, GWL_EXSTYLE) Or WS_EX_LAYERED
-    SetLayeredWindowAttributes Me.hwnd, vbCyan, 0&, LWA_COLORKEY
+    If WindowsVersion >= 100 Then 'Win10
+        PipColor = &H1000000
+        Me.Width = (picMagColor.Left + picMagColor.Width) * LTwipsPerPixelX
+        Me.Height = (picMagColor.Top + picMagColor.Height) * LTwipsPerPixelY
+        Me.BackColor = vbCyan
+        SetWindowLong Me.hwnd, GWL_EXSTYLE, GetWindowLong(Me.hwnd, GWL_EXSTYLE) Or WS_EX_LAYERED
+        SetLayeredWindowAttributes Me.hwnd, vbCyan, 0&, LWA_COLORKEY
+    Else
+        Me.Width = 1080
+        Me.Height = 1080
+        SetWindowLong Me.hwnd, GWL_EXSTYLE, GetWindowLong(Me.hwnd, GWL_EXSTYLE) Or WS_EX_LAYERED
+        SetLayeredWindowAttributes Me.hwnd, 0&, 1&, LWA_ALPHA
+        picMagColor.Visible = False
+    End If
 End Sub
 
 Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     SetPipColor Button
+    Set PicColorTarget = Nothing
     Me.Hide
 End Sub
 
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 Dim tCursorPos As POINTAPI
     GetCursorPos tCursorPos
+    If Not PicColorTarget Is Nothing Then PicColorTarget.BackColor = GetPxColor(tCursorPos)
     PrintMagColor tCursorPos
 End Sub
 

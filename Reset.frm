@@ -73,8 +73,8 @@ Option Explicit
 
 Private Sub Form_Load()
     With lstReset
-        .AddItem "Bildschirlupe-Vergrößerungsfaktor":       .ItemData(.NewIndex) = 0
-        .AddItem "Bildschirlupe-Statusbar":                 .ItemData(.NewIndex) = 1
+        .AddItem "Bildschirmlupe-Vergrößerungsfaktor":       .ItemData(.NewIndex) = 0
+        .AddItem "Bildschirmlupe-Statusbar":                 .ItemData(.NewIndex) = 1
         .AddItem "Gesamelte Farben":                        .ItemData(.NewIndex) = 2
         .AddItem "Lineal-Farben":                           .ItemData(.NewIndex) = 3
         .AddItem "Lineal-Schrift":                          .ItemData(.NewIndex) = 4
@@ -97,7 +97,7 @@ Dim i As Integer
             For i = 1 To f.mnuColorCollectionItems.UBound: f.mnuColorCollectionItems(i).Visible = False: Next i
             f.mnuPal(f.mnuPal.UBound).Visible = False
         ElseIf TypeOf f Is frmImage Then
-        
+            f.SBar.Palette = 0
         End If
     Next
     
@@ -216,23 +216,15 @@ Dim f As Form
     End If
     If CBool(chkResetAll.Value) Then
         On Error Resume Next
-        For Each f In Forms
-            If TypeOf f Is frmImage Then
-                With f
-                    .SBar.Line = 0
-                    .SBar.ForeColor = vbBlack
-                    .SBar.BackColor = vbWhite
-                    .SBar.Palette = 0
-                    .TBar.Selected = 0
-                    .TBar.Arrow = 0
-                    .SBar.Fill = 0
-                End With
-            End If
-        Next f
         DeleteSetting App.Title, "Options"
         DeleteSetting App.Title, "ScreenShot"
         DeleteSetting App.Title, "Editor"
         DeleteSetting App.Title, "Textbox"
+        For Each f In Forms
+            If TypeOf f Is frmImage Then
+                f.ReadSettings
+            End If
+        Next f
     End If
     Unload Me
 Exit Sub

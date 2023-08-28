@@ -208,10 +208,10 @@ deltaX = deltaY - 1
         End With
         Me.Line (rectLeft - deltaX, rectTop - deltaX)-(rectRight - deltaY, rectBottom - deltaY), vbRed, B
     End If
-    PrintStatus lPxColor, tCursorPos
+    PrintStatus lPxColor, tCursorPos, Abs(frmRuler.RulerScaleMulti), frmRuler.RulerScaleDec
 End Sub
 
-Friend Sub PrintStatus(lPxColor As Long, tCursorPos As POINTAPI, Optional isCopy As Boolean)
+Friend Sub PrintStatus(lPxColor As Long, tCursorPos As POINTAPI, RulerScaleMulti As Single, RulerScaleDec As Integer, Optional isCopy As Boolean)
 Dim X As Long, Y As Long, a As Single, s As String
 
     If Not bStatus Then Exit Sub
@@ -223,11 +223,11 @@ Dim X As Long, Y As Long, a As Single, s As String
     
     picStatusbar.CurrentX = 5: picStatusbar.CurrentY = 5
     If frmRuler.Visible Then
-        X = Round((tCursorPos.X - (frmRuler.Left \ LTwipsPerPixelX) + plZeroLine) * Abs(RulerScaleMulti) * 1000) / 1000
-        Y = Round((tCursorPos.Y - (frmRuler.Top \ LTwipsPerPixelY) + plZeroLine) * Abs(RulerScaleMulti) * 1000) / 1000
+        X = Round((tCursorPos.X - (frmRuler.Left \ LTwipsPerPixelX) + plZeroLine) * Abs(RulerScaleMulti), RulerScaleDec)
+        Y = Round((tCursorPos.Y - (frmRuler.Top \ LTwipsPerPixelY) + plZeroLine) * Abs(RulerScaleMulti), RulerScaleDec)
     Else
-        X = Round(tCursorPos.X * Abs(RulerScaleMulti) * 1000) / 1000
-        Y = Round(tCursorPos.Y * Abs(RulerScaleMulti) * 1000) / 1000
+        X = Round(tCursorPos.X * Abs(RulerScaleMulti), RulerScaleDec)
+        Y = Round(tCursorPos.Y * Abs(RulerScaleMulti), RulerScaleDec)
     End If
     a = Round(Math.Sqr(X ^ 2 + Y ^ 2), 1)
     s = "X:" & X & "   Y:" & Y & "   A:" & Format$(a, "0.0")
@@ -320,11 +320,14 @@ Dim i As Integer
     h = GetMenu(Me.hwnd)
     h = GetSubMenu(h, 0&)
     SetMenuItemBitmaps h, 2, MF_BYPOSITION, frmMenu.picMenuFile(5).Picture, frmMenu.picMenuFile(5).Picture
+    SetMenuItemBitmaps h, 4, MF_BYPOSITION, frmMenu.picMenuFile(9).Picture, frmMenu.picMenuFile(9).Picture
     h = GetMenu(Me.hwnd)
     h = GetSubMenu(h, 2&)
     SetMenuItemBitmaps h, 0, MF_BYPOSITION, frmMenu.picMenuFile(4).Picture, frmMenu.picMenuFile(4).Picture
     SetMenuItemBitmaps h, 1, MF_BYPOSITION, frmMenu.picMenuFile(7).Picture, frmMenu.picMenuFile(7).Picture
     SetMenuItemBitmaps h, 2, MF_BYPOSITION, frmMenu.picMenuFile(8).Picture, frmMenu.picMenuFile(8).Picture
+    
+    
     For i = mnuColorCollectionItems.LBound To mnuColorCollectionItems.UBound
         mnuColorCollectionItems(i).Visible = frmMenu.mnuColorCollectionItems(i).Visible
     Next i
@@ -415,8 +418,10 @@ MsgBox "Fehler: " & Err.Number & vbCrLf & _
 End Sub
 
 Private Sub mnuCopyRGB_Click()
+Dim tCursorPos As POINTAPI
     On Error GoTo mnuCopyRGB_Click_Error
-    CopyRGB GetPxColor
+    GetCursorPos tCursorPos
+    CopyRGB GetPxColor(tCursorPos)
   Exit Sub
   
 mnuCopyRGB_Click_Error:
@@ -459,19 +464,6 @@ Private Sub mnuMagGlass_Click()
     Else
       mnuColorCollection.Enabled = True
     End If
-End Sub
-
-Private Sub mnuReset_Click()
-    On Error GoTo mnuReset_Click_Error
-    frmReset.Show vbModal, Me
-Exit Sub
-
-mnuReset_Click_Error:
-Screen.MousePointer = vbDefault
-MsgBox "Fehler: " & Err.Number & vbCrLf & _
- "Beschreibung: " & Err.Description & vbCrLf & _
- "Quelle: frmMagGlass.mnuReset_Click." & Erl & vbCrLf & Err.Source, _
- vbCritical
 End Sub
 
 Private Sub mnuStatus_Click()

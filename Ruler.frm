@@ -54,24 +54,6 @@ Attribute VB_Exposed = False
 Option Explicit
 Public MarkerColor As Long
 
-Private Declare Function CreateFont Lib "gdi32" Alias _
-        "CreateFontA" (ByVal h As Long, ByVal w As Long, _
-        ByVal e As Long, ByVal O As Long, ByVal w As _
-        Long, ByVal i As Long, ByVal u As Long, ByVal s _
-        As Long, ByVal c As Long, ByVal OP As Long, ByVal _
-        CP As Long, ByVal Q As Long, ByVal PAF As Long, _
-        ByVal f As String) As Long
- 
-Private Declare Function SelectObject Lib "gdi32" (ByVal _
-        hDC As Long, ByVal hObject As Long) As Long
- 
-Private Declare Function DeleteObject Lib "gdi32" (ByVal _
-        hObject As Long) As Long
- 
-Private Declare Function TextOut Lib "gdi32" Alias "TextOutA" _
-        (ByVal hDC As Long, ByVal X As Long, ByVal Y As Long, _
-        ByVal lpString As String, ByVal nCount As Long) As Long
-        
 Private Const VK_LBUTTON = &H1
 'Private Const VK_RBUTTON = &H2
 Private Const VK_MBUTTON = &H4
@@ -80,31 +62,49 @@ Private mRulerOrientation As PL_Orientation
 Private mRulerWidth As Single
 Private mRulerHeight As Single
 Private mRedrawRequired As Boolean
+Private mRulerScaleMode As PL_ScaleMode
+Public RulerScaleMulti As Single
+Public RulerScaleDec As Integer
+
+Public Property Get RulerScaleMode() As PL_ScaleMode
+    RulerScaleMode = mRulerScaleMode
+End Property
+Public Property Let RulerScaleMode(ByVal vNewValue As PL_ScaleMode)
+    If vNewValue > PL_USER Or vNewValue < PL_PIXEL Then vNewValue = PL_PIXEL
+    mRulerScaleMode = vNewValue
+    If vNewValue = PL_TWIPS Then
+        If mRulerOrientation = PL_HORIZONTAL Then RulerScaleMulti = LTwipsPerPixelX Else RulerScaleMulti = LTwipsPerPixelY
+    ElseIf vNewValue = PL_TWIPS Then
+        RulerScaleMulti = 1
+    End If
+    ProcRefreshRuler Left, Top
+End Property
+
 
 
 
 Public Sub DrawLabelingScaleUser()
-  Dim txtMessage As String
-  Dim oldSize As Long, hFont As Long, fontMem As Long, bold As Long, res As Long
+Dim txtMessage As String
+Dim oldSize As Long, hFont As Long, fontMem As Long, bold As Long, res As Long
   
-  oldSize = picRuler.FontSize
-  picRuler.FontSize = oldSize + 2
-  txtMessage = "Bei gerdückter Strg-Taste auf Lineal klicken um Referenzmaß einzugeben."
-  If mRulerOrientation = PL_HORIZONTAL Then
-    picRuler.CurrentX = 20: picRuler.CurrentY = 6: picRuler.Print txtMessage;
-    picRuler.Line (0, 0)-(0, plBREADTH), MarkerColor
-  ElseIf mRulerOrientation = PL_VERTICAL Then
-    Me.AutoRedraw = True
-    hFont = CreateFont(oldSize + 6, 0, -900, 0, bold, _
-            picRuler.FontItalic, picRuler.FontUnderline, 0, 1, 4, &H10, _
-            2, 4, picRuler.FontName)
-    fontMem = SelectObject(picRuler.hDC, hFont)
-    res = TextOut(picRuler.hDC, 14, 10, txtMessage, Len(txtMessage))
-    res = SelectObject(picRuler.hDC, fontMem)
-    res = DeleteObject(hFont)
-    picRuler.Line (0, 0)-(plBREADTH, 0), MarkerColor
-    Me.Refresh
-  End If
+    oldSize = picRuler.FontSize
+    picRuler.FontSize = oldSize + 2
+    txtMessage = "Bei gerdückter Strg-Taste auf Lineal klicken um Referenzmaß einzugeben."
+    If mRulerOrientation = PL_HORIZONTAL Then
+      picRuler.CurrentX = 20: picRuler.CurrentY = 6: picRuler.Print txtMessage;
+      picRuler.Line (0, 0)-(0, plBREADTH), MarkerColor
+    ElseIf mRulerOrientation = PL_VERTICAL Then
+      Me.AutoRedraw = True
+      hFont = CreateFont(oldSize + 6, 0, -900, 0, bold, _
+              picRuler.FontItalic, picRuler.FontUnderline, 0, 1, 4, &H10, _
+              2, 4, picRuler.FontName)
+      fontMem = SelectObject(picRuler.hDC, hFont)
+      res = TextOut(picRuler.hDC, 14, 10, txtMessage, Len(txtMessage))
+      res = SelectObject(picRuler.hDC, fontMem)
+      res = DeleteObject(hFont)
+      picRuler.Line (0, 0)-(plBREADTH, 0), MarkerColor
+      Me.Refresh
+    End If
     picRuler.FontSize = oldSize
 End Sub
 
@@ -268,15 +268,15 @@ Dim sBeschriftung As String
     Case PL_TWIPS
         If mRulerOrientation = PL_HORIZONTAL Then
             'optimale Beschriftung berechnen
-            For i = RulerScaleMulti * 10 To mRulerWidth * RulerScaleMulti Step RulerScaleMulti
+            For i = Abs(RulerScaleMulti) * 10 To mRulerWidth * Abs(RulerScaleMulti) Step Abs(RulerScaleMulti)
               If i Mod 100 = 0 Then Exit For
             Next i
             picRuler.CurrentX = 2: picRuler.CurrentY = 13: picRuler.Print "x100";
-            i = i / RulerScaleMulti
+            i = i / Abs(RulerScaleMulti)
             For iZehner = i To mRulerWidth Step i
                 picRuler.Line (iZehner - plZeroLine, 0)-(iZehner - plZeroLine, 6)
                 picRuler.CurrentY = 5
-                sBeschriftung = CStr((iZehner * RulerScaleMulti) \ 100)
+                sBeschriftung = CStr((iZehner * Abs(RulerScaleMulti)) \ 100)
                 picRuler.CurrentX = iZehner - picRuler.TextWidth(sBeschriftung) \ 2
                 picRuler.Print sBeschriftung;
             Next iZehner
@@ -288,14 +288,14 @@ Dim sBeschriftung As String
             Next i
         ElseIf mRulerOrientation = PL_VERTICAL Then
             'optimale Beschriftung berechnen
-            For i = RulerScaleMulti * 10 To mRulerHeight * RulerScaleMulti Step RulerScaleMulti
+            For i = Abs(RulerScaleMulti) * 10 To mRulerHeight * Abs(RulerScaleMulti) Step Abs(RulerScaleMulti)
               If i Mod 100 = 0 Then Exit For
             Next i
             picRuler.CurrentX = 1: picRuler.CurrentY = 1: picRuler.Print "x100";
-            i = i / RulerScaleMulti
+            i = i / Abs(RulerScaleMulti)
             For iZehner = i To mRulerHeight Step i
                 picRuler.Line (plBREADTH - 6, iZehner - plZeroLine)-(plBREADTH, iZehner - plZeroLine)
-                sBeschriftung = CStr(Fix(iZehner * RulerScaleMulti) \ 100)
+                sBeschriftung = CStr(Fix(iZehner * Abs(RulerScaleMulti)) \ 100)
                 picRuler.CurrentX = 15 - picRuler.TextWidth(sBeschriftung)
                 picRuler.CurrentY = iZehner - plZeroLine - 4
                 picRuler.Print sBeschriftung;
@@ -309,6 +309,7 @@ Dim sBeschriftung As String
             Next i
         End If
     Case PL_USER
+        '###_START_PRO_###
         If RulerScaleMulti = -1 Then  'Benutzerdefinierter Maßstab ist noch nicht festgelegt
               DrawLabelingScaleUser
               Exit Sub
@@ -324,7 +325,7 @@ Dim sBeschriftung As String
               Else
                 picRuler.Line (iZehner - plZeroLine, 0)-(iZehner - plZeroLine, 10)
                 picRuler.Line (iZehner - plZeroLine - 5, 2)-(iZehner - plZeroLine - 5, 4)
-                sBeschriftung = CStr(((iZehner * RulerScaleMulti * 100) \ 1) / 100)
+                sBeschriftung = Round(iZehner * Abs(RulerScaleMulti), RulerScaleDec)
                 picRuler.CurrentX = iZehner - picRuler.TextWidth(sBeschriftung) \ 2
                 picRuler.CurrentY = 10
                 picRuler.Print sBeschriftung;
@@ -345,7 +346,7 @@ Dim sBeschriftung As String
                 picRuler.Line (plBREADTH - 7, iZehner - plZeroLine)-(plBREADTH, iZehner - plZeroLine)
                 picRuler.CurrentX = 0
                 picRuler.CurrentY = iZehner - 4
-                picRuler.Print CStr(((iZehner * RulerScaleMulti * 100) \ 1) / 100);
+                picRuler.Print Round(iZehner * Abs(RulerScaleMulti), RulerScaleDec);
               End If
             Next iZehner
             'Marker
@@ -355,6 +356,7 @@ Dim sBeschriftung As String
                 picRuler.Line (0, VMarker(i))-(plBREADTH, VMarker(i)), MarkerColor
             Next i
         End If
+        '###_END_PRO_###
     End Select
 End Sub
 
@@ -410,12 +412,12 @@ Dim startCmd As String
     LScreenHeight = Screen.Height \ LTwipsPerPixelY
     mRulerWidth = LScreenWidth
     mRulerHeight = LScreenHeight
+    RulerScaleMulti = 1
     
     ReDim ColorCollection(0)
     ReDim HMarker(0)
     ReDim VMarker(0)
     ColorCollection(0) = -1
-    XYFieldWidth = XYFieldMinWidth
     
     On Error Resume Next
     MarkerColor = CLng(GetSetting(App.Title, "Options", "MarkColor", RGB(255, 0, 0)))
@@ -431,9 +433,9 @@ Dim startCmd As String
         .BackColor = CLng(GetSetting(App.Title, "Options", "BackColor", RGB(255, 255, 231)))
         .ForeColor = CLng(GetSetting(App.Title, "Options", "ForeColor", RGB(132, 132, 132)))
     End With
-    RulerScaleMode = GetSetting(App.Title, "Options", "ScaleMode", 0)
+    RulerScaleMode = GetSetting(App.Title, "Options", "ScaleMode", PL_PIXEL)
+    If RulerScaleMode > PL_TWIPS Then RulerScaleMode = PL_PIXEL
     iTransparencyRuler = GetSetting(App.Title, "Options", "TransparencyRuler", 0)
-    If RulerScaleMode > 2 Or RulerScaleMode < 0 Then RulerScaleMode = PL_PIXEL
     If iTransparencyRuler > 0 Then Call frmMenu.mnuTransparencyRuler_Click(iTransparencyRuler)
     
     On Error GoTo Form_Load_Error
@@ -441,10 +443,9 @@ Dim startCmd As String
     Call SetWindowLong(Me.hwnd, GWL_STYLE, lCurrentStyle And Not WS_BORDER)
     mRulerOrientation = PL_HORIZONTAL
     SetWindowPos hwnd, HWND_TOPMOST, 0, LScreenHeight \ 2, LScreenWidth, plBREADTH, 0&
-    Call frmMenu.mnuScaleMode_Click(CInt(RulerScaleMode))
     Call GetAsyncKeyState(VK_LBUTTON) 'initialisieren
     startCmd = Command
-    If (startCmd = "-s" And Not CBool(GetAsyncKeyState(vbKeyShift))) Or (startCmd = "" And CBool(GetAsyncKeyState(vbKeyShift))) Then
+    If (startCmd = "-s" And Not CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED)) Or (startCmd = "" And CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED)) Then
         Me.Visible = False
         Set Capture = New frmCapture
         Capture.Show vbModeless, Me
@@ -458,6 +459,7 @@ MsgBox "Fehler: " & Err.Number & vbCrLf & _
  "Quelle: frmRuler.Form_Load." & Erl & vbCrLf & Err.Source, _
  vbCritical
 End Sub
+
 
 Private Sub Form_Resize()
     If mRulerOrientation = PL_HORIZONTAL Then
@@ -476,6 +478,7 @@ End Sub
 
 Private Sub Form_Unload(cancel As Integer)
 Dim f As Form
+Dim regPlScale As PL_ScaleMode
     On Error Resume Next
     TimerMagGlass.Enabled = False
     If Not MagGlass Is Nothing Then Unload MagGlass
@@ -493,20 +496,30 @@ Dim f As Form
     Set f = Nothing
     gdiplus.TerminateGDI
     Unload frmMenu
+    regPlScale = GetSetting(App.Title, "Options", "ScaleMode", PL_PIXEL)
+    
+    If mRulerScaleMode = PL_TWIPS And regPlScale = PL_PIXEL Or mRulerScaleMode = PL_PIXEL And regPlScale = PL_TWIPS Or regPlScale > PL_TWIPS Then
+        regPlScale = mRulerScaleMode
+        If regPlScale > PL_TWIPS Then regPlScale = PL_PIXEL
+        SaveSetting App.Title, "Options", "ScaleMode", regPlScale
+    End If
     Set frmMenu = Nothing
     Set frmRuler = Nothing
 End Sub
 
 
 Private Sub SetScaleUser(X As Single, Y As Single)
+'###_START_PRO_###
 Dim benutzerwert As Double
 Dim benutzerwertStr As String
 Dim eingabeok As Boolean
 Dim prompt As String
-    prompt = "Bitte Referenzwert eingeben:" & vbCrLf & "(1-10000)"
+Dim decChr As String
+Dim i As Integer
+    decChr = Mid$(CStr(1.5), 2, 1)
+    prompt = "Bitte Referenzwert eingeben (1-10000):"
     While Not eingabeok
         benutzerwertStr = Trim$(InputBox(prompt, "Referenzwert", benutzerwertStr))
-        If Len(benutzerwertStr) = 0 Then Exit Sub
         On Error Resume Next
         benutzerwert = CDbl(benutzerwertStr)
         If Err Or benutzerwert < 1 Or benutzerwert > 10000 Then
@@ -515,15 +528,18 @@ Dim prompt As String
         Else
             eingabeok = True
             If mRulerOrientation = PL_HORIZONTAL Then
-                RulerScaleMulti = benutzerwert / (X + 1)
+                RulerScaleMulti = Round(benutzerwert / (X + 1), 2)
             Else
-                RulerScaleMulti = benutzerwert / (Y + 1)
+                RulerScaleMulti = Round(benutzerwert / (Y + 1), 2)
             End If
-            XYFieldWidth = XYFieldMinWidth + Len(CStr(Fix(RulerScaleMulti * 1000))) * 8
+            benutzerwertStr = CStr(RulerScaleMulti)
+            i = InStr(benutzerwertStr, decChr)
+            If i > 0 Then RulerScaleDec = Len(Mid$(benutzerwertStr, i + 1)) Else RulerScaleDec = 0
             ProcRefreshRuler frmRuler.Left, frmRuler.Top
             Exit Sub
         End If
     Wend
+'###_END_PRO_###
 End Sub
 
 Private Sub TimerMagGlass_Timer()
@@ -536,12 +552,12 @@ Static tCursorPos0 As POINTAPI
 
     GetCursorPos tCursorPos
     'Strg+C untersuchen
-    If GetAsyncKeyState(vbKeyControl) And GetAsyncKeyState(VK_MBUTTON) Then
+    If CBool(GetAsyncKeyState(vbKeyControl) And KEY_PRESSED) And GetAsyncKeyState(VK_MBUTTON) Then
         frmRuler.Move tCursorPos.X * LTwipsPerPixelX, tCursorPos.Y * LTwipsPerPixelY
         Call GetAsyncKeyState(VK_LBUTTON)
-    ElseIf GetAsyncKeyState(vbKeyControl) And GetAsyncKeyState(vbKeyMenu) And GetAsyncKeyState(vbKeyC) Then
+    ElseIf CBool(GetAsyncKeyState(vbKeyControl) And KEY_PRESSED) And CBool(GetAsyncKeyState(vbKeyMenu) And KEY_PRESSED) And CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) Then
         Dim lPxColor As Long
-        lPxColor = GetPxColor
+        lPxColor = GetPxColor(tCursorPos)
         CopyRGB lPxColor
         Exit Sub
     End If
@@ -585,65 +601,75 @@ Dim i As Long
 Dim isKeyCtrl As Boolean
 Dim ubMarker As Long
 Dim MousePosition As MousePos
+Dim tCursorPos As POINTAPI
+
     If Button = vbLeftButton Then
-        isKeyCtrl = CBool(GetAsyncKeyState(vbKeyControl))
+        isKeyCtrl = CBool(GetAsyncKeyState(vbKeyControl) And KEY_PRESSED)
         If isKeyCtrl <> 0 And RulerScaleMode = PL_USER Then
-          Call SetScaleUser(X, Y)
+            Call SetScaleUser(X, Y)
         Else
-          MousePosition = GetMousePos(Me, X, Y, 5)
-          ReleaseCapture
-          If mRulerOrientation = PL_HORIZONTAL And (MousePosition = mpRight) Then
-            PostMessage hwnd, WM_SYSCOMMAND, SC_SIZE_Right, 0&
-            mRedrawRequired = True
-          ElseIf mRulerOrientation = PL_VERTICAL And (MousePosition = mpBottom) Then
-            PostMessage hwnd, WM_SYSCOMMAND, SC_SIZE_Bottom, 0&
-            mRedrawRequired = True
-          Else
-            SendMessage hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
-          End If
+            MousePosition = GetMousePos(Me, X, Y, 5)
+            ReleaseCapture
+            If mRulerOrientation = PL_HORIZONTAL And (MousePosition = mpRight) Then
+                PostMessage hwnd, WM_SYSCOMMAND, SC_SIZE_Right, 0&
+                mRedrawRequired = True
+            ElseIf mRulerOrientation = PL_VERTICAL And (MousePosition = mpBottom) Then
+                PostMessage hwnd, WM_SYSCOMMAND, SC_SIZE_Bottom, 0&
+                mRedrawRequired = True
+            Else
+                SendMessage hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+            End If
         End If
     ElseIf Button = vbRightButton Then
-      If ColorCollection(0) = -1 Then
-        frmMenu.mnuColorCollection.Enabled = False
-      Else
-        frmMenu.mnuColorCollection.Enabled = True
-      End If
-      'Marker Menü einstellen auf setzen oder entfernen
-      If mRulerOrientation = PL_HORIZONTAL Then
-          ubMarker = UBound(HMarker)
-          For i = 1 To ubMarker
-              If X = HMarker(i) Or X = HMarker(i) - 1 Or X = HMarker(i) + 1 Then
-                  frmMenu.mnuMarker.Caption = "Markierer entfernen"
-                  frmMenu.mnuMarker.Tag = i
-                  i = 0
-                  Exit For
-              End If
-          Next i
-          If i > 0 Then
-              frmMenu.mnuMarker.Caption = "Markierer setzen          M"
-              frmMenu.mnuMarker.Tag = "+"
-          End If
-          TMarker = X 'X-Pos zwischenspeichern, damit er in frmMenu abrufbar wird
-      Else
-          ubMarker = UBound(VMarker)
-          For i = 1 To ubMarker
-              If Y = VMarker(i) Or Y = VMarker(i) - 1 Or Y = VMarker(i) + 1 Then
-                  frmMenu.mnuMarker.Caption = "Markierer entfernen"
-                  frmMenu.mnuMarker.Tag = i
-                  i = 0
-                  Exit For
-              End If
-          Next i
-          If i > 0 Then
-              frmMenu.mnuMarker.Caption = "Markierer setzen          M"
-              frmMenu.mnuMarker.Tag = "+"
-          End If
-          TMarker = Y 'Y-Pos zwischenspeichern, damit er in frmMenu abrufbar wird
-      End If
-      PopupMenu frmMenu.MRuler
+        If ColorCollection(0) = -1 Then
+          frmMenu.mnuColorCollection.Enabled = False
+        Else
+          frmMenu.mnuColorCollection.Enabled = True
+        End If
+        'Marker Menü einstellen auf setzen oder entfernen
+        If mRulerOrientation = PL_HORIZONTAL Then
+            ubMarker = UBound(HMarker)
+            For i = 1 To ubMarker
+                If X = HMarker(i) Or X = HMarker(i) - 1 Or X = HMarker(i) + 1 Then
+                    frmMenu.mnuMarker.Caption = "Markierer entfernen"
+                    frmMenu.mnuMarker.Tag = i
+                    i = 0
+                    Exit For
+                End If
+            Next i
+            If i > 0 Then
+                frmMenu.mnuMarker.Caption = "Markierer setzen          M"
+                frmMenu.mnuMarker.Tag = "+"
+            End If
+            TMarker = X 'X-Pos zwischenspeichern, damit er in frmMenu abrufbar wird
+        Else
+            ubMarker = UBound(VMarker)
+            For i = 1 To ubMarker
+                If Y = VMarker(i) Or Y = VMarker(i) - 1 Or Y = VMarker(i) + 1 Then
+                    frmMenu.mnuMarker.Caption = "Markierer entfernen"
+                    frmMenu.mnuMarker.Tag = i
+                    i = 0
+                    Exit For
+                End If
+            Next i
+            If i > 0 Then
+                frmMenu.mnuMarker.Caption = "Markierer setzen          M"
+                frmMenu.mnuMarker.Tag = "+"
+            End If
+            TMarker = Y 'Y-Pos zwischenspeichern, damit er in frmMenu abrufbar wird
+        End If
+        With frmMenu
+            .mnuScaleMode(PL_RULER).Visible = False
+            .mnuScaleMode(PL_USER).Checked = (mRulerScaleMode = PL_USER)
+            .mnuScaleMode(PL_TWIPS).Checked = (mRulerScaleMode = PL_TWIPS)
+            .mnuScaleMode(PL_PIXEL).Checked = (mRulerScaleMode = PL_PIXEL)
+            .mnuScale.Tag = "Ruler"
+            .SetRulerColors
+             PopupMenu .MRuler
+        End With
         
     ElseIf Button = vbMiddleButton Then
-      Dim tCursorPos As POINTAPI
+      
       GetCursorPos tCursorPos
       Me.Move tCursorPos.X * LTwipsPerPixelX, tCursorPos.Y * LTwipsPerPixelY
     End If
@@ -661,18 +687,18 @@ Dim MousePosition As MousePos
         picRuler.MousePointer = vbCustom
         If RulerScaleMode = PL_USER Then
             If mRulerOrientation = PL_HORIZONTAL Then
-                picRuler.ToolTipText = Round(((X + plZeroLine) * Abs(RulerScaleMulti)) * 1000) / 1000
+                picRuler.ToolTipText = Round((X + plZeroLine) * Abs(RulerScaleMulti), RulerScaleDec)
                 TMarker = X 'X-Pos zwischenspeichern, damit er mit der M-Taste abrufbar wird
             Else
-                picRuler.ToolTipText = Round(((Y + plZeroLine) * Abs(RulerScaleMulti)) * 1000) / 1000
+                picRuler.ToolTipText = Round((Y + plZeroLine) * Abs(RulerScaleMulti), RulerScaleDec)
                 TMarker = Y 'Y-Pos zwischenspeichern, damit er mit der M-Taste abrufbar wird
             End If
         Else
             If mRulerOrientation = PL_HORIZONTAL Then
-                picRuler.ToolTipText = (X + plZeroLine) * Abs(RulerScaleMulti)
+                picRuler.ToolTipText = Round((X + plZeroLine) * Abs(RulerScaleMulti), RulerScaleDec)
                 TMarker = X 'X-Pos zwischenspeichern, damit er mit der M-Taste abrufbar wird
             Else
-                picRuler.ToolTipText = (Y + plZeroLine) * Abs(RulerScaleMulti)
+                picRuler.ToolTipText = Round((Y + plZeroLine) * Abs(RulerScaleMulti), RulerScaleDec)
                 TMarker = Y 'Y-Pos zwischenspeichern, damit er mit der M-Taste abrufbar wird
             End If
         End If

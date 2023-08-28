@@ -18,9 +18,9 @@ Begin VB.Form frmImage
       BackColor       =   &H8000000C&
       BorderStyle     =   0  'Kein
       ForeColor       =   &H80000008&
-      Height          =   1095
+      Height          =   2580
       Left            =   330
-      ScaleHeight     =   73
+      ScaleHeight     =   172
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   169
       TabIndex        =   4
@@ -44,6 +44,41 @@ Begin VB.Form frmImage
          Top             =   480
          Visible         =   0   'False
          Width           =   1455
+      End
+      Begin VB.Shape shpDimension 
+         BorderColor     =   &H000000FF&
+         Height          =   75
+         Left            =   225
+         Top             =   1350
+         Visible         =   0   'False
+         Width           =   150
+      End
+      Begin VB.Line linDimension 
+         BorderColor     =   &H000000FF&
+         Index           =   2
+         Visible         =   0   'False
+         X1              =   28
+         X2              =   28
+         Y1              =   85
+         Y2              =   99
+      End
+      Begin VB.Line linDimension 
+         BorderColor     =   &H000000FF&
+         Index           =   1
+         Visible         =   0   'False
+         X1              =   8
+         X2              =   32
+         Y1              =   96
+         Y2              =   96
+      End
+      Begin VB.Line linDimension 
+         BorderColor     =   &H000000FF&
+         Index           =   0
+         Visible         =   0   'False
+         X1              =   11
+         X2              =   11
+         Y1              =   85
+         Y2              =   99
       End
    End
    Begin PixelLineal.ToolBar TBar 
@@ -86,9 +121,20 @@ Begin VB.Form frmImage
       Appearance      =   0  '2D
       BorderStyle     =   1  'Fest Einfach
       Height          =   510
+      Index           =   106
+      Left            =   7590
+      Picture         =   "Image.frx":038A
+      Top             =   2475
+      Visible         =   0   'False
+      Width           =   510
+   End
+   Begin VB.Image curPointer 
+      Appearance      =   0  '2D
+      BorderStyle     =   1  'Fest Einfach
+      Height          =   510
       Index           =   63
       Left            =   6930
-      Picture         =   "Image.frx":038A
+      Picture         =   "Image.frx":04DC
       Top             =   3135
       Visible         =   0   'False
       Width           =   510
@@ -99,7 +145,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   62
       Left            =   6930
-      Picture         =   "Image.frx":04DC
+      Picture         =   "Image.frx":062E
       Top             =   2475
       Visible         =   0   'False
       Width           =   510
@@ -110,7 +156,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   61
       Left            =   6930
-      Picture         =   "Image.frx":062E
+      Picture         =   "Image.frx":0780
       Top             =   1815
       Visible         =   0   'False
       Width           =   510
@@ -121,7 +167,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   60
       Left            =   6930
-      Picture         =   "Image.frx":0780
+      Picture         =   "Image.frx":08D2
       Top             =   1155
       Visible         =   0   'False
       Width           =   510
@@ -132,7 +178,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   53
       Left            =   6270
-      Picture         =   "Image.frx":08D2
+      Picture         =   "Image.frx":0A24
       Top             =   3135
       Visible         =   0   'False
       Width           =   510
@@ -143,7 +189,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   52
       Left            =   6270
-      Picture         =   "Image.frx":0A24
+      Picture         =   "Image.frx":0B76
       Top             =   2475
       Visible         =   0   'False
       Width           =   510
@@ -154,7 +200,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   51
       Left            =   6270
-      Picture         =   "Image.frx":0B76
+      Picture         =   "Image.frx":0CC8
       Top             =   1815
       Visible         =   0   'False
       Width           =   510
@@ -165,7 +211,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   50
       Left            =   6270
-      Picture         =   "Image.frx":0CC8
+      Picture         =   "Image.frx":0E1A
       Top             =   1155
       Visible         =   0   'False
       Width           =   510
@@ -176,7 +222,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   40
       Left            =   5610
-      Picture         =   "Image.frx":0E1A
+      Picture         =   "Image.frx":0F6C
       Top             =   1155
       Visible         =   0   'False
       Width           =   510
@@ -187,7 +233,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   4
       Left            =   2970
-      Picture         =   "Image.frx":1AE4
+      Picture         =   "Image.frx":1C36
       Top             =   3135
       Visible         =   0   'False
       Width           =   510
@@ -198,7 +244,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   9
       Left            =   3630
-      Picture         =   "Image.frx":1C36
+      Picture         =   "Image.frx":1D88
       Top             =   3135
       Visible         =   0   'False
       Width           =   510
@@ -209,7 +255,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   14
       Left            =   4290
-      Picture         =   "Image.frx":1D88
+      Picture         =   "Image.frx":1EDA
       Top             =   3135
       Visible         =   0   'False
       Width           =   510
@@ -220,7 +266,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   19
       Left            =   4950
-      Picture         =   "Image.frx":1EDA
+      Picture         =   "Image.frx":202C
       Top             =   3135
       Visible         =   0   'False
       Width           =   510
@@ -231,7 +277,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   43
       Left            =   5610
-      Picture         =   "Image.frx":202C
+      Picture         =   "Image.frx":217E
       Top             =   3135
       Visible         =   0   'False
       Width           =   510
@@ -242,7 +288,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   42
       Left            =   5610
-      Picture         =   "Image.frx":217E
+      Picture         =   "Image.frx":22D0
       Top             =   2475
       Visible         =   0   'False
       Width           =   510
@@ -253,7 +299,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   41
       Left            =   5610
-      Picture         =   "Image.frx":22D0
+      Picture         =   "Image.frx":2422
       Top             =   1815
       Visible         =   0   'False
       Width           =   510
@@ -264,7 +310,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   71
       Left            =   7590
-      Picture         =   "Image.frx":2422
+      Picture         =   "Image.frx":2574
       Top             =   1815
       Visible         =   0   'False
       Width           =   510
@@ -275,7 +321,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   17
       Left            =   4950
-      Picture         =   "Image.frx":2574
+      Picture         =   "Image.frx":26C6
       Top             =   2475
       Visible         =   0   'False
       Width           =   510
@@ -286,7 +332,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   12
       Left            =   4290
-      Picture         =   "Image.frx":26C6
+      Picture         =   "Image.frx":2818
       Top             =   2475
       Visible         =   0   'False
       Width           =   510
@@ -297,7 +343,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   7
       Left            =   3630
-      Picture         =   "Image.frx":2818
+      Picture         =   "Image.frx":296A
       Top             =   2475
       Visible         =   0   'False
       Width           =   510
@@ -308,7 +354,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   2
       Left            =   2970
-      Picture         =   "Image.frx":296A
+      Picture         =   "Image.frx":2ABC
       Top             =   2475
       Visible         =   0   'False
       Width           =   510
@@ -319,7 +365,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   16
       Left            =   4950
-      Picture         =   "Image.frx":2ABC
+      Picture         =   "Image.frx":2C0E
       Top             =   1815
       Visible         =   0   'False
       Width           =   510
@@ -330,7 +376,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   11
       Left            =   4290
-      Picture         =   "Image.frx":2C0E
+      Picture         =   "Image.frx":2D60
       Top             =   1815
       Visible         =   0   'False
       Width           =   510
@@ -341,7 +387,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   6
       Left            =   3630
-      Picture         =   "Image.frx":2D60
+      Picture         =   "Image.frx":2EB2
       Top             =   1815
       Visible         =   0   'False
       Width           =   510
@@ -352,7 +398,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   1
       Left            =   2970
-      Picture         =   "Image.frx":2EB2
+      Picture         =   "Image.frx":3004
       Top             =   1815
       Visible         =   0   'False
       Width           =   510
@@ -363,7 +409,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   15
       Left            =   4950
-      Picture         =   "Image.frx":3004
+      Picture         =   "Image.frx":3156
       Top             =   1155
       Visible         =   0   'False
       Width           =   510
@@ -374,7 +420,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   10
       Left            =   4290
-      Picture         =   "Image.frx":3156
+      Picture         =   "Image.frx":32A8
       Top             =   1155
       Visible         =   0   'False
       Width           =   510
@@ -385,7 +431,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   5
       Left            =   3630
-      Picture         =   "Image.frx":32A8
+      Picture         =   "Image.frx":33FA
       Top             =   1155
       Visible         =   0   'False
       Width           =   510
@@ -396,7 +442,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   0
       Left            =   2970
-      Picture         =   "Image.frx":33FA
+      Picture         =   "Image.frx":354C
       Top             =   1155
       Visible         =   0   'False
       Width           =   510
@@ -407,7 +453,7 @@ Begin VB.Form frmImage
       Height          =   510
       Index           =   70
       Left            =   7590
-      Picture         =   "Image.frx":354C
+      Picture         =   "Image.frx":369E
       Top             =   1155
       Visible         =   0   'False
       Width           =   510
@@ -419,11 +465,10 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+
 Private mUndoStack As clsUndoStack
 Private mTextOverhang As Long
 Private mCurrentFileName As String
-Private mBeforePickerColor As Long
-Private mBeforePickerCursor As Integer
 Private mGradingVisible As Boolean
 
 Private Type tWorkControl
@@ -449,10 +494,6 @@ Private Enum eAction
     ActionStart
     ActionEnd
 End Enum
-
-
-Private Declare Function TextOut Lib "gdi32" Alias "TextOutA" (ByVal hDC As Long, ByVal X As Long, _
-    ByVal Y As Long, ByVal lpString As String, ByVal nCount As Long) As Long
     
 Private Declare Function SendMessageL Lib "user32" Alias "SendMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
 Private Const EM_SETMARGINS = &HD3
@@ -575,23 +616,36 @@ MsgBox "Fehler: " & Err.Number & vbCrLf & _
  Resume FinalizeProc
 End Sub
 
-Private Sub CreateTestImage(Optional ShowImgPaste As Boolean)
+Private Sub CreateTestImage(Optional imgIndex As Integer, Optional ShowImgPaste As Boolean)
 Dim i As Integer
     Me.Width = 12000: Me.Height = 6000
     With picImage
         Set .Picture = Nothing
-        .Width = 300 * LTwipsPerPixelX
-        .Height = 200 * LTwipsPerPixelX
+        .Width = (imgIndex + 1) * 300 * LTwipsPerPixelX
+        .Height = (imgIndex + 1) * 200 * LTwipsPerPixelX
         .DrawMode = vbCopyPen
         .DrawStyle = vbSolid
         .DrawWidth = 1
-        picImage.Line (0, 0)-(299, 199), vbWhite, BF
-        picImage.Line (0, 0)-(299, 199), vbRed, B
-        picImage.Line (1, 1)-(298, 198), vbGreen, B
-        For i = 9 To 80 Step 10
-            picImage.Line (i, i)-(299 - i - 1, 199 - i - 1), vbRed, B
-            picImage.Line (i + 1, i + 1)-(299 - i - 2, 199 - i - 2), vbGreen, B
-        Next
+        If imgIndex = 0 Then
+            picImage.Line (0, 0)-(299, 199), vbWhite, BF
+            picImage.Line (0, 0)-(299, 199), vbRed, B
+            picImage.Line (1, 1)-(298, 198), vbGreen, B
+            For i = 9 To 80 Step 10
+                picImage.Line (i, i)-(299 - i - 1, 199 - i - 1), vbRed, B
+                picImage.Line (i + 1, i + 1)-(299 - i - 2, 199 - i - 2), vbGreen, B
+            Next
+        ElseIf imgIndex = 1 Then
+            picImage.Line (0, 0)-(599, 399), vbWhite, BF
+            For i = 9 To 599 Step 10
+                If i Mod 99 < 9 Then
+                    If i < 400 Then picImage.Line (0, i)-(600, i), &HAAAAFF
+                    picImage.Line (i, 0)-(i, 400), &HAAAAFF
+                Else
+                    If i < 400 Then picImage.Line (0, i)-(600, i), &HFFAAAA
+                    picImage.Line (i, 0)-(i, 400), &HFFAAAA
+                End If
+            Next
+        End If
         mUndoStack.CreateUndoStep gdiplus.CopyStdPicture(.Image)
     End With
     TBar.Enabled(tbUndo) = True: TBar.Enabled(tbRedo) = False
@@ -600,6 +654,8 @@ Dim i As Integer
         picPaste.Move 400 * LTwipsPerPixelX, TBar.Height, picImage.Width, picImage.Height
         picPaste.Visible = True
         picPaste.ZOrder
+    Else
+        picPaste.Visible = False
     End If
     
 End Sub
@@ -657,6 +713,7 @@ End Sub
 Private Sub DrawArrow(X As Single, Y As Single)
 Dim tCursorPos As POINTAPI
 Dim i As Integer
+Dim iPts() As POINTAPI
     With picImage
         mDrawStyle.DrawStyle = .DrawStyle
         mDrawStyle.DrawMode = .DrawMode
@@ -671,14 +728,25 @@ Dim i As Integer
         
         Select Case TBar.Arrow
             Case 0
-                picImage.PSet (X, Y)
+'                ReDim iPts(6) As POINTAPI
+'                iPts(0).X = X:     iPts(0).Y = Y
+'                iPts(1).X = X + 4: iPts(1).Y = Y - 4
+'                iPts(2).X = X + 4: iPts(2).Y = Y - 1
+'                iPts(3).X = X + 9: iPts(3).Y = Y - 1
+'                iPts(4).X = X + 9: iPts(4).Y = Y + 1
+'                iPts(5).X = X + 4: iPts(5).Y = Y + 1
+'                iPts(6).X = X + 4: iPts(6).Y = Y + 4
+'                gdiplus.PaintPolygon picImage, iPts, vbBSSolid, SBar.ForeColor, 1, SBar.Fill > 0, SBar.BackColor, IIf(SBar.Fill = 1, 50, 100)
+'                Exit Sub
+                picImage.PSet (X, Y), SBar.ForeColor
                 picImage.Line (X + 1, Y - 1)-(X + 1, Y + 2), SBar.ForeColor
                 picImage.Line (X + 2, Y - 2)-(X + 2, Y + 3), SBar.ForeColor
                 picImage.Line (X + 3, Y - 3)-(X + 3, Y + 4), SBar.ForeColor
                 picImage.Line (X + 4, Y - 4)-(X + 4, Y + 5), SBar.ForeColor
                 picImage.Line (X + 5, Y - 1)-(X + 9, Y + 1), SBar.ForeColor, BF
+                If TBar.SelectedEx = tbLegend Then DrawLegend X + 19 + (SBar.Line * 2), Y
             Case 1
-                picImage.PSet (X, Y)
+                picImage.PSet (X, Y), SBar.ForeColor
                 picImage.Line (X + 1, Y - 1)-(X + 1, Y + 2), SBar.ForeColor
                 picImage.Line (X + 2, Y - 2)-(X + 2, Y + 3), SBar.ForeColor
                 picImage.Line (X + 3, Y - 3)-(X + 3, Y + 4), SBar.ForeColor
@@ -686,8 +754,9 @@ Dim i As Integer
                 picImage.Line (X + 5, Y - 5)-(X + 5, Y + 6), SBar.ForeColor
                 picImage.Line (X + 6, Y - 6)-(X + 6, Y + 7), SBar.ForeColor
                 picImage.Line (X + 7, Y - 2)-(X + 12, Y + 2), SBar.ForeColor, BF
+                If TBar.SelectedEx = tbLegend Then DrawLegend X + 22 + (SBar.Line * 2), Y
             Case 2
-                picImage.PSet (X, Y)
+                picImage.PSet (X, Y), SBar.ForeColor
                 picImage.Line (X + 1, Y - 1)-(X + 1, Y + 2), SBar.ForeColor
                 picImage.Line (X + 2, Y - 2)-(X + 2, Y + 3), SBar.ForeColor
                 picImage.Line (X + 3, Y - 3)-(X + 3, Y + 4), SBar.ForeColor
@@ -697,15 +766,17 @@ Dim i As Integer
                 picImage.Line (X + 7, Y - 7)-(X + 7, Y + 8), SBar.ForeColor
                 picImage.Line (X + 8, Y - 8)-(X + 8, Y + 9), SBar.ForeColor
                 picImage.Line (X + 9, Y - 3)-(X + 15, Y + 3), SBar.ForeColor, BF
+                If TBar.SelectedEx = tbLegend Then DrawLegend X + 24 + (SBar.Line * 2), Y
             Case 5
-                picImage.PSet (X, Y)
+                picImage.PSet (X, Y), SBar.ForeColor
                 picImage.Line (X - 1, Y + 1)-(X + 2, Y + 1), SBar.ForeColor
                 picImage.Line (X - 2, Y + 2)-(X + 3, Y + 2), SBar.ForeColor
                 picImage.Line (X - 3, Y + 3)-(X + 4, Y + 3), SBar.ForeColor
                 picImage.Line (X - 4, Y + 4)-(X + 5, Y + 4), SBar.ForeColor
                 picImage.Line (X - 1, Y + 5)-(X + 1, Y + 9), SBar.ForeColor, BF
+                If TBar.SelectedEx = tbLegend Then DrawLegend X, Y + 19 + (SBar.Line * 2)
             Case 6
-                picImage.PSet (X, Y)
+                picImage.PSet (X, Y), SBar.ForeColor
                 picImage.Line (X - 1, Y + 1)-(X + 2, Y + 1), SBar.ForeColor
                 picImage.Line (X - 2, Y + 2)-(X + 3, Y + 2), SBar.ForeColor
                 picImage.Line (X - 3, Y + 3)-(X + 4, Y + 3), SBar.ForeColor
@@ -713,8 +784,9 @@ Dim i As Integer
                 picImage.Line (X - 5, Y + 5)-(X + 6, Y + 5), SBar.ForeColor
                 picImage.Line (X - 6, Y + 6)-(X + 7, Y + 6), SBar.ForeColor
                 picImage.Line (X - 2, Y + 7)-(X + 2, Y + 12), SBar.ForeColor, BF
+                If TBar.SelectedEx = tbLegend Then DrawLegend X, Y + 22 + (SBar.Line * 2)
             Case 7
-                picImage.PSet (X, Y)
+                picImage.PSet (X, Y), SBar.ForeColor
                 picImage.Line (X - 1, Y + 1)-(X + 2, Y + 1), SBar.ForeColor
                 picImage.Line (X - 2, Y + 2)-(X + 3, Y + 2), SBar.ForeColor
                 picImage.Line (X - 3, Y + 3)-(X + 4, Y + 3), SBar.ForeColor
@@ -724,15 +796,17 @@ Dim i As Integer
                 picImage.Line (X - 7, Y + 7)-(X + 8, Y + 7), SBar.ForeColor
                 picImage.Line (X - 8, Y + 8)-(X + 9, Y + 8), SBar.ForeColor
                 picImage.Line (X - 3, Y + 9)-(X + 3, Y + 15), SBar.ForeColor, BF
+                If TBar.SelectedEx = tbLegend Then DrawLegend X, Y + 24 + (SBar.Line * 2)
             Case 10
-                picImage.PSet (X, Y)
+                picImage.PSet (X, Y), SBar.ForeColor
                 picImage.Line (X - 1, Y - 1)-(X + 2, Y - 1), SBar.ForeColor
                 picImage.Line (X - 2, Y - 2)-(X + 3, Y - 2), SBar.ForeColor
                 picImage.Line (X - 3, Y - 3)-(X + 4, Y - 3), SBar.ForeColor
                 picImage.Line (X - 4, Y - 4)-(X + 5, Y - 4), SBar.ForeColor
                 picImage.Line (X - 1, Y - 5)-(X + 1, Y - 9), SBar.ForeColor, BF
+                If TBar.SelectedEx = tbLegend Then DrawLegend X, Y - 19 - (SBar.Line * 2)
             Case 11
-                picImage.PSet (X, Y)
+                picImage.PSet (X, Y), SBar.ForeColor
                 picImage.Line (X - 1, Y - 1)-(X + 2, Y - 1), SBar.ForeColor
                 picImage.Line (X - 2, Y - 2)-(X + 3, Y - 2), SBar.ForeColor
                 picImage.Line (X - 3, Y - 3)-(X + 4, Y - 3), SBar.ForeColor
@@ -740,8 +814,9 @@ Dim i As Integer
                 picImage.Line (X - 5, Y - 5)-(X + 6, Y - 5), SBar.ForeColor
                 picImage.Line (X - 6, Y - 6)-(X + 7, Y - 6), SBar.ForeColor
                 picImage.Line (X - 2, Y - 7)-(X + 2, Y - 12), SBar.ForeColor, BF
+                If TBar.SelectedEx = tbLegend Then DrawLegend X, Y - 22 - (SBar.Line * 2)
             Case 12
-                picImage.PSet (X, Y)
+                picImage.PSet (X, Y), SBar.ForeColor
                 picImage.Line (X - 1, Y - 1)-(X + 2, Y - 1), SBar.ForeColor
                 picImage.Line (X - 2, Y - 2)-(X + 3, Y - 2), SBar.ForeColor
                 picImage.Line (X - 3, Y - 3)-(X + 4, Y - 3), SBar.ForeColor
@@ -751,15 +826,17 @@ Dim i As Integer
                 picImage.Line (X - 7, Y - 7)-(X + 8, Y - 7), SBar.ForeColor
                 picImage.Line (X - 8, Y - 8)-(X + 9, Y - 8), SBar.ForeColor
                 picImage.Line (X - 3, Y - 9)-(X + 3, Y - 15), SBar.ForeColor, BF
+                If TBar.SelectedEx = tbLegend Then DrawLegend X, Y - 24 - (SBar.Line * 2)
             Case 15
-                picImage.PSet (X, Y)
+                picImage.PSet (X, Y), SBar.ForeColor
                 picImage.Line (X - 1, Y - 1)-(X - 1, Y + 2), SBar.ForeColor
                 picImage.Line (X - 2, Y - 2)-(X - 2, Y + 3), SBar.ForeColor
                 picImage.Line (X - 3, Y - 3)-(X - 3, Y + 4), SBar.ForeColor
                 picImage.Line (X - 4, Y - 4)-(X - 4, Y + 5), SBar.ForeColor
                 picImage.Line (X - 5, Y - 1)-(X - 9, Y + 1), SBar.ForeColor, BF
+                If TBar.SelectedEx = tbLegend Then DrawLegend X - 19 - (SBar.Line * 2), Y
             Case 16
-                picImage.PSet (X, Y)
+                picImage.PSet (X, Y), SBar.ForeColor
                 picImage.Line (X - 1, Y - 1)-(X - 1, Y + 2), SBar.ForeColor
                 picImage.Line (X - 2, Y - 2)-(X - 2, Y + 3), SBar.ForeColor
                 picImage.Line (X - 3, Y - 3)-(X - 3, Y + 4), SBar.ForeColor
@@ -767,8 +844,9 @@ Dim i As Integer
                 picImage.Line (X - 5, Y - 5)-(X - 5, Y + 6), SBar.ForeColor
                 picImage.Line (X - 6, Y - 6)-(X - 6, Y + 7), SBar.ForeColor
                 picImage.Line (X - 7, Y - 2)-(X - 12, Y + 2), SBar.ForeColor, BF
+                If TBar.SelectedEx = tbLegend Then DrawLegend X - 22 - (SBar.Line * 2), Y
             Case 17
-                picImage.PSet (X, Y)
+                picImage.PSet (X, Y), SBar.ForeColor
                 picImage.Line (X - 1, Y - 1)-(X - 1, Y + 2), SBar.ForeColor
                 picImage.Line (X - 2, Y - 2)-(X - 2, Y + 3), SBar.ForeColor
                 picImage.Line (X - 3, Y - 3)-(X - 3, Y + 4), SBar.ForeColor
@@ -778,8 +856,9 @@ Dim i As Integer
                 picImage.Line (X - 7, Y - 7)-(X - 7, Y + 8), SBar.ForeColor
                 picImage.Line (X - 8, Y - 8)-(X - 8, Y + 9), SBar.ForeColor
                 picImage.Line (X - 9, Y - 3)-(X - 15, Y + 3), SBar.ForeColor, BF
+                If TBar.SelectedEx = tbLegend Then DrawLegend X - 24 - (SBar.Line * 2), Y
             Case 4, 9, 14, 19 'Mauszeiger
-                Dim iPts(10) As POINTAPI
+                ReDim iPts(10) As POINTAPI
                 iPts(0).X = X + 3:  iPts(0).Y = Y + 1
                 iPts(1).X = X + 3:  iPts(1).Y = Y + 16
                 iPts(2).X = X + 6:  iPts(2).Y = Y + 13
@@ -799,10 +878,10 @@ Dim i As Integer
                 gdiplus.PaintPolygon picImage, iPts, vbBSSolid, vbBlack, 1, True, vbWhite, 100  'Mauszeiger
                 If TBar.Arrow >= 9 Then
                     picImage.Line (X - 3, Y - 1)-(X + 3, Y - 1), SBar.ForeColor
-                    picImage.PSet (X - 1, Y - 2): picImage.PSet (X - 2, Y - 3)
-                    picImage.PSet (X - 1, Y + 0): picImage.PSet (X - 2, Y + 1)
-                    picImage.PSet (X + 1, Y - 2): picImage.PSet (X + 2, Y - 3)
-                    picImage.PSet (X, Y - 3): picImage.PSet (X, Y - 4)
+                    picImage.PSet (X - 1, Y - 2), SBar.ForeColor:   picImage.PSet (X - 2, Y - 3), SBar.ForeColor
+                    picImage.PSet (X - 1, Y + 0), SBar.ForeColor:   picImage.PSet (X - 2, Y + 1), SBar.ForeColor
+                    picImage.PSet (X + 1, Y - 2), SBar.ForeColor:   picImage.PSet (X + 2, Y - 3), SBar.ForeColor
+                    picImage.PSet (X, Y - 3), SBar.ForeColor:       picImage.PSet (X, Y - 4), SBar.ForeColor
                     picImage.Line (X - 5, Y + 1)-(X - 5, Y + 4), vbBlack   'V
                     picImage.Line (X - 9, Y + 4)-(X - 9, Y + 13), vbBlack   'V
                     picImage.Line (X - 2, Y + 4)-(X - 2, Y + 13), vbBlack   'V
@@ -817,16 +896,16 @@ Dim i As Integer
                         picImage.Line (X - 4, Y + 4)-(X - 2, Y + 7), SBar.ForeColor, BF
                     End If
                 End If
-            
         End Select
-        
         
         .DrawMode = mDrawStyle.DrawMode
         .DrawStyle = mDrawStyle.DrawStyle
         .FillStyle = mDrawStyle.FillStyle
         .DrawWidth = mDrawStyle.DrawWidth
-         mUndoStack.CreateUndoStep gdiplus.CopyStdPicture(.Image)
-         TBar.Enabled(tbUndo) = True: TBar.Enabled(tbRedo) = False
+        If TBar.SelectedEx <> tbLegend Then
+            mUndoStack.CreateUndoStep gdiplus.CopyStdPicture(.Image)
+            TBar.Enabled(tbUndo) = True: TBar.Enabled(tbRedo) = False
+        End If
     End With
     
     If Not MagGlass Is Nothing Then
@@ -895,7 +974,7 @@ Dim tCursorPos As POINTAPI
         picImage.DrawMode = vbCopyPen
         picImage.DrawStyle = vbSolid
         picImage.DrawWidth = (SBar.Line * 2) + 2
-        picImage.PSet (X, Y)
+        picImage.PSet (X, Y), SBar.ForeColor
         mWorkControl.DrawMode = tbFreehand
     Else
         mWorkControl.DrawMode = 0
@@ -949,8 +1028,8 @@ Dim sLegend As String
         .FillStyle = vbFSTransparent
         .FillColor = &H0&
         .ForeColor = SBar.ForeColor
-         mUndoStack.CreateUndoStep gdiplus.CopyStdPicture(.Image)
-         TBar.Enabled(tbUndo) = True: TBar.Enabled(tbRedo) = False
+        mUndoStack.CreateUndoStep gdiplus.CopyStdPicture(.Image), sLegend
+        TBar.Enabled(tbUndo) = True: TBar.Enabled(tbRedo) = False
     End With
     SBar.LegendIncrease
     If Not MagGlass Is Nothing Then
@@ -962,35 +1041,196 @@ End Sub
 
 Private Sub DrawLine(X As Single, Y As Single, Optional Step As eAction)
 Dim tCursorPos As POINTAPI
+With mWorkControl
     If Step = ActionStart Then
         If modMain.IsLightColor(SBar.ForeColor) Then picImage.ForeColor = &HEEEEEE
         picImage.DrawMode = vbNotXorPen
         picImage.DrawStyle = vbDash
         picImage.DrawWidth = 1
-        If GetAsyncKeyState(vbKeyShift) Then
+        If CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) Then
             If X <= 10 Then X = 0
             If Y <= 10 Then Y = 0
         End If
-        With mWorkControl
-            .x0 = X: .y0 = Y: .x1 = X: .y1 = Y: .x2 = X: .y2 = Y
-            .DrawMode = tbLine
-        End With
+        .x0 = X: .y0 = Y: .x1 = X: .y1 = Y: .x2 = X: .y2 = Y
+        .DrawMode = tbLine
+        If TBar.SelectedEx = tbLegend Then ResetCursor tbLegend
+    ElseIf TBar.SelectedEx = tbLegend Then  'Multi-Tool
+        .x2 = .x0: .y2 = .y0
+        picImage.Line (.x1, .y1)-(.x2, .y2) 'aufheben
+        Call CutLine(18 + (SBar.Line * 4))
+        gdiplus.PaintShape picImage, seShapeLine, .x1, .y1, .x2, .y2, vbBSSolid, SBar.ForeColor, 1 + SBar.Line, , , IIf(SBar.Fill = 0, 80, SBar.Fill * 50)
+        DrawLegend X, Y
+        ResetCursor tbLine
     Else                'Aktion-Ende
-        With mWorkControl
-            .x2 = .x0: .y2 = .y0
-            picImage.Line (.x1, .y1)-(.x2, .y2) 'aufheben
-            gdiplus.PaintShape picImage, seShapeLine, .x1, .y1, .x2, .y2, vbBSSolid, SBar.ForeColor, 1 + (SBar.Line * 2), , , (SBar.Fill * 40) + 20
-            .x0 = 0: .y0 = 0: .x1 = 0: .y1 = 0: .x2 = 0: .y2 = 0: .DrawMode = 0
-        End With
-        mUndoStack.CreateUndoStep gdiplus.CopyStdPicture(picImage.Image)
-        TBar.Enabled(tbUndo) = True: TBar.Enabled(tbRedo) = False
+        .x2 = .x0: .y2 = .y0
+        picImage.Line (.x1, .y1)-(.x2, .y2) 'aufheben
+        gdiplus.PaintShape picImage, seShapeLine, .x1, .y1, .x2, .y2, vbBSSolid, SBar.ForeColor, 1 + (SBar.Line * 2), , , (SBar.Fill * 40) + 20
+    End If
+    
+    If Step = ActionEnd Then
+        If TBar.SelectedEx <> tbLegend Then
+            mUndoStack.CreateUndoStep gdiplus.CopyStdPicture(picImage.Image)
+            TBar.Enabled(tbUndo) = True: TBar.Enabled(tbRedo) = False
+        End If
+        .x0 = 0: .y0 = 0: .x1 = 0: .y1 = 0: .x2 = 0: .y2 = 0: .DrawMode = 0
         If Not MagGlass Is Nothing Then
             DoEvents
             GetCursorPos tCursorPos
             MagGlass.PrintMagGlass tCursorPos
         End If
     End If
+End With
 End Sub
+
+Private Sub DrawDimension(X As Single, Y As Single, Optional Step As eAction)
+Dim tCursorPos As POINTAPI
+Dim isVDim As Boolean
+Dim txtDimension As String
+Dim distUd As Single
+Dim distPx As Integer
+Dim distStr As String
+Dim decChr As String
+Dim i As Integer
+'###_START_PRO_###
+With mWorkControl
+    If Not IsPro Then Exit Sub
+    If mWorkControl.DrawMode = 0 And Step = ActionStart Then
+        linDimension(0).x1 = X: linDimension(0).y1 = Y: linDimension(0).x2 = X: linDimension(0).y2 = Y
+        linDimension(1).x1 = X: linDimension(1).y1 = Y: linDimension(1).x2 = X: linDimension(1).y2 = Y
+        linDimension(0).Visible = True: linDimension(1).Visible = True: linDimension(2).Visible = False: shpDimension.Visible = False
+        .x0 = X: .y0 = Y
+        .DrawMode = tbDimension     'Step1 Bemaßung
+    ElseIf mWorkControl.DrawMode > 0 And Step = ActionStart Then
+        mWorkControl.DrawMode = -1 * tbDimension
+        linDimension(2).Visible = True
+        shpDimension.Visible = True
+        picImage.Font = TBar.Font
+        .x2 = picImage.TextHeight("µÎ") + 1
+        linDimension(2).x1 = X: linDimension(2).y1 = Y: linDimension(2).x2 = X: linDimension(2).y2 = Y
+        If CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) Then   'vertikale Bemaßung
+            txtDimension = Round((Abs(Y - .y0) + 1) * Abs(SBar.RulerScaleMulti), SBar.RulerScaleDec)
+            shpDimension.Move X - .x2 - 2, Y - .x2 - 1, .x2 - 1, picImage.TextWidth(txtDimension)
+            .y2 = 1 'zeigt an, dass der Bemaßungstext vertikal berechnet wurde
+        Else
+            txtDimension = Round((Abs(X - .x0) + 1) * Abs(SBar.RulerScaleMulti), SBar.RulerScaleDec)
+            shpDimension.Move X, Y - .x2 - 2, picImage.TextWidth(txtDimension), .x2 - 1
+            .y2 = 0 'zeigt an, dass der Bemaßungstext horizontal berechnet wurde
+        End If
+        .x1 = X: .y1 = Y            'Step2 Bemaßung
+    Else
+        With picImage
+            .DrawWidth = 1
+            .DrawMode = vbCopyPen
+            .DrawStyle = vbSolid
+            .ForeColor = SBar.ForeColor
+        End With
+        isVDim = CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED)
+        If isVDim Then
+            distPx = (Abs(.y1 - .y0) + 1)  'vertikale Bemaßung
+        Else
+            distPx = (Abs(.x1 - .x0) + 1)   'horizontale Bemaßung
+        End If
+        TBar.SetButtonShift False
+        txtDimension = InputBox("Beschriftungstext:", "Bemaßung...", Round(distPx * Abs(SBar.RulerScaleMulti), SBar.RulerScaleDec))
+        If StrPtr(txtDimension) = 0 Then
+            .x0 = 0: .y0 = 0: .x1 = 0: .y1 = 0: .x2 = 0: .y2 = 0: .DrawMode = 0
+            linDimension(0).Visible = False: linDimension(1).Visible = False: linDimension(2).Visible = False: shpDimension.Visible = False
+            Exit Sub
+        End If
+        txtDimension = Trim$(txtDimension)
+        'Urechnungsfaktor und Kommastellen berechnen
+        If Len(txtDimension) > 0 And SBar.RulerScaleMode = PL_USER And SBar.RulerScaleMulti = -1 Then
+            distStr = txtDimension
+            Do While IsNumeric(distStr) = False And Len(distStr) > 0
+                distStr = Right$(distStr, (Len(distStr) - 1))
+            Loop
+            If Len(distStr) > 0 Then distUd = CSng(distStr)
+            If distUd <> 0 And distPx <> 0 Then
+                distUd = Round(distUd / distPx, 2)
+                SBar.RulerScaleMulti = distUd
+                decChr = Mid$(CStr(1.5), 2, 1)
+                distStr = CStr(distUd)
+                i = InStr(distStr, decChr)
+                If i > 0 Then SBar.RulerScaleDec = Len(Mid$(distStr, i + 1)) Else SBar.RulerScaleDec = 0
+            End If
+            Debug.Print SBar.RulerScaleMulti & vbTab & SBar.RulerScaleDec
+        End If
+        'Bemaßung zeichnen
+        picImage.Line (linDimension(0).x1, linDimension(0).y1)-(linDimension(0).x2, linDimension(0).y2)
+        picImage.Line (linDimension(1).x1, linDimension(1).y1)-(linDimension(1).x2, linDimension(1).y2)
+        picImage.Line (linDimension(2).x1, linDimension(2).y1)-(linDimension(2).x2, linDimension(2).y2)
+        Select Case True    'Bemaßungspfeile
+            Case isVDim And Y < .y1 And .y1 < .y0   'UOO
+                picImage.Line (X - 1, .y1 - 2)-(X + 2, .y1 - 2): picImage.Line (X - 2, .y1 - 3)-(X + 3, .y1 - 3): picImage.Line (X - 3, .y1 - 4)-(X + 4, .y1 - 4)
+                picImage.Line (X - 1, .y0 + 2)-(X + 2, .y0 + 2): picImage.Line (X - 2, .y0 + 3)-(X + 3, .y0 + 3): picImage.Line (X - 3, .y0 + 4)-(X + 4, .y0 + 4)
+                picImage.Line (X, .y0)-(X, .y0 + 10)
+            Case isVDim And Y > .y0 And .y1 < .y0   'UOU
+                picImage.Line (X - 1, .y1 - 2)-(X + 2, .y1 - 2): picImage.Line (X - 2, .y1 - 3)-(X + 3, .y1 - 3): picImage.Line (X - 3, .y1 - 4)-(X + 4, .y1 - 4)
+                picImage.Line (X - 1, .y0 + 2)-(X + 2, .y0 + 2): picImage.Line (X - 2, .y0 + 3)-(X + 3, .y0 + 3): picImage.Line (X - 3, .y0 + 4)-(X + 4, .y0 + 4)
+                picImage.Line (X, .y1)-(X, .y1 - 10)
+            Case isVDim And Y < .y0 And .y0 < .y1   'OUO
+                picImage.Line (X - 2, .y0 - 2)-(X + 2, .y0 - 2): picImage.Line (X - 3, .y0 - 3)-(X + 3, .y0 - 3): picImage.Line (X - 4, .y0 - 4)-(X + 4, .y0 - 4)
+                picImage.Line (X - 2, .y1 + 2)-(X + 2, .y1 + 2): picImage.Line (X - 3, .y1 + 3)-(X + 3, .y1 + 3): picImage.Line (X - 4, .y1 + 4)-(X + 4, .y1 + 4)
+                picImage.Line (X, .y1)-(X, .y1 + 10)
+            Case isVDim And Y > .y1 And .y0 < .y1   'OUU
+                picImage.Line (X - 2, .y0 - 2)-(X + 2, .y0 - 2): picImage.Line (X - 3, .y0 - 3)-(X + 3, .y0 - 3): picImage.Line (X - 4, .y0 - 4)-(X + 4, .y0 - 4)
+                picImage.Line (X - 2, .y1 + 2)-(X + 2, .y1 + 2): picImage.Line (X - 3, .y1 + 3)-(X + 3, .y1 + 3): picImage.Line (X - 4, .y1 + 4)-(X + 4, .y1 + 4)
+                picImage.Line (X, .y0)-(X, .y0 - 10)
+            Case isVDim And .y1 < .y0   'UOM
+                picImage.Line (X - 2, .y0 - 2)-(X + 2, .y0 - 2): picImage.Line (X - 3, .y0 - 3)-(X + 3, .y0 - 3): picImage.Line (X - 4, .y0 - 4)-(X + 4, .y0 - 4)
+                picImage.Line (X - 2, .y1 + 2)-(X + 2, .y1 + 2): picImage.Line (X - 3, .y1 + 3)-(X + 3, .y1 + 3): picImage.Line (X - 4, .y1 + 4)-(X + 4, .y1 + 4)
+            Case isVDim                 'OUM
+                picImage.Line (X - 1, .y1 - 2)-(X + 2, .y1 - 2): picImage.Line (X - 2, .y1 - 3)-(X + 3, .y1 - 3): picImage.Line (X - 3, .y1 - 4)-(X + 4, .y1 - 4)
+                picImage.Line (X - 1, .y0 + 2)-(X + 2, .y0 + 2): picImage.Line (X - 2, .y0 + 3)-(X + 3, .y0 + 3): picImage.Line (X - 3, .y0 + 4)-(X + 4, .y0 + 4)
+            Case X < .x1 And .x1 < .x0
+                picImage.Line (.x1 - 2, Y - 1)-(.x1 - 2, Y + 2): picImage.Line (.x1 - 3, Y - 2)-(.x1 - 3, Y + 3): picImage.Line (.x1 - 4, Y - 3)-(.x1 - 4, Y + 4)
+                picImage.Line (.x0 + 2, Y - 1)-(.x0 + 2, Y + 2): picImage.Line (.x0 + 3, Y - 2)-(.x0 + 3, Y + 3): picImage.Line (.x0 + 4, Y - 3)-(.x0 + 4, Y + 4)
+                picImage.Line (.x0, Y)-(.x0 + 10, Y)
+            Case X > .x0 And .x1 < .x0
+                picImage.Line (.x1 - 2, Y - 1)-(.x1 - 2, Y + 2): picImage.Line (.x1 - 3, Y - 2)-(.x1 - 3, Y + 3): picImage.Line (.x1 - 4, Y - 3)-(.x1 - 4, Y + 4)
+                picImage.Line (.x0 + 2, Y - 1)-(.x0 + 2, Y + 2): picImage.Line (.x0 + 3, Y - 2)-(.x0 + 3, Y + 3): picImage.Line (.x0 + 4, Y - 3)-(.x0 + 4, Y + 4)
+                picImage.Line (.x1, Y)-(.x1 - 10, Y)
+            Case X < .x0 And .x0 < .x1
+                picImage.Line (.x0 - 2, Y - 1)-(.x0 - 2, Y + 2): picImage.Line (.x0 - 3, Y - 2)-(.x0 - 3, Y + 3): picImage.Line (.x0 - 4, Y - 3)-(.x0 - 4, Y + 4)
+                picImage.Line (.x1 + 2, Y - 1)-(.x1 + 2, Y + 2): picImage.Line (.x1 + 3, Y - 2)-(.x1 + 3, Y + 3): picImage.Line (.x1 + 4, Y - 3)-(.x1 + 4, Y + 4)
+                picImage.Line (.x1, Y)-(.x1 + 10, Y)
+            Case X > .x1 And .x0 < .x1
+                picImage.Line (.x0 - 2, Y - 1)-(.x0 - 2, Y + 2): picImage.Line (.x0 - 3, Y - 2)-(.x0 - 3, Y + 3): picImage.Line (.x0 - 4, Y - 3)-(.x0 - 4, Y + 4)
+                picImage.Line (.x1 + 2, Y - 1)-(.x1 + 2, Y + 2): picImage.Line (.x1 + 3, Y - 2)-(.x1 + 3, Y + 3): picImage.Line (.x1 + 4, Y - 3)-(.x1 + 4, Y + 4)
+                picImage.Line (.x0, Y)-(.x0 - 10, Y)
+            Case .x1 < .x0  'Innen
+                picImage.Line (.x0 - 2, Y - 1)-(.x0 - 2, Y + 2): picImage.Line (.x0 - 3, Y - 2)-(.x0 - 3, Y + 3): picImage.Line (.x0 - 4, Y - 3)-(.x0 - 4, Y + 4)
+                picImage.Line (.x1 + 2, Y - 1)-(.x1 + 2, Y + 2): picImage.Line (.x1 + 3, Y - 2)-(.x1 + 3, Y + 3): picImage.Line (.x1 + 4, Y - 3)-(.x1 + 4, Y + 4)
+            Case Else       'Innen
+                picImage.Line (.x0 + 2, Y - 1)-(.x0 + 2, Y + 2): picImage.Line (.x0 + 3, Y - 2)-(.x0 + 3, Y + 3): picImage.Line (.x0 + 4, Y - 3)-(.x0 + 4, Y + 4)
+                picImage.Line (.x1 - 2, Y - 1)-(.x1 - 2, Y + 2): picImage.Line (.x1 - 3, Y - 2)-(.x1 - 3, Y + 3): picImage.Line (.x1 - 4, Y - 3)-(.x1 - 4, Y + 4)
+        End Select
+        .x0 = 0: .y0 = 0: .x1 = 0: .y1 = 0: .x2 = 0: .y2 = 0: .DrawMode = 0
+        linDimension(0).Visible = False: linDimension(1).Visible = False: linDimension(2).Visible = False: shpDimension.Visible = False
+        If isVDim Then
+            Dim hFont As Long, fontMem As Long, res As Long
+            hFont = CreateFont(picImage.FontSize * 1.55, 0, 900, 0, IIf(picImage.FontBold, 700, 0), _
+                    picImage.FontItalic, picImage.FontUnderline, picImage.FontStrikethru, 1, 4, &H10, 2, 4, picImage.FontName)
+            fontMem = SelectObject(picImage.hDC, hFont)
+            res = TextOut(picImage.hDC, shpDimension.Left, shpDimension.Top + (1.5 * shpDimension.Width), txtDimension, Len(txtDimension))
+            res = SelectObject(picImage.hDC, fontMem)
+            res = DeleteObject(hFont)
+        Else
+            TextOut picImage.hDC, shpDimension.Left, shpDimension.Top, txtDimension, Len(txtDimension)
+        End If
+        mUndoStack.CreateUndoStep gdiplus.CopyStdPicture(picImage.Image)
+        TBar.Enabled(tbUndo) = True: TBar.Enabled(tbRedo) = False
+        
+        If Not MagGlass Is Nothing Then
+            DoEvents
+            GetCursorPos tCursorPos
+            MagGlass.PrintMagGlass tCursorPos
+        End If
+    End If
+End With
+'###_END_PRO_###
+End Sub
+
 
 Private Sub DrawMarker(X As Single, Y As Single, Optional Step As eAction)
 Dim tCursorPos As POINTAPI
@@ -998,9 +1238,9 @@ Dim tCursorPos As POINTAPI
         picImage.DrawMode = vbMaskPen
         picImage.DrawStyle = vbSolid
         picImage.DrawWidth = (SBar.Line * 6) + 6
-        picImage.PSet (X, Y)
+        picImage.PSet (X, Y), SBar.ForeColor
         mWorkControl.DrawMode = tbMarker
-        If GetAsyncKeyState(vbKeyShift) Then mWorkControl.y0 = Y
+        If CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) Then mWorkControl.y0 = Y
     Else                'Aktion-Ende
         mWorkControl.DrawMode = 0
         mWorkControl.y0 = 0
@@ -1098,10 +1338,13 @@ End Sub
 Private Sub DrawText(Optional X As Single, Optional Y As Single, Optional Step As eAction = ActionEnd)
 Dim tCursorPos As POINTAPI
 Dim l As Integer
+Static eingabe As String
     If Step = ActionStart Then
+        eingabe = InputBox("Text:", "Text erfassen...", eingabe)
+        If StrPtr(eingabe) = 0 Then Exit Sub
         With txtEditBox
-            .Text = ""
-            .Move X, Y, mTextOverhang
+            .Text = eingabe
+            .Move X, Y, picImage.TextWidth(eingabe) + mTextOverhang
             .Visible = True
             .SetFocus
             SendMessageL .hwnd, EM_SETMARGINS, EC_LEFTMARGIN, 3&
@@ -1202,7 +1445,8 @@ Private Sub FixPaste()
         If picImage.Height < .y1 Then picImage.Height = .y1
         If picImage.Width > .x2 Then picImage.Width = .x2
         If picImage.Height > .y2 Then picImage.Height = .y2
-        picImage.PaintPicture picPaste.Image, x1:=.x0 \ LTwipsPerPixelX, y1:=.y0 \ LTwipsPerPixelY
+        Set picImage.Picture = Nothing
+        picImage.PaintPicture picPaste.Image, x1:=.x0 \ LTwipsPerPixelX, y1:=.y0 \ LTwipsPerPixelY, Width2:=.x2, Height2:=.y2
         .x0 = 0: .x1 = 0: .x2 = 0: .y0 = 0: .y1 = 0: .y2 = 0
     End With
 
@@ -1222,7 +1466,7 @@ End Sub
 '=====FORM========================================
 Private Sub Form_Activate()
 Dim cancel As Boolean
-    TBar.SetButtonShift GetAsyncKeyState(vbKeyShift)
+    TBar.SetButtonShift CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED)
     TBar_Change TBar.Selected, tbPointer, cancel
 End Sub
 
@@ -1249,6 +1493,15 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
         TBar.SetButtonShift True
     ElseIf KeyCode = vbKeyF1 Then
         ShellExec "https://docs.ww-a.de/doku.php/pixellineal:bildeditor", vbNormalFocus
+    ElseIf KeyCode = vbKeyEscape Then
+        With mWorkControl
+            '###_START_PRO_###
+            If Abs(.DrawMode) = tbDimension Then  'Abbruch Bemaßung
+                .x0 = 0: .y0 = 0: .x1 = 0: .y1 = 0: .x2 = 0: .y2 = 0: .DrawMode = 0
+                linDimension(0).Visible = False: linDimension(1).Visible = False: linDimension(2).Visible = False: shpDimension.Visible = False
+            End If
+            '###_END_PRO_###
+        End With
     End If
     Exit Sub
     
@@ -1265,31 +1518,9 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-Dim i As Integer
     On Error Resume Next
     Call modMenuColor.Set_MenuColor(nfoSysMenuColor, Me.hwnd, &HF0F0F0)
-    i = Abs(CInt(GetSetting(App.Title, "Editor", "Tool", 0)))
-    If i > tbMenu Then i = 0
-    TBar.Selected = i
-    SBar.Line = Abs(CInt(GetSetting(App.Title, "Editor", "LineWidth", 0)))
-    SBar.ForeColor = CLng(GetSetting(App.Title, "Editor", "ForeColor", 0))
-    SBar.BackColor = CLng(GetSetting(App.Title, "Editor", "BackColor", vbWhite))
-    SBar.Fill = CLng(GetSetting(App.Title, "Editor", "Fill", 0))
-    SBar.Palette = CLng(GetSetting(App.Title, "Editor", "Palette", 0))
-    TBar.FontColor = CLng(GetSetting(App.Title, "Textbox", "Color", 0))
-    mGradingVisible = CBool(Val(GetSetting(App.Title, "Editor", "Grading", 1)))
-
-    With TBar
-        .FontBold = CBool(GetSetting(App.Title, "Textbox", "FontBold", False))
-        .FontItalic = GetSetting(App.Title, "Textbox", "FontItalic", 0)
-        .FontUnderline = GetSetting(App.Title, "Textbox", "FontUnderline", 0)
-        .FontStrikethru = GetSetting(App.Title, "Textbox", "FontStrikethru", 0)
-        .FontSize = 9
-        .FontName = GetSetting(App.Title, "Textbox", "FontName", "Verdana")
-        .Arrow = Abs(CInt(GetSetting(App.Title, "Editor", "Arrow", 0)))
-    End With
-    
-    Call SyncFontAndColor
+    Call ReadSettings
     
     txtEditBox.Text = ""
     TBar.Enabled(tbUndo) = False
@@ -1300,19 +1531,67 @@ Dim i As Integer
     TBar.ZOrder
 End Sub
 
+Public Sub ReadSettings()
+Dim i As Integer
+    On Error Resume Next
+    mGradingVisible = CBool(Val(GetSetting(App.Title, "Editor", "Grading", 1)))
+    i = Abs(CInt(GetSetting(App.Title, "Editor", "Tool", 0)))
+    If i > tbMenu Then i = 0
+    TBar.Selected = i
+    TBar.FontColor = CLng(GetSetting(App.Title, "Textbox", "Color", 0))
+    TBar.FontBold = CBool(GetSetting(App.Title, "Textbox", "FontBold", False))
+    TBar.FontItalic = GetSetting(App.Title, "Textbox", "FontItalic", 0)
+    TBar.FontUnderline = GetSetting(App.Title, "Textbox", "FontUnderline", 0)
+    TBar.FontStrikethru = GetSetting(App.Title, "Textbox", "FontStrikethru", 0)
+    TBar.FontSize = CInt(GetSetting(App.Title, "Textbox", "FontSize", 9))
+    TBar.FontName = GetSetting(App.Title, "Textbox", "FontName", "Verdana")
+    TBar.Arrow = Abs(CInt(GetSetting(App.Title, "Editor", "Arrow", 0)))
+    SBar.Line = Abs(CInt(GetSetting(App.Title, "Editor", "LineWidth", 0)))
+    SBar.ForeColor = CLng(GetSetting(App.Title, "Editor", "ForeColor", 0))
+    SBar.BackColor = CLng(GetSetting(App.Title, "Editor", "BackColor", vbWhite))
+    SBar.Fill = CLng(GetSetting(App.Title, "Editor", "Fill", 0))
+    i = CLng(GetSetting(App.Title, "Editor", "Palette", 0))
+    If i >= 8 Then i = 0
+    SBar.Palette = i
+    '###_START_PRO_###
+    linDimension(0).BorderColor = SBar.ForeColor
+    linDimension(1).BorderColor = SBar.ForeColor
+    linDimension(2).BorderColor = SBar.ForeColor
+    shpDimension.BorderColor = SBar.ForeColor
+    '###_END_PRO_###
+    Call SyncFontAndColor
+End Sub
+
+Public Sub SaveSettings()
+    On Error Resume Next
+    If mGradingVisible <> CBool(Val(GetSetting(App.Title, "Editor", "Grading", 1))) Then SaveSetting App.Title, "Editor", "Grading", mGradingVisible
+    With TBar
+        If .Selected <> Abs(CInt(GetSetting(App.Title, "Editor", "Tool", 0))) Then SaveSetting App.Title, "Editor", "Tool", .Selected
+        If .FontColor <> CLng(GetSetting(App.Title, "Textbox", "Color", 0)) Then SaveSetting App.Title, "Textbox", "Color", .FontColor
+        If .FontBold <> CBool(GetSetting(App.Title, "Textbox", "FontBold", False)) Then SaveSetting App.Title, "Textbox", "FontBold", Abs(.FontBold)
+        If .FontItalic <> GetSetting(App.Title, "Textbox", "FontItalic", 0) Then SaveSetting App.Title, "Textbox", "FontItalic", Abs(.FontItalic)
+        If .FontUnderline <> GetSetting(App.Title, "Textbox", "FontUnderline", 0) Then SaveSetting App.Title, "Textbox", "FontUnderline", Abs(.FontUnderline)
+        If .FontStrikethru <> GetSetting(App.Title, "Textbox", "FontStrikethru", 0) Then SaveSetting App.Title, "Textbox", "FontStrikethru", Abs(.FontStrikethru)
+        If .FontSize <> CInt(GetSetting(App.Title, "Textbox", "FontSize", 9)) Then SaveSetting App.Title, "Textbox", "FontSize", .FontSize
+        If .FontName <> GetSetting(App.Title, "Textbox", "FontName", "Verdana") Then SaveSetting App.Title, "Textbox", "FontName", .FontName
+        If .Arrow <> Abs(CInt(GetSetting(App.Title, "Editor", "Arrow", 0))) Then SaveSetting App.Title, "Editor", "Arrow", .Arrow
+    End With
+    With SBar
+        If .Line <> Abs(CInt(GetSetting(App.Title, "Editor", "LineWidth", 0))) Then SaveSetting App.Title, "Editor", "LineWidth", .Line
+        If .ForeColor <> CLng(GetSetting(App.Title, "Editor", "ForeColor", 0)) Then SaveSetting App.Title, "Editor", "ForeColor", .ForeColor
+        If .BackColor <> CLng(GetSetting(App.Title, "Editor", "BackColor", vbWhite)) Then SaveSetting App.Title, "Editor", "BackColor", .BackColor
+        If .Fill <> CLng(GetSetting(App.Title, "Editor", "Fill", 0)) Then SaveSetting App.Title, "Editor", "Fill", .Fill
+        If .Palette <> CLng(GetSetting(App.Title, "Editor", "Palette", 0)) Then SaveSetting App.Title, "Editor", "Palette", .Palette
+    End With
+
+End Sub
+
 
 
 Private Sub Form_Unload(cancel As Integer)
 Dim f As Form
     On Error Resume Next
-    If SBar.Line <> 0 Then SaveSetting App.Title, "Editor", "LineWidth", SBar.Line
-    If SBar.ForeColor <> vbBlack Then SaveSetting App.Title, "Editor", "ForeColor", SBar.ForeColor
-    If SBar.BackColor <> vbWhite Then SaveSetting App.Title, "Editor", "BackColor", SBar.BackColor
-    If SBar.Palette <> 0 Then SaveSetting App.Title, "Editor", "Palette", SBar.Palette
-    If TBar.Selected <> 0 Then SaveSetting App.Title, "Editor", "Tool", IIf(TBar.Selected < tbPaste, TBar.Selected, tbPointer)
-    If TBar.Arrow <> 0 Then SaveSetting App.Title, "Editor", "Arrow", TBar.Arrow
-    If SBar.Fill <> 0 Then SaveSetting App.Title, "Editor", "Fill", SBar.Fill
-
+    Call SaveSettings
 
     If frmRuler.Visible Then
         Exit Sub
@@ -1425,28 +1704,28 @@ Dim iPts(2) As POINTAPI
             iPts(0).X = w \ LTwipsPerPixelX - 6:   iPts(0).Y = 0
             iPts(1).X = w \ LTwipsPerPixelX:       iPts(1).Y = 0
             iPts(2).X = w \ LTwipsPerPixelX:       iPts(2).Y = 6
-            gdiplus.PaintPolygon picImage, iPts, vbBSSolid, vbWhite, 0, True, vbWhite, 80
+            gdiplus.PaintPolygon picImage, iPts, vbBSSolid, &HDDDDDD, 0, True, vbWhite, 70
         Case tbbTearBottomRight  'Abriss unten-rechts
             MakeBorder tbbTearBottom, False
             MakeBorder tbbTearRight, False
-            iPts(0).X = w \ LTwipsPerPixelX - 7:   iPts(0).Y = h \ LTwipsPerPixelY
+            iPts(0).X = w \ LTwipsPerPixelX - 8:   iPts(0).Y = h \ LTwipsPerPixelY
             iPts(1).X = w \ LTwipsPerPixelX:       iPts(1).Y = h \ LTwipsPerPixelY
-            iPts(2).X = w \ LTwipsPerPixelX:       iPts(2).Y = h \ LTwipsPerPixelY - 7
-            gdiplus.PaintPolygon picImage, iPts, vbBSSolid, vbWhite, 0, True, vbWhite, 70
+            iPts(2).X = w \ LTwipsPerPixelX:       iPts(2).Y = h \ LTwipsPerPixelY - 8
+            gdiplus.PaintPolygon picImage, iPts, vbBSSolid, &HDDDDDD, 0, True, vbWhite, 70
         Case tbbTearBottomLeft   'Abriss unten-links
             MakeBorder tbbTearBottom, False
             MakeBorder tbbTearLeft, False
-            iPts(0).X = 0:   iPts(0).Y = h \ LTwipsPerPixelY - 6
-            iPts(1).X = 6:   iPts(1).Y = h \ LTwipsPerPixelY
+            iPts(0).X = 0:   iPts(0).Y = h \ LTwipsPerPixelY - 8
+            iPts(1).X = 8:   iPts(1).Y = h \ LTwipsPerPixelY
             iPts(2).X = 0:   iPts(2).Y = h \ LTwipsPerPixelY
-            gdiplus.PaintPolygon picImage, iPts, vbBSSolid, vbWhite, 0, True, vbWhite, 80
+            gdiplus.PaintPolygon picImage, iPts, vbBSSolid, &HDDDDDD, 0, True, vbWhite, 70
         Case tbbTearTopLeft   'Abriss oben-links
             MakeBorder tbbTearTop, False
             MakeBorder tbbTearLeft, False
             iPts(0).X = 0:   iPts(0).Y = 0
-            iPts(1).X = 6:   iPts(1).Y = 0
-            iPts(2).X = 0:   iPts(2).Y = 6
-            gdiplus.PaintPolygon picImage, iPts, vbBSSolid, vbWhite, 0, True, vbWhite, 80
+            iPts(1).X = 8:   iPts(1).Y = 0
+            iPts(2).X = 0:   iPts(2).Y = 8
+            gdiplus.PaintPolygon picImage, iPts, vbBSSolid, &HDDDDDD, 0, True, vbWhite, 70
     End Select
     If crUndoStep Then
         mUndoStack.CreateUndoStep gdiplus.CopyStdPicture(picImage.Image)
@@ -1456,9 +1735,8 @@ End Sub
 
 Private Sub PaintGrading()
 Dim i As Long, w  As Long, h As Long, v As Long, t As Long
-    If Not mGradingVisible Then
-        Me.Cls
-    Else
+    Me.Cls
+    If mGradingVisible Then
         t = TBar.Height / LTwipsPerPixelY
         w = (picImage.Width / LTwipsPerPixelX) + 1
         h = (picImage.Height / LTwipsPerPixelY) + t + 1
@@ -1478,15 +1756,17 @@ Dim i As Long, w  As Long, h As Long, v As Long, t As Long
                 Line (i, h)-(i, h + 2)
             Next
             For i = 9 To w Step 10
-                Line (i, h + 2)-(i, h + 7)
                 If (i + 1) Mod 100 = 0 Then
+                     Line (i, h + 2)-(i, h + 10)
                     .CurrentX = i - v
-                    Print (i + 1)
+                    Print Round((i + 1) * Abs(SBar.RulerScaleMulti), SBar.RulerScaleDec)
+                Else
+                    Line (i, h + 2)-(i, h + 7)
                 End If
             Next
             'Vertikal
             .CurrentX = w + 10
-            v = (.TextHeight("000") \ 2)
+            v = (.TextHeight("0") \ 2)
             For i = t + 1 To h Step 2
                 Line (w, i)-(w + 2, i)
             Next
@@ -1494,8 +1774,11 @@ Dim i As Long, w  As Long, h As Long, v As Long, t As Long
             For i = 9 To h Step 10
                 Line (w, i + t)-(w + 7, i + t)
                 If (i + 1) Mod 100 = 0 Then
+                    Line (w, i + t)-(w + 10, i + t)
                     .CurrentY = i + t - v
-                    Print (i + 1)
+                    Print Round((i + 1) * Abs(SBar.RulerScaleMulti), SBar.RulerScaleDec)
+                Else
+                    Line (w, i + t)-(w + 7, i + t)
                 End If
             Next
             .ScaleMode = vbTwips
@@ -1525,13 +1808,19 @@ Private Sub ResetCursor(Optional ByVal newValue As tbButtons = -1)
         Case tbLegend
             picImage.MousePointer = vbCustom
             picImage.MouseIcon = curPointer(40 + SBar.Line).Picture
-        Case tbCrop, tbObfus
-            picImage.MousePointer = vbCrosshair
+        Case tbCrop, tbObfus, tbDimension
+            picImage.MousePointer = vbCustom
+            picImage.MouseIcon = curPointer(106).Picture
         Case Else
             picImage.MousePointer = vbDefault
     End Select
 End Sub
 
+
+Private Sub SBar_ChangeScaleMode()
+    On Error Resume Next
+    PaintGrading
+End Sub
 
 Private Sub SBar_Click(Button As sbButtons)
 Dim isMagGlass As Boolean
@@ -1539,8 +1828,21 @@ Dim isMagGlass As Boolean
     Select Case Button
         Case sbLine0, sbLine1, sbLine2, sbLine3
             picImage.DrawWidth = (SBar.Line * 2) + 2
+            SaveSetting App.Title, "Editor", "LineWidth", SBar.Line
             Call ResetCursor
-        Case sbForeColor, sbBackColor, sbFill0, sbFill1, sbFill2
+        Case sbForeColor
+            SaveSetting App.Title, "Editor", "ForeColor", SBar.ForeColor
+            '###_START_PRO_###
+            linDimension(0).BorderColor = SBar.ForeColor
+            linDimension(1).BorderColor = SBar.ForeColor
+            linDimension(2).BorderColor = SBar.ForeColor
+            shpDimension.BorderColor = SBar.ForeColor
+            '###_END_PRO_###
+        Case sbBackColor
+            SaveSetting App.Title, "Editor", "BackColor", SBar.BackColor
+            SyncFontAndColor
+        Case sbFill0, sbFill1, sbFill2
+            SaveSetting App.Title, "Editor", "Fill", SBar.Fill
             SyncFontAndColor
         Case sbPicker
             If Not MagGlass Is Nothing Then
@@ -1549,7 +1851,9 @@ Dim isMagGlass As Boolean
                 Set MagGlass = Nothing
             End If
             Set MagColor = New frmMagColor
+            Set MagColor.PicColorTarget = SBar.GetPickerColor
             MagColor.Show vbModal, Me
+            SBar.GetPickerColor reset:=True
             Unload MagColor
             If MagColor.PipColor <> &H1000000 Then
                 If MagColor.PipColor > 0 Then
@@ -1562,6 +1866,8 @@ Dim isMagGlass As Boolean
                 SyncFontAndColor
             End If
             Set MagColor = Nothing
+        Case sbPalette
+           SaveSetting App.Title, "Editor", "Palette", SBar.Palette
     End Select
     
 SBar_Click_Resume:
@@ -1586,7 +1892,7 @@ Dim w As Long, h As Long
 Dim tCursorPos As POINTAPI
 
     w = (picImage.Width * 0.9): h = (picImage.Height * 0.9)
-    If GetAsyncKeyState(vbKeyShift) Then    'verkleinern ohne GDI+
+    If CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) Then    'verkleinern ohne GDI+
         picPaste.Width = w: picPaste.Height = h
         picPaste.PaintPicture picImage.Image, 0, 0, w, h, 0, 0, picImage.Width, picImage.Height
         Set picImage.Picture = picPaste.Image
@@ -1653,14 +1959,21 @@ End Sub
 
 Private Sub TBar_Change(ByVal newValue As tbButtons, ByVal OldValue As tbButtons, cancel As Boolean)
     On Error GoTo TBar_Change_Error
-    Select Case OldValue
-        Case tbPaste:  If picPaste.Visible Then FixPaste
-        Case tbText:   If txtEditBox.Visible Then DrawText
-        Case tbLegend: SBar.Legend = (newValue = tbLegend)
-    End Select
-    With mWorkControl: .x0 = 0: .y0 = 0: .x1 = 0: .y1 = 0: .x2 = 0: .y2 = 0: .DrawMode = 0: End With
-    Select Case newValue
-        Case tbPaste
+    With mWorkControl
+        Select Case OldValue
+            Case tbPaste:  If picPaste.Visible Then FixPaste
+            Case tbText:   If txtEditBox.Visible Then DrawText
+            Case tbDimension
+                '###_START_PRO_###
+                If Abs(.DrawMode) = tbDimension Then  'Abbruch Bemaßung
+                    linDimension(0).Visible = False: linDimension(1).Visible = False: linDimension(2).Visible = False: shpDimension.Visible = False
+                End If
+                '###_END_PRO_###
+        End Select
+        .x0 = 0: .y0 = 0: .x1 = 0: .y1 = 0: .x2 = 0: .y2 = 0: .DrawMode = 0
+    End With
+    Select Case True
+        Case newValue = tbPaste
             If Clipboard.GetFormat(vbCFBitmap) Then
                 Set picPaste.Picture = Clipboard.GetData(vbCFBitmap)
             ElseIf Clipboard.GetFormat(vbCFDIB) Then
@@ -1678,11 +1991,12 @@ Private Sub TBar_Change(ByVal newValue As tbButtons, ByVal OldValue As tbButtons
                 .Visible = True
                 .SetFocus
             End With
-        Case tbLegend
+        Case newValue = tbLegend Or TBar.SelectedEx = tbLegend
             SBar.Legend = True
-        Case tbTear
+        Case newValue = tbTear
             cancel = False
     End Select
+    SBar.Legend = newValue = tbLegend Or TBar.SelectedEx = tbLegend
     If Not cancel Then Call ResetCursor(newValue)
     Exit Sub
     
@@ -1695,13 +2009,14 @@ TBar_Change_Error:
 End Sub
 
 
-Private Sub TBar_Click(ByVal Value As tbButtons, ByVal X As Long)
+Private Sub TBar_Click(ByVal value As tbButtons, ByVal X As Long)
 Dim w As Long, h As Long
 Dim isRetry As Boolean
 Dim p As StdPicture
+Dim stackLgndChar As String
 
     On Error GoTo TBar_Click_Error
-    Select Case Value
+    Select Case value
         Case tbMenu
             If TBar.Selected = tbPaste And picPaste.Visible Then FixPaste
         Case tbCopy
@@ -1717,20 +2032,20 @@ Retry_Copy:
                 Clipboard.Clear
                 Clipboard.SetData picImage.Image, vbCFDIB
             End If
-            If GetAsyncKeyState(vbKeyShift) Then Unload Me
+            If CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) Then Unload Me
         Case tbMagGlass
             frmMenu.ToogleMagGlass
         Case tbLineal
-            If GetAsyncKeyState(vbKeyShift) Then
+            If CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) Then
                 mGradingVisible = Not mGradingVisible
                 Call PaintGrading
-                SaveSetting App.Title, "Editor", "Grading", mGradingVisible
+                SaveSetting App.Title, "Editor", "Grading", Abs(mGradingVisible)
             Else
                 frmRuler.Visible = Not frmRuler.Visible
             End If
         Case tbNew
             Set Capture = New frmCapture
-            If GetAsyncKeyState(vbKeyShift) Then
+            If CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) Then
                 If TBar.Selected = tbPaste And picPaste.Visible Then FixPaste
                 Capture.Show vbModeless, Me
             Else
@@ -1765,7 +2080,7 @@ Retry_Copy:
                 End If
             End If
             If mUndoStack.CanUndo Then
-                If mUndoStack.GetUndo(p) Then
+                If mUndoStack.GetUndo(p, stackLgndChar) Then
                     w = ScaleX(p.Width, vbHimetric, vbTwips)
                     h = ScaleY(p.Height, vbHimetric, vbTwips)
                     If picImage.Width <> w Or h <> picImage.Height Then
@@ -1776,10 +2091,11 @@ Retry_Copy:
                     TBar.Enabled(tbRedo) = True
                 End If
                 TBar.Enabled(tbUndo) = mUndoStack.CanUndo
+                If Len(stackLgndChar) Then SBar.LegendText = stackLgndChar
             End If
         Case tbRedo
             If mUndoStack.CanRedo Then
-                If mUndoStack.GetRedo(p) Then
+                If mUndoStack.GetRedo(p, stackLgndChar) Then
                     w = ScaleX(p.Width, vbHimetric, vbTwips)
                     h = ScaleY(p.Height, vbHimetric, vbTwips)
                     If picImage.Width <> w Or h <> picImage.Height Then
@@ -1789,6 +2105,7 @@ Retry_Copy:
                     Set picImage.Picture = p
                     TBar.Enabled(tbUndo) = True
                     TBar.Enabled(tbRedo) = mUndoStack.CanRedo
+                    If Len(stackLgndChar) Then SBar.LegendText = stackLgndChar
                 End If
             End If
         Case tbArrow
@@ -1801,7 +2118,11 @@ Retry_Copy:
                     picPaste.Visible = False
                     Set picPaste.Picture = Nothing
                 End If
-                If GetAsyncKeyState(vbKeyShift) Then CreateTestImage True
+                If CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) Then
+                    CreateTestImage 0, True
+                ElseIf CBool(GetAsyncKeyState(vbKeyControl) And KEY_PRESSED) Then
+                    CreateTestImage 1, False
+                End If
             End If
     End Select
 
@@ -1809,7 +2130,7 @@ Exit Sub
  
 TBar_Click_Error:
  Screen.MousePointer = vbDefault
- If Err = 521 And Value = tbCopy And Not isRetry Then
+ If Err = 521 And value = tbCopy And Not isRetry Then
     If MsgBox("Fehler: " & Err.Number & vbCrLf & Err.Description, vbInformation Or vbRetryCancel) = vbRetry Then
         isRetry = True
         Resume Retry_Copy
@@ -1829,20 +2150,21 @@ Dim Flags As Long
 Dim i As Integer
 Dim isPaste As Boolean, isSave As Boolean
 Dim p As StdPicture
+Dim faktorSW As Single, faktorSH As Single
 
     On Error GoTo TBar_MenuClick_Error
     If Name = "mnuFileOpen" Then
         InitialDir = GetSetting(App.Title, "Editor", "FileDir", "C:\")
-        Extension = GetSetting(App.Title, "Editor", "Extension", "jpg")
+        Extension = GetSetting(App.Title, "Editor", "Extension", "*.png")
     ElseIf Name = "mnuFilePaste" Then
         isPaste = True
         InitialDir = GetSetting(App.Title, "Editor", "PasteDir", "C:\")
-        Extension = GetSetting(App.Title, "Editor", "Extension", "jpg")
+        Extension = GetSetting(App.Title, "Editor", "Extension", "*.png")
     ElseIf Name = "mnuFileSave" Then
         isSave = True
         Flags = OFN_HIDEREADONLY Or OFN_PATHMUSTEXIST Or OFN_EXTENSIONDIFFERENT
         InitialDir = GetSetting(App.Title, "Editor", "FileDir", "C:\")
-        Extension = GetSetting(App.Title, "Editor", "Extension", "jpg")
+        Extension = GetSetting(App.Title, "Editor", "Extension", "*.png")
         Filter = "JPG (*.jpg)" & Chr$(0) & "*.jpg" & Chr$(0) & _
                  "BMP (*.bmp)" & Chr$(0) & "*.bmp" & Chr$(0) & _
                  "GIF (*.gif)" & Chr$(0) & "*.gif" & Chr$(0) & _
@@ -1857,6 +2179,30 @@ Dim p As StdPicture
         MakeBorder Index
     ElseIf Name = "mnuReset" Then
         frmReset.Show vbModal, Me
+    ElseIf Name = "mnuPrint" Then
+        If Not Printer Is Nothing Then
+            Set frmPrint.Picture = Nothing
+            faktorSW = Printer.ScaleWidth / picImage.Width
+            faktorSH = Printer.ScaleHeight / picImage.Height
+            If faktorSW < 1 Or faktorSH < 1 Then
+                If faktorSH < faktorSW Then faktorSW = faktorSH
+                frmPrint.Width = CLng(picImage.Width * faktorSW)
+                frmPrint.Height = CLng(picImage.Height * faktorSW)
+                gdiplus.ResizePicture picImage, CLng((picImage.Width * faktorSW) \ LTwipsPerPixelX), CLng((picImage.Height * faktorSW) \ LTwipsPerPixelX), frmPrint.hDC
+                frmPrint.Picture = frmPrint.Image
+                
+            Else
+                frmPrint.Width = picImage.Width
+                frmPrint.Height = picImage.Height
+                frmPrint.Picture = picImage.Image
+            End If
+        Else
+            MsgBox "Der Standard-Drucker ist nicht verfügbar!", vbCritical, "Drucken..."
+            Exit Sub
+        End If
+        frmPrint.PrintForm
+        DoEvents
+        Unload frmPrint
     End If
     
     '====File-Aktionen===
@@ -1879,9 +2225,10 @@ Dim p As StdPicture
         i = InStrRev(FileName, "\")
         If i > 0 Then
             InitialDir = Left$(FileName, i)
-            Extension = LCase(GetFileExtension(FileName))
+            Extension = LCase$(GetFileExtension(FileName))
             If isPaste Then
                 SaveSetting App.Title, "Editor", "PasteDir", InitialDir
+                SaveSetting App.Title, "Editor", "Extension", Extension
             Else
                 SaveSetting App.Title, "Editor", "FileDir", InitialDir
                 SaveSetting App.Title, "Editor", "Extension", Extension
@@ -1997,46 +2344,48 @@ End Sub
 '=====picImage========================================
 Private Sub picImage_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     On Error GoTo picImage_MouseDown_Error
-    
-    Select Case TBar.Selected
-        Case tbFreehand:  DrawFreehand X, Y
-        Case tbLine:      DrawLine X, Y
-        Case tbRectangle: DrawRectangle X, Y
-        Case tbCyrcle:    DrawCyrcle X, Y
-        Case tbMarker:    DrawMarker X, Y
-        Case tbObfus:     DrawObfus X, Y
-        Case tbFill:      DrawFill X, Y
-        Case tbText:      If txtEditBox.Visible Then DrawText Else DrawText X, Y, ActionStart
-        Case tbArrow:     DrawArrow X, Y
-        Case tbLegend:    DrawLegend X, Y
-        Case tbCrop, tbTear
-            With picImage
-                 mDrawStyle.DrawStyle = .DrawStyle
-                 mDrawStyle.DrawMode = .DrawMode
-                 mDrawStyle.DrawWidth = .DrawWidth
-                 mDrawStyle.FillStyle = .FillStyle
-                 If modMain.IsLightColor(SBar.ForeColor) Then .ForeColor = &HEEEEEE
-                .DrawStyle = vbDash
-                .DrawMode = vbNotXorPen
-                .ForeColor = vbBlack
-                .DrawWidth = 1
-            End With
-            With mWorkControl
-                If GetAsyncKeyState(vbKeyShift) Then
-                    If X <= 10 Then X = 0
-                    If Y <= 10 Then Y = 0
-                End If
-                .x2 = .x0: .y2 = .y0
-                 picImage.Line (.x1, .y1)-(.x2, .y2), , B
-                .x1 = X: .y1 = Y
-                .x0 = .x1: .y0 = .y1
-                .DrawMode = tbCrop
-            End With
-        Case tbLegend
-            SBar.Legend = True
-        Case tbPaste
-            FixPaste
-    End Select
+    If Button = vbLeftButton Then
+        Select Case TBar.Selected
+            Case tbFreehand:  DrawFreehand X, Y
+            Case tbLine:      DrawLine X, Y
+            Case tbRectangle: DrawRectangle X, Y
+            Case tbCyrcle:    DrawCyrcle X, Y
+            Case tbMarker:    DrawMarker X, Y
+            Case tbObfus:     DrawObfus X, Y
+            Case tbFill:      DrawFill X, Y
+            Case tbText:      If txtEditBox.Visible Then DrawText Else DrawText X, Y, ActionStart
+            Case tbArrow:     DrawArrow X, Y
+            Case tbLegend:    DrawLegend X, Y
+            Case tbDimension: DrawDimension X, Y
+            Case tbCrop, tbTear
+                With picImage
+                     mDrawStyle.DrawStyle = .DrawStyle
+                     mDrawStyle.DrawMode = .DrawMode
+                     mDrawStyle.DrawWidth = .DrawWidth
+                     mDrawStyle.FillStyle = .FillStyle
+                     If modMain.IsLightColor(SBar.ForeColor) Then .ForeColor = &HEEEEEE
+                    .DrawStyle = vbDash
+                    .DrawMode = vbNotXorPen
+                    .ForeColor = vbBlack
+                    .DrawWidth = 1
+                End With
+                With mWorkControl
+                    If CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) Then
+                        If X <= 10 Then X = 0
+                        If Y <= 10 Then Y = 0
+                    End If
+                    .x2 = .x0: .y2 = .y0
+                     picImage.Line (.x1, .y1)-(.x2, .y2), , B
+                    .x1 = X: .y1 = Y
+                    .x0 = .x1: .y0 = .y1
+                    .DrawMode = tbCrop
+                End With
+            Case tbLegend
+                SBar.Legend = True
+            Case tbPaste
+                FixPaste
+        End Select
+    End If
 
 Exit Sub
 
@@ -2049,19 +2398,74 @@ MsgBox "Fehler: " & Err.Number & vbCrLf & _
 End Sub
 
 Private Sub picImage_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-Dim lDeskDC As Long
-Dim tCursorPos As POINTAPI
-    If Button = vbLeftButton Then
-        With mWorkControl
+    
+    With mWorkControl
+        '###_START_PRO_###
+        If .DrawMode = tbDimension Then  'Bemaßung1
+            If CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) Then   'vertikale Bemaßung
+                linDimension(0).x2 = X: linDimension(0).y2 = .y0
+                linDimension(1).x1 = X: linDimension(1).y1 = .y0:  linDimension(1).x2 = X: linDimension(1).y2 = Y
+            Else                                                'horizontale Bemaßung
+                linDimension(0).x2 = .x0: linDimension(0).y2 = Y
+                linDimension(1).x1 = .x0: linDimension(1).y1 = Y:  linDimension(1).x2 = X: linDimension(1).y2 = Y
+            End If
+            SBar.Coordinates X + 1, Y + 1
+            Exit Sub
+        ElseIf Abs(.DrawMode) = tbDimension Then  'Bemaßung2
+            If CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) Then   'vertikale Bemaßung
+                linDimension(0).x2 = X: linDimension(0).y2 = .y0
+                Select Case True
+                    Case Y < .y0 And .y0 < .y1: linDimension(1).y1 = .y1: linDimension(1).y2 = Y - .x2 - 10
+                    Case Y > .y1 And .y0 < .y1: linDimension(1).y1 = Y:   linDimension(1).y2 = .y0 - 1
+                    Case Y < .y1 And .y1 < .y0: linDimension(1).y1 = .y0: linDimension(1).y2 = Y - .x2 - 10
+                    Case Y > .y0 And .y1 < .y0: linDimension(1).y1 = .y1: linDimension(1).y2 = Y
+                    Case .y1 < .y0:             linDimension(1).y1 = .y0: linDimension(1).y2 = .y1 - 1
+                    Case .y1 > .y0:             linDimension(1).y1 = .y0: linDimension(1).y2 = .y1 + 1
+                End Select
+                linDimension(1).x1 = X: linDimension(1).x2 = X
+                linDimension(2).x2 = X: linDimension(2).y2 = .y1
+                If .y2 = 0 Then
+                    .y2 = shpDimension.Width
+                    shpDimension.Width = shpDimension.Height
+                    shpDimension.Height = .y2
+                    .y2 = 1
+                End If
+                shpDimension.Move X - .x2 - 2, Y - .x2
+            Else                                                'horizontale Bemaßung
+                linDimension(0).x2 = .x0: linDimension(0).y2 = Y
+                Select Case True
+                    Case X < .x0 And .x1 > .x0:   linDimension(1).x1 = X:   linDimension(1).x2 = .x1 + 1
+                    Case X > .x1 And .x1 > .x0:   linDimension(1).x1 = .x0: linDimension(1).x2 = X + .x2 + 10
+                    Case X < .x1 And .x1 < .x0:   linDimension(1).x1 = X:   linDimension(1).x2 = .x0 + 1
+                    Case X > .x0 And .x1 < .x0:   linDimension(1).x1 = .x1: linDimension(1).x2 = X + .x2 + 10
+                    Case .x1 > .x0:               linDimension(1).x1 = .x0: linDimension(1).x2 = .x1 + 1
+                    Case .x1 < .x0:               linDimension(1).x1 = .x0: linDimension(1).x2 = .x1 - 1
+                End Select
+                linDimension(1).y1 = Y:   linDimension(1).y2 = Y
+                linDimension(2).x2 = .x1: linDimension(2).y2 = Y
+                If .y2 = 1 Then
+                    .y2 = shpDimension.Width
+                    shpDimension.Width = shpDimension.Height
+                    shpDimension.Height = .y2
+                    .y2 = 0
+                End If
+                shpDimension.Move X, Y - .x2 - 2
+            End If
+            SBar.Coordinates X + 1, Y + 1
+            Exit Sub
+        End If
+        '###_END_PRO_###
+        
+        If Button = vbLeftButton Then
             If .DrawMode = tbFreehand Or .DrawMode = tbMarker Then 'Punkt oder Marker
-                If GetAsyncKeyState(vbKeyShift) And mWorkControl.y0 <> 0 Then Y = mWorkControl.y0
-                picImage.PSet (X, Y)
-                SBar.Coordinates = (X + 1) & "," & (Y + 1)
+                If CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) And mWorkControl.y0 <> 0 Then Y = mWorkControl.y0
+                picImage.PSet (X, Y), SBar.ForeColor
+                SBar.Coordinates X + 1, Y + 1
             ElseIf .DrawMode = tbLine Then  'Linie
                 If .x1 <> X Or .y1 <> Y Then
                     .x2 = .x0: .y2 = .y0
                     picImage.Line (.x1, .y1)-(.x2, .y2)
-                    If GetAsyncKeyState(vbKeyShift) And &H8000 Then
+                    If CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) Then
                         If Abs(.x1 - X) > Abs(.y1 - Y) Then
                             .x2 = X: .y2 = .y1
                         Else
@@ -2073,7 +2477,7 @@ Dim tCursorPos As POINTAPI
                     picImage.Line (.x1, .y1)-(.x2, .y2)
                 End If
                 .x0 = .x2: .y0 = .y2
-                SBar.Coordinates = (X + 1) & "," & (Y + 1)
+                SBar.Coordinates X + 1, Y + 1
             ElseIf .DrawMode = tbRectangle Or .DrawMode = tbObfus Or .DrawMode = tbCrop Or .DrawMode = tbTear Then   'Rechteck oder Ausschneiden
                 If .x1 <> X Or .y1 <> Y Then
                     .x2 = .x0: .y2 = .y0
@@ -2082,7 +2486,7 @@ Dim tCursorPos As POINTAPI
                     picImage.Line (.x1, .y1)-(.x2, .y2), , B
                     .x0 = .x2: .y0 = .y2
                 End If
-                SBar.Coordinates = (X + 1) & "," & (Y + 1) & " L×B:" & Abs(.x2 - .x1) & "×" & Abs(.y2 - .y1)
+                SBar.Coordinates X + 1, Y + 1, Abs(.x2 - .x1), Abs(.y2 - .y1)
             ElseIf .DrawMode = tbCyrcle Then  'Kreis
                 If .x1 <> X Or .y1 <> Y Then
                     .x2 = .x0: .y2 = .y0
@@ -2091,39 +2495,43 @@ Dim tCursorPos As POINTAPI
                     If Abs(.x2 - .x1) > (SBar.Line + 1) Then picImage.Circle (.x1, .y1), Abs(.x2 - .x1)
                     .x0 = .x2: .y0 = .y2
                 End If
-                SBar.Coordinates = (X + 1) & "," & (Y + 1)
+                SBar.Coordinates X + 1, Y + 1
             End If
-        End With
-    Else
-        SBar.Coordinates = (X + 1) & "," & (Y + 1)
-    End If
+        Else
+            SBar.Coordinates X + 1, Y + 1
+        End If
+    End With
 End Sub
 
 Private Sub picImage_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    If Button = vbLeftButton Then
-        On Error GoTo picImage_MouseUp_Error
-        Select Case mWorkControl.DrawMode
-            Case tbFreehand:   DrawFreehand X, Y, ActionEnd
-            Case tbLine:       DrawLine X, Y, ActionEnd
-            Case tbRectangle:  DrawRectangle X, Y, ActionEnd
-            Case tbCyrcle:     DrawCyrcle X, Y, ActionEnd
-            Case tbMarker:     DrawMarker X, Y, ActionEnd
-            Case tbObfus:      DrawObfus X, Y, ActionEnd
-            Case tbCrop, tbTear
-                With mWorkControl
-                    If .DrawMode = 0 Then Exit Sub
-                    .x2 = .x0: .y2 = .y0
-                End With
-                Call CropOrTearImage
-        End Select
-        With mWorkControl
+    With mWorkControl
+        If Button = vbLeftButton Then
+            On Error GoTo picImage_MouseUp_Error
+            Select Case Abs(mWorkControl.DrawMode)
+                Case tbFreehand:   DrawFreehand X, Y, ActionEnd
+                Case tbLine:       DrawLine X, Y, ActionEnd
+                Case tbRectangle:  DrawRectangle X, Y, ActionEnd
+                Case tbCyrcle:     DrawCyrcle X, Y, ActionEnd
+                Case tbMarker:     DrawMarker X, Y, ActionEnd
+                Case tbObfus:      DrawObfus X, Y, ActionEnd
+                Case tbDimension:  Exit Sub
+                Case tbCrop, tbTear
+                    With mWorkControl
+                        If .DrawMode = 0 Then Exit Sub
+                        .x2 = .x0: .y2 = .y0
+                    End With
+                    Call CropOrTearImage
+            End Select
             .x0 = 0: .y0 = 0: .x1 = 0: .y1 = 0: .x2 = 0: .y2 = 0: .DrawMode = 0
-        End With
-        TBar.Enabled(tbUndo) = mUndoStack.CanUndo
-        TBar.Enabled(tbRedo) = mUndoStack.CanRedo
-    End If
-
+            TBar.Enabled(tbUndo) = mUndoStack.CanUndo
+            TBar.Enabled(tbRedo) = mUndoStack.CanRedo
+        '###_START_PRO_###
+        ElseIf Button = vbRightButton And Abs(.DrawMode) = tbDimension Then     'Abbruch Bemaßung
+            .x0 = 0: .y0 = 0: .x1 = 0: .y1 = 0: .x2 = 0: .y2 = 0: .DrawMode = 0
+            linDimension(0).Visible = False: linDimension(1).Visible = False: linDimension(2).Visible = False: shpDimension.Visible = False
+        '###_END_PRO_###
+        End If
+    End With
 Exit Sub
 
 picImage_MouseUp_Error:
@@ -2189,7 +2597,7 @@ Dim xD&, yD&
             xD = picPaste.Left + (X - mWorkControl.x0)
             yD = picPaste.Top + (Y - mWorkControl.y0)
             picPaste.Move xD, yD
-            SBar.Coordinates = (xD \ LTwipsPerPixelX) & "," & (yD \ LTwipsPerPixelX)
+            SBar.Coordinates xD \ LTwipsPerPixelX, yD \ LTwipsPerPixelX
         End If
     End If
 End Sub
@@ -2262,7 +2670,7 @@ Dim xD&, yD&
             yD = txtEditBox.Top + ((Y \ LTwipsPerPixelY) - mWorkControl.y0)
             If xD < 0 Then xD = 0: If yD < 0 Then yD = 0
             txtEditBox.Move xD, yD
-            SBar.Coordinates = (xD) & "," & (yD)
+            SBar.Coordinates CSng(xD), CSng(yD)
         End If
     End If
 End Sub
@@ -2278,9 +2686,31 @@ End Sub
 
 Private Sub AdjustingWorkControlEdges()
     With mWorkControl
-        If .x2 > picImage.ScaleWidth - 1 Then .x2 = picImage.ScaleWidth - 1 'über rechten Rand verhindern
-        If .y2 > picImage.ScaleHeight - 1 Then .y2 = picImage.ScaleHeight - 1 'über unteren Rand verhindern
-        If .x2 < 0 Then .x2 = 0                'über linken Rand verhindern
-        If .y2 < 0 Then .y2 = 0                'über oberen Rand verhindern
+        If .x2 > picImage.ScaleWidth - 1 Then .x2 = picImage.ScaleWidth - 1     'über rechten Rand verhindern
+        If .y2 > picImage.ScaleHeight - 1 Then .y2 = picImage.ScaleHeight - 1   'über unteren Rand verhindern
+        If .x2 < 0 Then .x2 = 0                                                 'über linken Rand verhindern
+        If .y2 < 0 Then .y2 = 0                                                 'über oberen Rand verhindern
+    End With
+End Sub
+
+Private Sub CutLine(r As Double)
+Dim f As Double
+    With mWorkControl
+        f = Math.Sqr(Abs(.x2 - .x1) ^ 2 + Abs(.y2 - .y1) ^ 2)
+        f = (f - (r / 2)) / f
+        Select Case True
+            Case .x2 >= .x1 And .y2 >= .y1  'SO
+                .x2 = ((.x2 - .x1) * f) + .x1
+                .y2 = ((.y2 - .y1) * f) + .y1
+            Case .x2 < .x1 And .y2 >= .y1   'SW
+                .x2 = .x1 - ((.x1 - .x2) * f)
+                .y2 = ((.y2 - .y1) * f) + .y1
+            Case .x2 >= .x1 And .y2 < .y1   'NO
+                .x2 = ((.x2 - .x1) * f) + .x1
+                .y2 = .y1 - ((.y1 - .y2) * f)
+            Case .x2 < .x1 And .y2 < .y1    'NW
+                .x2 = .x1 - ((.x1 - .x2) * f)
+                .y2 = .y1 - ((.y1 - .y2) * f)
+        End Select
     End With
 End Sub

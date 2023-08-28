@@ -154,7 +154,7 @@ Dim isRetry As Boolean
             lDeskDC, Me.ScaleX(Me.Left, vbTwips, vbPixels), Me.ScaleY(Me.Top, vbTwips, vbPixels), Me.ScaleX(.Width, vbTwips, vbPixels), Me.ScaleY(.Height, vbTwips, vbPixels), SRCCOPY
     End With
     ReleaseDC lDeskDC, lDeskDC
-    If GetAsyncKeyState(vbKeyShift) Then
+    If CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) Then
 Retry_Copy:
         Clipboard.Clear
         Clipboard.SetData picToSave.Image, vbCFDIB
@@ -239,7 +239,6 @@ End Sub
 
 Private Sub Form_Load()
 Dim X As Long, Y As Long, w As Long, h As Long
-
     On Error Resume Next
     w = Abs(CInt(GetSetting(App.Title, "ScreenShot", "Width", 400)))
     h = Abs(CInt(GetSetting(App.Title, "ScreenShot", "Height", 300)))
@@ -291,7 +290,7 @@ Dim MousePosition As MousePos
         Case mpTop:         MousePointer = vbSizeNS
         Case mpRight:       MousePointer = vbSizeWE
         Case mpBottom:      MousePointer = vbSizeNS
-        Case Else:          If GetAsyncKeyState(vbKeyShift) Then MousePointer = vbCustom Else MousePointer = vbSizeAll
+        Case Else:          If CBool(GetAsyncKeyState(vbKeyShift) And KEY_PRESSED) Then MousePointer = vbCustom Else MousePointer = vbSizeAll
     End Select
     
 End Sub
